@@ -8,7 +8,9 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>,
     next: HttpHandler): Observable<HttpEvent<any>> {
 
-    const idToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbjJAYS5jb20iLCJVc2VySWQiOiIzMDAwMDAwMC0wMDAwLTAwMDAtMDAwMC0wMDAwMDAwMDAwMDAiLCJBdXRob3JpdGllcyI6IlJPTEVfQURNSU4iLCJleHAiOjE2MzE4MzE3NDR9.oFwaTzfC5dEsx9dvo180riEHq3uJ4tB255thLRvMZnSFFzdsheQzOdWNZgzg486aTK5sA1YsBKzdu9rVb4-Vig';//localStorage.getItem("id_token");
+    // change this to your auth token if you want to run this for the time being
+    const idToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBhLmNvbSIsIlVzZXJJZCI6IjRjNTI4NTNiLTExNzgtMTFlYy1iZGNhLTJjNGQ1NGYxMjc2MCIsIkF1dGhvcml0aWVzIjoiUk9MRV9BRE1JTiIsImV4cCI6MTYzMjA2MjA3OH0.qQ3EOrDoTy8zmGx4dVGrPJWgXZ7SyHnYGSwXbgKlzxbD-e4p1FXt_ldrqWOpw_NVHTfeNwc5gwxKqa8JePSFvg';
+    //localStorage.getItem("id_token");
 
     if (idToken) {
       const cloned = req.clone({

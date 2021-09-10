@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CustomerComponent } from './customer/customer.component';
 import { LayoutComponent } from './layout/layout.component';
-import { UserComponent } from './user/user.component';
 
 const routes: Routes = [
   {
@@ -10,16 +10,16 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'accounts',
-        pathMatch: 'full'
+        redirectTo: "customers",
+        pathMatch: "full"
       },
       {
-        path: 'accounts',
-        component: UserComponent
+        path: 'customers',
+        component: CustomerComponent
       },
       {
-        path: 'accounts/:id',
-        component: UserComponent
+        path: 'customers/:id',
+        component: CustomerComponent
       }
     ]
   }
