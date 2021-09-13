@@ -19,6 +19,7 @@ export class CustomerComponent implements OnInit {
   //user: any;
   id: any;
   image: any;
+  isLoading = false;
   modalMsg?: string = undefined;
 
   constructor(
@@ -86,6 +87,29 @@ export class CustomerComponent implements OnInit {
     return (returnedValue as HttpErrorResponse).status !== undefined;
   }
 
+  //get values from the form to update our customer in preparation for sending to the backend
+  pullInCustomerFormValues(): void {
+    (this.customer as Customer).firstName = this.customerProfileForm
+      .get('firstName')
+      ?.value.trim();
+    (this.customer as Customer).lastName = this.customerProfileForm
+      .get('lastName')
+      ?.value.trim();
+    (this.customer as Customer).addrLine1 = this.customerProfileForm
+      .get('addrLine1')
+      ?.value.trim();
+    (this.customer as Customer).addrLine2 = this.customerProfileForm
+      .get('addrLine2')
+      ?.value.trim();
+    (this.customer as Customer).city = this.customerProfileForm.get('city')?.value.trim();
+    (this.customer as Customer).state = this.customerProfileForm.get('state')?.value.trim();
+    (this.customer as Customer).zip = this.customerProfileForm
+      .get('zip')
+      ?.value.trim();
+    (this.customer as Customer).phone = this.customerProfileForm.get('phone')?.value.trim();
+    //loyaltyPoints NOT updated
+  }
+
   fillThisCustomerAddr(): void {
     if (this.checkIsValidCustomer(this.customer)) {
       this.customer.addrLine1 = this.customer.addresses[0].line1;
@@ -112,7 +136,7 @@ export class CustomerComponent implements OnInit {
   updateCustomer(): void {
     if (this.checkIsValidCustomer(this.customer)) {
       this.pullInCustomerFormValues();
-      this.customerService.updateCustomer(this.customer).subscribe(
+      this.customerService.updateCustomer(this.customer, this.id).subscribe(
         (res) => {
           //update succeeded
           this.modalMsg = 'Your profile was updated successfully!';
@@ -125,35 +149,17 @@ export class CustomerComponent implements OnInit {
     }
   }
 
-  //get values from the form to update our customer in preparation for sending to the backend
-  pullInCustomerFormValues(): void {
-    (this.customer as Customer).firstName = this.customerProfileForm
-      .get('firstName')
-      ?.value.trim();
-    (this.customer as Customer).lastName = this.customerProfileForm
-      .get('lastName')
-      ?.value.trim();
-    (this.customer as Customer).addrLine1 = this.customerProfileForm
-      .get('addrLine1')
-      ?.value.trim();
-    (this.customer as Customer).addrLine2 = this.customerProfileForm
-      .get('addrLine2')
-      ?.value.trim();
-    (this.customer as Customer).city = this.customerProfileForm.get('city')?.value.trim();
-    (this.customer as Customer).state = this.customerProfileForm.get('state')?.value.trim();
-    (this.customer as Customer).zip = this.customerProfileForm
-      .get('zip')
-      ?.value.trim();
-    (this.customer as Customer).phone = this.customerProfileForm.get('phone')?.value.trim();
-    //loyaltyPoints NOT updated
 
-  }
 
   checkIsValidCustomer(
     returnedValue: Customer | HttpErrorResponse | undefined
   ): returnedValue is Customer {
     //try to cast it to a Customer and check its firstName to see if it's actually a customer
     return (returnedValue as Customer).firstName !== undefined;
+  }
+
+  onCloseAlert() {
+    this.modalMsg = undefined;
   }
 
 

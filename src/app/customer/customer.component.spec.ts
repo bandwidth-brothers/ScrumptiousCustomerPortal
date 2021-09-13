@@ -27,7 +27,7 @@ describe('CustomerComponent', () => {
 
   const mockAddrs: Address[] = [
     {
-      id: 0,
+      addressId: "30000000-0000-0000-0000-000000000000",
       line1: '123 Fake St',
       line2: '#1',
       city: 'Anywhere',
@@ -36,7 +36,7 @@ describe('CustomerComponent', () => {
     },
   ];
   const mockCustomer: Customer = {
-    id: '00000000-0000-0000-0000-000000000000',
+    customerId: '00000000-0000-0000-0000-000000000000',
     firstName: 'Foo',
     lastName: 'Testcustomer',
     addresses: mockAddrs,
@@ -121,10 +121,10 @@ describe('CustomerComponent', () => {
   });
 
 
-  // it('should clear error message #onCloseAlert', () => {
-  //   component.onCloseAlert();
-  //   expect(component.modalMsg).toBeFalsy();
-  // });
+  it('should clear error message #onCloseAlert', () => {
+    component.onCloseAlert();
+    expect(component.modalMsg).toBeFalsy();
+  });
 
   it('should call #updateCustomer on valid customer', () => {
     const fn = spyOn(customerServiceSpy, 'updateCustomer').and.returnValue(

@@ -7,7 +7,7 @@ import { Address } from './address';
 */
 
 export interface Customer {
-    id: string;
+    customerId: string;
     firstName: string;
     lastName: string;
     addresses: Address[];
