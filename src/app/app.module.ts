@@ -10,6 +10,10 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { LayoutComponent } from './layout/layout.component';
 import { HttpService } from './shared/services/http.service';
 import { AuthInterceptor } from './shared/services/auth-interceptor.service';
+import { RestaurantsComponent } from './restaurants/restaurants/restaurants.component';
+import { RestaurantComponent } from './restaurants/restaurant/restaurant.component';
+import { MenuItemsComponent } from './menu-items/menu-items/menu-items.component';
+import { MenuItemComponent } from './menu-items/menu-item/menu-item.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +21,11 @@ import { AuthInterceptor } from './shared/services/auth-interceptor.service';
     UserComponent,
     HeaderComponent,
     FooterComponent,
-    LayoutComponent
+    LayoutComponent,
+    RestaurantsComponent,
+    RestaurantComponent,
+    MenuItemsComponent,
+    MenuItemComponent
   ],
   imports: [
     BrowserModule,

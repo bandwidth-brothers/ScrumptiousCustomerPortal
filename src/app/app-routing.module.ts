@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
+import { MenuItemsComponent } from './menu-items/menu-items/menu-items.component';
 import { UserComponent } from './user/user.component';
 
 const routes: Routes = [
@@ -10,16 +11,12 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'accounts',
-        pathMatch: 'full'
+        redirectTo: "customers",
+        pathMatch: "full"
       },
       {
-        path: 'accounts',
-        component: UserComponent
-      },
-      {
-        path: 'accounts/:id',
-        component: UserComponent
+        path: 'restaurants/:id/menu-items',
+        component: MenuItemsComponent
       }
     ]
   }
