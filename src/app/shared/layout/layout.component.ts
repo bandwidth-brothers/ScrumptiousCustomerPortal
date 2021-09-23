@@ -16,17 +16,13 @@ import { map, shareReplay } from 'rxjs/operators';
 })
 export class LayoutComponent {
 
-    //private _mobileQueryListener: () => void;
-    //mobileQuery: MediaQueryList;
-    showSpinner: boolean | undefined;
+
+    showSpinner!: boolean;
     isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
         .pipe(
             map(result => result.matches),
             shareReplay()
         );
-
-
-    private autoLogoutSubscription: Subscription | undefined;
 
     constructor(
         public spinnerService: SpinnerService,
