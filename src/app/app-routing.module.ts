@@ -1,29 +1,58 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LayoutComponent } from './layout/layout.component';
-import { UserComponent } from './user/user.component';
+import { ProfileComponent } from './account/profile/profile.component';
+import { LoginComponent } from './auth/login/login.component';
+import { CustomerProfileComponent } from './customer-profile/customer-profile.component';
+import { HomeComponent } from './home/home.component';
+import { LayoutComponent } from './shared/layout/layout.component';
 
 const routes: Routes = [
+  {
+    path: 'auth',
+    children: [
+      {
+        path: '',
+        redirectTo: 'login',
+        pathMatch: "full"
+      },
+      {
+        path: 'login',
+        component: LoginComponent,
+      },
+      {
+        path: 'register',
+        component: LoginComponent,
+      },
+    ]
+  },
   {
     path: '',
     component: LayoutComponent,
     children: [
+
       {
         path: '',
-        redirectTo: 'accounts',
+        redirectTo: 'home',
         pathMatch: 'full'
       },
       {
-        path: 'accounts',
-        component: UserComponent
+        path: 'home',
+        component: HomeComponent
       },
       {
-        path: 'accounts/:id',
-        component: UserComponent
+        path: 'account/profile',
+        component: ProfileComponent
+      },
+      {
+        path: 'customers',
+        component: CustomerProfileComponent
+      },
+      {
+        path: 'customers/:id',
+        component: CustomerProfileComponent
       }
     ]
   }
-
 ];
 
 @NgModule({
