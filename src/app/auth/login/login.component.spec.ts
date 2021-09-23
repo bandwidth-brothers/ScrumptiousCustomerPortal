@@ -46,7 +46,7 @@ describe('LoginComponent', () => {
     ];
 
     const mockUser: User = {
-        userId: '00000000-0000-0000-0000-000000000000',
+        id: '00000000-0000-0000-0000-000000000000',
         email: 'dave@a.com',
         password: 'dave',
     }

@@ -9,7 +9,7 @@
         <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
 
           <div fxFlex="30%" fxFlex.sm="95%" fxFlex.xs="95%">
-            <app-profile-details></app-profile-details>
+            <!-- this is for some kind of heading to appear over all tabs, maybe good for first,last name -->
           </div>
 
           <div fxFlex></div>
@@ -18,6 +18,9 @@
 
 
             <mat-tab-group>
+              <mat-tab label="Details">
+                <app-profile-details></app-profile-details>
+              </mat-tab>
               <mat-tab label="Change Password">
                 <app-change-password></app-change-password>
               </mat-tab>

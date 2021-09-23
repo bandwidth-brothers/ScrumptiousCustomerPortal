@@ -1,14 +1,50 @@
-<div class="profile-card">
+<!-- <div *ngIf="customer"> -->
 
-  <h2 class="title">
-    dsfg
-  </h2>
+<form [formGroup]="customerProfileForm">
+  <p>Use the form below to change your password.</p>
 
-  <label>
-    fhgj
-  </label>
+  <div fxLayout="row">
 
-  <label>
-    fghj
-  </label>
-</div>
+    <div fxFlex="40%" fxFlex.md="60%" fxFlex.sm="50%" fxFlex.xs="100%">
+
+      <mat-form-field class="full-width">
+        <input matInput placeholder="First name" formControlName="firstName">
+
+        <mat-error *ngIf="customerProfileForm.controls['firstName'].hasError('required')">
+          Please enter your first name
+        </mat-error>
+      </mat-form-field>
+
+      <!-- <mat-form-field class="full-width">
+          <input matInput placeholder="New Password" formControlName="newPassword"
+            [type]="hideNewPassword ? 'password' : 'text'" autocomplete="new-password">
+          <mat-icon matSuffix (click)="hideNewPassword = !hideNewPassword">
+            {{hideNewPassword ? 'visibility' : 'visibility_off'}}
+          </mat-icon>
+
+          <mat-error *ngIf="form.controls['newPassword'].hasError('required')">
+            Please enter a new password
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Confirm New Password" formControlName="newPasswordConfirm"
+            [type]="hideNewPassword ? 'password' : 'text'" autocomplete="new-password">
+          <mat-icon matSuffix (click)="hideNewPassword = !hideNewPassword">
+            {{hideNewPassword ? 'visibility' : 'visibility_off'}}
+          </mat-icon>
+
+          <mat-error *ngIf="form.controls['newPasswordConfirm'].hasError('required')">
+            Please confirm your new password
+          </mat-error>
+        </mat-form-field> -->
+
+      <button mat-raised-button color="primary" [disabled]="customerProfileForm.invalid"
+        (click)="updateCustomer()">Save</button>
+
+    </div>
+
+  </div>
+
+</form>
+<!-- </div> -->

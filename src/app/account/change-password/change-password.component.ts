@@ -53,12 +53,12 @@ export class ChangePasswordComponent implements OnInit {
 
   changePassword() {
 
-    // if (this.newPassword !== this.newPasswordConfirm) {
-    //   this.notificationService.openSnackBar('New passwords do not match.');
-    //   return;
-    // }
+    if (this.newPassword !== this.newPasswordConfirm) {
+      this.notificationService.openSnackBar('New passwords do not match.');
+      return;
+    }
 
-    // const email = this.authService.getCurrentUser().email;
+    const email = this.authService.username;
 
     // this.authService.changePassword(email, this.currentPassword, this.newPassword)
     //   .subscribe(
