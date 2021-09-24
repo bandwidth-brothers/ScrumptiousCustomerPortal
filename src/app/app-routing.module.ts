@@ -7,6 +7,8 @@ import { CustomerProfileComponent } from './customer-profile/customer-profile.co
 import { HomeComponent } from './home/home.component';
 import { LayoutComponent } from './shared/layout/layout.component';
 
+import { AuthenticationGuard } from './authentication.guard';
+
 const routes: Routes = [
   {
     path: 'auth',
@@ -56,7 +58,8 @@ const routes: Routes = [
         path: 'customers/:id',
         component: CustomerProfileComponent
       }
-    ]
+    ],
+    canActivate: [AuthenticationGuard]
   }
 ];
 

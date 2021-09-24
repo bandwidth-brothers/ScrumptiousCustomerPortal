@@ -1,4 +1,4 @@
-
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 body {
   margin: 0;
@@ -62,14 +62,20 @@ body {
 
 .mat-table td.mat-cell a:hover {
   text-decoration: underline;
+}
+
 .mat-table td.mat-cell:first-child,
 .mat-table td.mat-footer-cell:first-child,
 .mat-table th.mat-header-cell:first-child {
   padding-left: 20px !important;
+}
+
 .mat-table td.mat-cell:last-child,
 .mat-table td.mat-footer-cell:last-child,
 .mat-table th.mat-header-cell:last-child {
   padding-right: 10px !important;
+}
+
 .mat-table .mat-cell a {
   color: inherit;
   text-decoration: none;
@@ -89,8 +95,12 @@ body {
   height: 130px;
   font-size: 130px;
   color: #c7c7c7;
+}
+
 p .mat-icon {
   vertical-align: middle;
+}
+
 .mat-slide-toggle.full-width {
   margin-top: 15px;
   margin-bottom: 15px;

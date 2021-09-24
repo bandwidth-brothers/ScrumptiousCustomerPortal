@@ -41,7 +41,6 @@ import { MatListModule } from '@angular/material/list';
     ChangePasswordComponent,
     ProfileDetailsComponent,
     HomeComponent,
-    LayoutComponent,
     RestaurantsComponent,
     RestaurantComponent,
     MenuItemsComponent,
