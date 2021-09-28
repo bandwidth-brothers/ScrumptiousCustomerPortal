@@ -55,7 +55,6 @@ export class ProfileDetailsComponent implements OnInit {
 
   getCustomer(): void {
     const id = this.authService.userId;
-    console.log(id);
 
     if (!id) {
       //todo navigate to login

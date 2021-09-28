@@ -7,11 +7,19 @@
 
     <div fxFlex="40%" fxFlex.md="60%" fxFlex.sm="50%" fxFlex.xs="100%">
 
-      <mat-form-field class="full-width">
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>First Name</mat-label>
         <input matInput placeholder="First name" formControlName="firstName">
-
         <mat-error *ngIf="customerProfileForm.controls['firstName'].hasError('required')">
           Please enter your first name
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input matInput placeholder="First name" formControlName="lastName">
+        <mat-error *ngIf="customerProfileForm.controls['lastName'].hasError('required')">
+          Please enter your last name
         </mat-error>
       </mat-form-field>
 
