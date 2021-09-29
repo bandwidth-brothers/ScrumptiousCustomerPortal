@@ -1,6 +1,10 @@
+import { Restaurant } from './Restaurant'
+
 export interface MenuItem {
-    menuItemId?: number,
+    id?: number,
     name: string,
-    price: number,
-    isAvailable: boolean
+    price: object,
+    isAvailable: boolean,
+    rating: number,
+    restaurant: Restaurant
 }

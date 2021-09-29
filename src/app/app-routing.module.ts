@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProfileComponent } from './account/profile/profile.component';
 import { MenuItemsComponent } from './menu-items/menu-items/menu-items.component';
+import { RestaurantsComponent } from './restaurants/restaurants/restaurants.component'
 import { LoginComponent } from './auth/login/login.component';
 import { CustomerProfileComponent } from './customer-profile/customer-profile.component';
 import { HomeComponent } from './home/home.component';
@@ -40,6 +41,14 @@ const routes: Routes = [
       },
       {
         path: 'restaurants/:id/menu-items',
+        component: MenuItemsComponent
+      },
+      {
+        path: 'restaurants',
+        component: RestaurantsComponent
+      },
+      {
+        path: 'menu-items',
         component: MenuItemsComponent
       },
       {
