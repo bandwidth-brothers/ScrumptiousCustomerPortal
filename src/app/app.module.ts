@@ -28,6 +28,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+
 
 
 @NgModule({
@@ -41,7 +44,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     HomeComponent,
   ],
   imports: [
-
+    MatGridListModule,
     CommonModule,
     BrowserModule,
     HttpClientModule,
@@ -67,7 +70,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-
+    MatCardModule,
   ],
   providers: [AuthInterceptor, {
     provide: HTTP_INTERCEPTORS,
