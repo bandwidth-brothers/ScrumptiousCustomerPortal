@@ -9,7 +9,7 @@ pipeline{
 		}
 		stage('Analysis'){
       steps{
-        sh 'npm install'
+        sh 'npm install --legacy-peer-deps'
         sh 'ng test'
       }
     }		
