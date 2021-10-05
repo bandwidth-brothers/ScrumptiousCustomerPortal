@@ -15,7 +15,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class CustomerService {
-  readonly CUSTOMERS_URL = environment.BASE_CUSTOMER_URL + '/me';
+  readonly CUSTOMERS_URL = environment.BASE_CUSTOMER_URL;
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };

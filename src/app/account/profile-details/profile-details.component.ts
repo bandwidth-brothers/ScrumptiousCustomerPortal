@@ -22,7 +22,6 @@ export class ProfileDetailsComponent implements OnInit {
     @Input() error: HttpErrorResponse | undefined;
     isLoading = false;
     startDate = new Date(1990, 0, 1);
-    isReadOnly = true;
     states: string[] = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA",
         "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
         "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ",
@@ -40,6 +39,7 @@ export class ProfileDetailsComponent implements OnInit {
 
     ngOnInit(): void {
         this.getCustomer();
+        this.customerProfileForm.disable();
     }
 
 
@@ -126,8 +126,8 @@ export class ProfileDetailsComponent implements OnInit {
                 }
 
             );
-
         }
+        this.customerProfileForm.disable();
     }
 
 
@@ -138,7 +138,7 @@ export class ProfileDetailsComponent implements OnInit {
     }
 
     enableEdit() {
-        this.isReadOnly = false;
+        this.customerProfileForm.enable();
     }
 
 
