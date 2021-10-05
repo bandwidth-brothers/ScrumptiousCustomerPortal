@@ -39,7 +39,7 @@ export class CustomerService {
   //PUT update a customer
   updateCustomer(updatedCustomer: Customer, id: any) {
     const url = `${this.CUSTOMERS_URL}/${id}`;
-    updatedCustomer.customerId = id;
+    updatedCustomer.id = id;
     return this.http.put<Customer>(url, updatedCustomer, this.httpOptions);
   }
 

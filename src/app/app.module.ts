@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { AuthInterceptor } from './core/interceptors/auth-interceptor.service';
 import { environment } from 'src/environments/environment';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CustomerProfileComponent } from './customer-profile/customer-profile.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CoreModule } from './core/core.module';
@@ -27,11 +26,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { FlexLayoutModule } from "@angular/flex-layout";
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { NgxMaskModule } from 'ngx-mask';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    CustomerProfileComponent,
     LoginComponent,
     ProfileComponent,
     ChangePasswordComponent,
@@ -39,6 +43,7 @@ import { MatListModule } from '@angular/material/list';
     HomeComponent,
   ],
   imports: [
+    MatGridListModule,
     CommonModule,
     BrowserModule,
     HttpClientModule,
@@ -50,6 +55,7 @@ import { MatListModule } from '@angular/material/list';
     BrowserAnimationsModule,
     CoreModule,
     SharedModule,
+    FlexLayoutModule,
     CustomMaterialModule.forRoot(),
     AppRoutingModule,
     LoggerModule.forRoot({
@@ -63,7 +69,8 @@ import { MatListModule } from '@angular/material/list';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-
+    MatCardModule,
+    NgxMaskModule.forRoot()
   ],
   providers: [AuthInterceptor, {
     provide: HTTP_INTERCEPTORS,

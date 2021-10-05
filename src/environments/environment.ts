@@ -10,8 +10,7 @@ export const environment = {
   baseAuthUrl: 'http://localhost:8080/auth',
   USERS_GET_ALL_URL: '/accounts',
   USERS_GET_URL: '/accounts/',
-  BASE_CUSTOMER_URL: 'http://localhost:8080/customer',
-  CUSTOMERS_GET_URL: '/me/',
+  BASE_CUSTOMER_URL: 'http://localhost:8080/customer/customers',
   logLevel: NgxLoggerLevel.TRACE,
   serverLogLevel: NgxLoggerLevel.OFF
 };

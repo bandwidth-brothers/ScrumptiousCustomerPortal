@@ -5,9 +5,10 @@
             <mat-card-subtitle>Log in to your account</mat-card-subtitle>
             <mat-card-content>
 
-                <mat-form-field class="full-width">
-                    <input id="emailInput" matInput placeholder="Email" formControlName="email" autocomplete="email"
-                        type="email">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input id="emailInput" matInput placeholder="example@a.com" formControlName="email"
+                        autocomplete="email" type="email">
 
                     <mat-error id="invalidEmailError" *ngIf="loginForm.controls['email'].hasError('email')">
                         Please enter a valid email address
@@ -19,9 +20,14 @@
 
                 </mat-form-field>
 
-                <mat-form-field class="full-width">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Password</mat-label>
                     <input id="passwordInput" matInput placeholder="Password" formControlName="password" type="password"
-                        autocomplete="current-password">
+                        autocomplete="current-password" [type]="hide ? 'password' : 'text'">
+                    <button mat-icon-button matSuffix type="button" (click)="hide = !hide"
+                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
                     <mat-error id="requiredPasswordError" *ngIf="loginForm.controls['email'].hasError('required')">
                         Password is
                         <strong>required</strong>
@@ -35,8 +41,8 @@
             </mat-card-content>
 
             <mat-card-actions class="login-actions">
-                <button mat-raised-button id="login" color="primary" [disabled]="loginForm.invalid || isLoading"
-                    (click)="login()">Login</button>
+                <button mat-raised-button id="login" color="primary" type="submit"
+                    [disabled]="loginForm.invalid || isLoading" (click)="login()">Login</button>
                 <button mat-button id="reset" type="reset">Reset</button>
             </mat-card-actions>
 
