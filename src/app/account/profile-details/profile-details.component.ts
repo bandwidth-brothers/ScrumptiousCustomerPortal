@@ -33,8 +33,9 @@ export class ProfileDetailsComponent implements OnInit {
         private route: ActivatedRoute,
         private customerService: CustomerService,
         private authService: AuthService,
-        private notificationService: NotificationService
-    ) { }
+        private notificationService: NotificationService,
+    ) {
+    }
 
 
     ngOnInit(): void {

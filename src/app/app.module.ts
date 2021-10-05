@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { AuthInterceptor } from './core/interceptors/auth-interceptor.service';
 import { environment } from 'src/environments/environment';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CustomerProfileComponent } from './customer-profile/customer-profile.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CoreModule } from './core/core.module';
@@ -30,13 +29,13 @@ import { MatListModule } from '@angular/material/list';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    CustomerProfileComponent,
     LoginComponent,
     ProfileComponent,
     ChangePasswordComponent,
@@ -71,6 +70,7 @@ import { MatCardModule } from '@angular/material/card';
     MatIconModule,
     MatListModule,
     MatCardModule,
+    NgxMaskModule.forRoot()
   ],
   providers: [AuthInterceptor, {
     provide: HTTP_INTERCEPTORS,

@@ -12,7 +12,6 @@ import {
     NGXLoggerHttpServiceMock,
     NGXMapperServiceMock,
 } from 'ngx-logger/testing';
-import { DatePipe } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -30,6 +29,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DatePipe } from '@angular/common';
 
 
 describe('LoginComponent', () => {
@@ -59,7 +59,7 @@ describe('LoginComponent', () => {
                 { provide: NGXLoggerHttpService, useClass: NGXLoggerHttpServiceMock },
                 { provide: NGXMapperService, useClass: NGXMapperServiceMock },
                 { provide: LoggerConfig, useValue: { level: NgxLoggerLevel.ERROR } },
-                DatePipe,
+                DatePipe
             ],
             imports: [RouterTestingModule, HttpClientTestingModule, FormsModule, ReactiveFormsModule, MatSnackBarModule, MatSlideToggleModule, BrowserAnimationsModule],
         }).compileComponents();
@@ -83,13 +83,13 @@ describe('LoginComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should navigate to homepage if logged in', () => {
+    it('should logout if logged in', () => {
         spyOn(authService, 'isLoggedIn').and.returnValue(true);
         const navigate = spyOn(router, 'navigate');
 
         component.ngOnInit();
 
-        expect(navigate).toHaveBeenCalledWith(['/']);
+        expect(navigate).not.toHaveBeenCalled();
     });
 
     it('should NOT navigate if not logged in', () => {

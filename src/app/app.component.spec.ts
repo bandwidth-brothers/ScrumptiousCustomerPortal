@@ -13,7 +13,6 @@ import {
   NGXLoggerHttpServiceMock,
   NGXMapperServiceMock,
 } from 'ngx-logger/testing';
-import { DatePipe } from '@angular/common';
 import { AuthService } from './core/services/auth.service';
 
 describe('AppComponent', () => {
@@ -29,7 +28,6 @@ describe('AppComponent', () => {
         { provide: NGXLoggerHttpService, useClass: NGXLoggerHttpServiceMock },
         { provide: NGXMapperService, useClass: NGXMapperServiceMock },
         { provide: LoggerConfig, useValue: { level: NgxLoggerLevel.ERROR } },
-        DatePipe,
       ],
     }).compileComponents();
   });
