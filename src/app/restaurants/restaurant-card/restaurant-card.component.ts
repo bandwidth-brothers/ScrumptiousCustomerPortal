@@ -1,15 +1,15 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Restaurant } from 'src/app/Interfaces/Restaurant';
-import { Address } from 'src/app/Interfaces/Address'
+import { Restaurant } from 'src/app/entities/restaurant';
+import { Address } from 'src/app/entities/address'
 
 @Component({
-  selector: 'app-restaurant',
-  templateUrl: './restaurant.component.html',
-  styleUrls: ['./restaurant.component.css']
+  selector: 'app-restaurant-card',
+  templateUrl: './restaurant-card.component.html',
+  styleUrls: ['./restaurant-card.component.css']
 })
-export class RestaurantComponent implements OnInit {
+export class RestaurantCardComponent implements OnInit {
   @Input() restaurant!: Restaurant
   restaurantAddress!: Address
   restaurantPicture: string = "assets/images/logo-template.jpg";
@@ -22,10 +22,7 @@ export class RestaurantComponent implements OnInit {
   }
 
   goToRestaurant() {
-    this.router.navigate([this.restaurant.id + '/menu-items'], {
-      relativeTo: this.route,
-
-    })
+    this.router.navigate(["restaurants/" + this.restaurant.id + '/menu-items'])
   }
 
 }

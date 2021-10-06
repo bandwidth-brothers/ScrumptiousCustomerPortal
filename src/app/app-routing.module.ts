@@ -3,14 +3,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProfileComponent } from './account/profile/profile.component';
 import { MenuItemsComponent } from './menu-items/menu-items/menu-items.component';
 import { RestaurantsComponent } from './restaurants/restaurants/restaurants.component'
+import { RestaurantHomeComponent } from './restaurants/restaurant-home/restaurant-home.component'
 import { LoginComponent } from './auth/login/login.component';
 import { CustomerProfileComponent } from './customer-profile/customer-profile.component';
 import { HomeComponent } from './home/home.component';
 import { LayoutComponent } from './shared/layout/layout.component';
 
 import { AuthenticationGuard } from './authentication.guard';
+import { MenuItemComponent } from './menu-items/menu-item/menu-item.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: 'auth',
     children: [
@@ -41,15 +43,15 @@ const routes: Routes = [
       },
       {
         path: 'restaurants/:id/menu-items',
-        component: MenuItemsComponent
+        component: RestaurantHomeComponent
       },
       {
         path: 'restaurants',
         component: RestaurantsComponent
       },
       {
-        path: 'menu-items',
-        component: MenuItemsComponent
+        path: 'search/menu-items',
+        component: RestaurantsComponent
       },
       {
         path: 'home',

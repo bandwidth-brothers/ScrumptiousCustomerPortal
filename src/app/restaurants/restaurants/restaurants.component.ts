@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Restaurant } from 'src/app/Interfaces/Restaurant';
+import { Restaurant } from 'src/app/entities/restaurant';
 import { RestaurantService } from 'src/app/core/services/restaurant.service';
+import { MenuItemService } from 'src/app/core/services/menu-item.service';
+
 
 @Component({
   selector: 'app-restaurants',
@@ -22,7 +24,8 @@ export class RestaurantsComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private restaurantService: RestaurantService) { }
+    private restaurantService: RestaurantService,
+    private menuItemService: MenuItemService) { }
 
   ngOnInit(): void {
     this.initializeForm()
@@ -35,8 +38,6 @@ export class RestaurantsComponent implements OnInit {
       this.restaurants = restaurants
       console.log(restaurants)
     })
-
-
   }
 
   initializeForm(): void {
@@ -46,7 +47,7 @@ export class RestaurantsComponent implements OnInit {
   }
 
   searchHandle() {
-    console.log(this.searchForm.value.search)
+    console.log(this.searchForm.get('search')?.value)
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: {
@@ -54,28 +55,19 @@ export class RestaurantsComponent implements OnInit {
       },
       skipLocationChange: false
     }).then(() => {
-      // const search = this.route.snapshot.queryParamMap.get('search')
-      // if (this.searchForm.value.search.length === 0 && this.restaurantId === undefined) {
-      //   this.menuItemService.getAllMenuItems().subscribe(menuItems => {
-      //     this.menuItems = menuItems
-      //     console.log(menuItems)
-      //   })
-      // } else if (this.searchForm.value.search.length === 0) {
-      //   this.menuItemService.getAllMenuItemsFromRestaurant(this.restaurantId).subscribe(menuItems => {
-      //     this.menuItems = menuItems
-      //     console.log(menuItems)
-      //   })
-      // } else if (this.restaurantId === undefined) {
-      //   this.menuItemService.getAllMenuItemsFromSearch("?search=" + search).subscribe(menuItems => {
-      //     this.menuItems = menuItems
-      //     console.log(menuItems)
-      //   })
-      // } else {
-      //   this.menuItemService.getAllMenuItemsInRestaurantFromSearch(this.restaurantId, "?search=" + search).subscribe(menuItems => {
-      //     this.menuItems = menuItems
-      //     console.log(menuItems)
-      //   })
-      // }
+      const search = this.route.snapshot.queryParamMap.get('search')
+
+      if (this.searchForm.value.search.length === 0) {
+        this.restaurantService.getAllRestaurants().subscribe(restaurants => {
+          this.restaurants = restaurants
+          console.log(restaurants)
+        })
+      } else {
+        this.menuItemService.getAllRestaurantsFromMenuItemSearch(search || "").subscribe(restaurants => {
+          this.restaurants = restaurants
+          console.log(restaurants)
+        })
+      }
     })
 
   }

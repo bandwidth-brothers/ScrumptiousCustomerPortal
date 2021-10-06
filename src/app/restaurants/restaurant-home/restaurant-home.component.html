@@ -1,8 +1,8 @@
 <div class="card mb-4">
-    <h2 class="card-header">
-        Restaurants
-
+    <h2 class="card-header" *ngIf="restaurant">
+        {{restaurant.name}}
     </h2>
+    <!-- <app-search-field [callbackFunction]="searchHandle"></app-search-field> -->
     <form class="search-form" [formGroup]="searchForm" (ngSubmit)="searchHandle()">
         <mat-form-field class="example-form-field" appearance="fill">
             <mat-label>Search</mat-label>
@@ -12,7 +12,8 @@
             </button>
         </mat-form-field>
     </form>
-    <div class="card-body">
-        <app-restaurant-card *ngFor="let restaurant of restaurants" [restaurant]="restaurant"></app-restaurant-card>
+    <div class="card-body" *ngIf="isLoading==false">
+        <app-menu-item *ngFor="let menuItem of menuItems" [menuItem]="menuItem" [restaurant]="restaurant">
+        </app-menu-item>
     </div>
 </div>

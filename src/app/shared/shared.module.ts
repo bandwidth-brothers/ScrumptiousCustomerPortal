@@ -10,6 +10,7 @@ import { LocalDatePipe } from './pipes/local-date.pipe';
 import { YesNoPipe } from './pipes/yes-no.pipe';
 import { LayoutComponent } from './layout/layout.component';
 import { LayoutModule } from '@angular/cdk/layout';
+import { SearchFieldComponent } from './search-field/search-field.component';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { LayoutModule } from '@angular/cdk/layout';
     LimitToPipe,
     LocalDatePipe,
     YesNoPipe,
-    LayoutComponent
+    LayoutComponent,
+    SearchFieldComponent
   ],
   exports: [
     FormsModule,
@@ -35,7 +37,8 @@ import { LayoutModule } from '@angular/cdk/layout';
     ConfirmDialogComponent,
     ContentPlaceholderAnimationComponent,
     LocalDatePipe,
-    YesNoPipe
+    YesNoPipe,
+    SearchFieldComponent
   ],
   entryComponents: [
     ConfirmDialogComponent

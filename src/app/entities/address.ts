@@ -1,7 +1,7 @@
 export interface Address {
-    id: bigint;
-    line1: string;
-    line2: string;
+    id: number;
+    lineOne: string;
+    lineTwo?: string;
     city: string;
     state: string;
     zip: string;
