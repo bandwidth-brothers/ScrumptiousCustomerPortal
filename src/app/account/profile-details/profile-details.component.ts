@@ -1,15 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { environment } from 'src/environments/environment';
-
-import { MatDividerModule } from '@angular/material/divider';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Customer } from 'src/app/entities/customer';
 import { CustomerService } from 'src/app/services/customer.service';
 import { trimStringLength } from 'src/app/shared/validators/validators';
 import { NotificationService } from 'src/app/core/services/notification.service';
+import { Address } from 'src/app/entities/address';
 
 @Component({
     selector: 'app-profile-details',
@@ -29,12 +26,10 @@ export class ProfileDetailsComponent implements OnInit {
         "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"]
 
     constructor(
-        private route: ActivatedRoute,
         private customerService: CustomerService,
         private authService: AuthService,
         private notificationService: NotificationService,
-    ) {
-    }
+    ) { }
 
 
     ngOnInit(): void {
@@ -103,12 +98,12 @@ export class ProfileDetailsComponent implements OnInit {
         (this.customer as Customer).address.line1 = this.customerProfileForm
             .get('line1')
             ?.value.trim();
-        (this.customer as Customer).address.line2 = this.customerProfileForm
+        ((this.customer as Customer).address as Address).line2 = this.customerProfileForm
             .get('line2')
             ?.value.trim();
-        (this.customer as Customer).address.city = this.customerProfileForm.get('city')?.value.trim();
-        (this.customer as Customer).address.state = this.customerProfileForm.get('state')?.value.trim();
-        (this.customer as Customer).address.zip = this.customerProfileForm.get('zip')?.value.trim();
+        ((this.customer as Customer).address as Address).city = this.customerProfileForm.get('city')?.value.trim();
+        ((this.customer as Customer).address as Address).state = this.customerProfileForm.get('state')?.value.trim();
+        ((this.customer as Customer).address as Address).zip = this.customerProfileForm.get('zip')?.value.trim();
         (this.customer as Customer).phone = this.customerProfileForm.get('phone')?.value.trim();
         //loyaltyPoints NOT updated
     }

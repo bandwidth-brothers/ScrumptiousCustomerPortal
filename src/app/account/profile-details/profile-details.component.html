@@ -1,6 +1,6 @@
 <!-- <div *ngIf="customer"> -->
 
-<form [formGroup]="customerProfileForm">
+<form [formGroup]="customerProfileForm" (ngSubmit)="updateCustomer()">
   <p>General information</p>
 
   <mat-grid-list cols="4" rowHeight="80px" gutterSize="10px">
@@ -55,9 +55,7 @@
         <mat-datepicker #picker enabled="customerProfileForm.enabled">
         </mat-datepicker>
       </mat-form-field>
-
     </mat-grid-tile>
-
 
   </mat-grid-list>
 
@@ -120,12 +118,12 @@
   <br>
 
   <div *ngIf="customerProfileForm.disabled">
-    <button mat-raised-button color="accent" class="full-width" (click)="enableEdit()">Edit</button>
+    <button mat-raised-button type="button" color="accent" class="full-width" (click)="enableEdit()">Edit</button>
   </div>
 
   <div *ngIf="customerProfileForm.enabled">
-    <button mat-raised-button color="primary" class="full-width" [disabled]="customerProfileForm.invalid"
-      (click)="updateCustomer()">Save</button>
+    <button mat-raised-button type="submit" color="primary" class="full-width"
+      [disabled]="customerProfileForm.invalid">Save</button>
   </div>
 
 </form>

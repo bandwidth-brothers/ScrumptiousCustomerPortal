@@ -38,9 +38,6 @@ export class LoginComponent implements OnInit {
         this.titleService.setTitle('Scrumptious - Login');
     }
 
-    //TODO:
-    // Disable button if no entry
-    // Display feedback if no entry
     login() {
         const email = this.loginForm.get('email')?.value;
         const password = this.loginForm.get('password')?.value;

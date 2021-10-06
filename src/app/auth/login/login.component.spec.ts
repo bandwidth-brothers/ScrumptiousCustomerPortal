@@ -24,7 +24,7 @@ import {
 import { Observable, of, throwError } from 'rxjs';
 import { LoginComponent } from './login.component';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { User } from 'src/app/entities/user';
+import { LoginDto } from 'src/app/entities/loginDto';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -45,7 +45,7 @@ describe('LoginComponent', () => {
         'rememberMe'
     ];
 
-    const mockUser: User = {
+    const mockUser: LoginDto = {
         id: '00000000-0000-0000-0000-000000000000',
         email: 'dave@a.com',
         password: 'dave',
