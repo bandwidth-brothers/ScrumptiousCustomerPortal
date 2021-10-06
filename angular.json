@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "UserPortal": {
+    "CustomerPortal": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -71,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "UserPortal:build:production"
+              "browserTarget": "CustomerPortal:build:production"
             },
             "development": {
-              "browserTarget": "UserPortal:build:development"
+              "browserTarget": "CustomerPortal:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -82,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "UserPortal:build"
+            "browserTarget": "CustomerPortal:build"
           }
         },
         "test": {
@@ -97,7 +97,6 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -106,5 +105,5 @@
       }
     }
   },
-  "defaultProject": "UserPortal"
+  "defaultProject": "CustomerPortal"
 }

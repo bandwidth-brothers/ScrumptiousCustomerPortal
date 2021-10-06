@@ -11,13 +11,9 @@ export interface Customer {
     email: string;
     firstName: string;
     lastName: string;
-    addresses: Address[];
     loyaltyPoints: number;
     phone: string;
     dob: Date;
-    addrLine1: string;
-    addrLine2: string;
-    city: string;
-    state: string;
-    zip: string;
+    veteranarianStatus: boolean;
+    address: Address;
 }

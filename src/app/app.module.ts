@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { AuthInterceptor } from './core/interceptors/auth-interceptor.service';
 import { environment } from 'src/environments/environment';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CustomerProfileComponent } from './customer-profile/customer-profile.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { RestaurantsComponent } from './restaurants/restaurants/restaurants.component';
@@ -34,11 +33,16 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MenuItemService } from './core/services/menu-item.service';
 import { RestaurantService } from './core/services/restaurant.service';
+import { FlexLayoutModule } from "@angular/flex-layout";
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { NgxMaskModule } from 'ngx-mask';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    CustomerProfileComponent,
     LoginComponent,
     ProfileComponent,
     ChangePasswordComponent,
@@ -51,6 +55,7 @@ import { RestaurantService } from './core/services/restaurant.service';
     MenuItemComponent
   ],
   imports: [
+    MatGridListModule,
     CommonModule,
     BrowserModule,
     HttpClientModule,
@@ -62,6 +67,7 @@ import { RestaurantService } from './core/services/restaurant.service';
     BrowserAnimationsModule,
     CoreModule,
     SharedModule,
+    FlexLayoutModule,
     CustomMaterialModule.forRoot(),
     AppRoutingModule,
     LoggerModule.forRoot({
@@ -75,7 +81,8 @@ import { RestaurantService } from './core/services/restaurant.service';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-
+    MatCardModule,
+    NgxMaskModule.forRoot()
   ],
   providers: [AuthInterceptor, {
     provide: HTTP_INTERCEPTORS,

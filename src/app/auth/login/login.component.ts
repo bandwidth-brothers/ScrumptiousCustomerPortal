@@ -17,6 +17,7 @@ import { NotificationService } from 'src/app/core/services/notification.service'
 export class LoginComponent implements OnInit {
     errorMsg?: string = undefined;
     isLoading = false;
+    hide = true;
     loginForm: FormGroup = new FormGroup({
         email: new FormControl(localStorage.getItem('savedUserEmail'), [Validators.required, Validators.email]),
         password: new FormControl('', Validators.required),
@@ -35,10 +36,6 @@ export class LoginComponent implements OnInit {
     ngOnInit(): void {
         this.authService.logout();
         this.titleService.setTitle('Scrumptious - Login');
-        if (this.authService.isLoggedIn()) {
-            //todo Navigate back to previous location if present
-            this.router.navigate(['/']);
-        }
     }
 
     //TODO:
@@ -93,7 +90,4 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/auth/register');
     }
 
-    onCloseAlert() {
-        this.errorMsg = undefined;
-    }
 }
