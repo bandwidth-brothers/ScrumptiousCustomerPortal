@@ -27,17 +27,14 @@ export class MenuItemsComponent implements OnInit {
     this.initializeForm()
     this.routeSub = this.route.params.subscribe(params => {
       this.restaurantId = params.id
-      console.log(params)
     })
     if (this.restaurantId === undefined) {
       this.menuItemService.getAllMenuItems().subscribe(menuItems => {
         this.menuItems = menuItems
-        console.log(menuItems)
       })
     } else {
       this.menuItemService.getAllMenuItemsFromRestaurant(this.restaurantId).subscribe(menuItems => {
         this.menuItems = menuItems
-        console.log(menuItems)
       })
     }
 
@@ -51,7 +48,6 @@ export class MenuItemsComponent implements OnInit {
   }
 
   searchHandle() {
-    console.log(this.searchForm.value.search)
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: {
@@ -63,22 +59,18 @@ export class MenuItemsComponent implements OnInit {
       if (this.searchForm.value.search.length === 0 && this.restaurantId === undefined) {
         this.menuItemService.getAllMenuItems().subscribe(menuItems => {
           this.menuItems = menuItems
-          console.log(menuItems)
         })
       } else if (this.searchForm.value.search.length === 0) {
         this.menuItemService.getAllMenuItemsFromRestaurant(this.restaurantId).subscribe(menuItems => {
           this.menuItems = menuItems
-          console.log(menuItems)
         })
       } else if (this.restaurantId === undefined) {
         this.menuItemService.getAllMenuItemsFromSearch("?search=" + search).subscribe(menuItems => {
           this.menuItems = menuItems
-          console.log(menuItems)
         })
       } else {
         this.menuItemService.getAllMenuItemsInRestaurantFromSearch(this.restaurantId, "?search=" + search).subscribe(menuItems => {
           this.menuItems = menuItems
-          console.log(menuItems)
         })
       }
     })

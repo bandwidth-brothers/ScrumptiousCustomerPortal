@@ -38,17 +38,14 @@ export class RestaurantHomeComponent implements OnInit {
     this.routeSub = this.route.params.subscribe(params => {
       this.restaurantId = params.id
     })
-    console.log("HELLO")
 
     this.restaurantService.getRestaurantById(this.restaurantId).subscribe(restaurant => {
       this.restaurant = restaurant
-      console.log(restaurant)
     })
 
     this.menuItemService.getAllMenuItemsFromRestaurant(this.restaurantId).subscribe(menuItems => {
       this.menuItems = menuItems
       this.isLoading = false;
-      console.log(menuItems)
     })
   }
 
@@ -69,41 +66,29 @@ export class RestaurantHomeComponent implements OnInit {
       skipLocationChange: false
     }).then(() => {
       const search = this.route.snapshot.queryParamMap.get('search')
-      console.log(searchValue)
-      console.log(search)
-      console.log(this.restaurantId)
       this.isLoading = true;
 
       if (searchValue.length === 0 && this.restaurantId === undefined) {
         this.menuItemService.getAllMenuItems().subscribe(menuItems => {
           this.menuItems = menuItems
-          console.log(menuItems)
         })
       } else if (searchValue.search.length === 0) {
         this.menuItemService.getAllMenuItemsFromRestaurant(this.restaurantId).subscribe(menuItems => {
           this.menuItems = menuItems
-          console.log(menuItems)
         })
       } else if (this.restaurantId === undefined) {
         this.menuItemService.getAllMenuItemsFromSearch("?search=" + search).subscribe(menuItems => {
           this.menuItems = menuItems
-          console.log(menuItems)
         })
       } else {
         if (search === undefined) {
-          console.log("Seach")
         }
         if (this.menuItemService === undefined) {
-          console.log("Service")
         }
         this.menuItemService.getAllMenuItemsInRestaurantFromSearch(this.restaurantId, "?search=" + search).subscribe(menuItems => {
 
           this.menuItems = menuItems
           this.isLoading = false;
-          //this.ref.detectChanges()
-          console.log(menuItems)
-          console.log(this.menuItems)
-
         })
       }
     })

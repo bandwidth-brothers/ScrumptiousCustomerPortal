@@ -32,7 +32,6 @@ export class SearchFieldComponent implements OnInit {
     this.routeSub = this.route.params.subscribe(params => {
       this.restaurantId = params.id
     })
-    console.log("HELLO")
   }
 
   initializeForm(): void {

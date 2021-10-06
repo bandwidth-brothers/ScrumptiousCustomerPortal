@@ -31,12 +31,10 @@ export class RestaurantsComponent implements OnInit {
     this.initializeForm()
     this.routeSub = this.route.params.subscribe(params => {
       this.restaurantId = params.id
-      console.log(params)
     })
 
     this.restaurantService.getAllRestaurants().subscribe(restaurants => {
       this.restaurants = restaurants
-      console.log(restaurants)
     })
   }
 
@@ -47,7 +45,6 @@ export class RestaurantsComponent implements OnInit {
   }
 
   searchHandle() {
-    console.log(this.searchForm.get('search')?.value)
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: {
@@ -60,12 +57,10 @@ export class RestaurantsComponent implements OnInit {
       if (this.searchForm.value.search.length === 0) {
         this.restaurantService.getAllRestaurants().subscribe(restaurants => {
           this.restaurants = restaurants
-          console.log(restaurants)
         })
       } else {
         this.menuItemService.getAllRestaurantsFromMenuItemSearch(search || "").subscribe(restaurants => {
           this.restaurants = restaurants
-          console.log(restaurants)
         })
       }
     })
