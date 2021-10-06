@@ -12,7 +12,6 @@ pipeline{
 		stage('Analysis'){
       steps{
         sh 'npm install'
-        sh 'npm run-script lint'
         sh 'npm run-script test'
       }
     }		
