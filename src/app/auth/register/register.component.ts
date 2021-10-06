@@ -1,3 +1,4 @@
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
@@ -10,101 +11,130 @@ import { Address } from 'src/app/entities/address';
 import { RegisterDto } from 'src/app/entities/registerDto';
 import { CustomerService } from 'src/app/services/customer.service';
 import { passwordMatchValidator } from 'src/app/shared/validators/passwordMatchValidator';
+import { trimStringLength } from 'src/app/shared/validators/validators';
 
 // TODO: create inputs for address fields
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+    selector: 'app-register',
+    templateUrl: './register.component.html',
+    styleUrls: ['./register.component.css'],
+    providers: [{
+        provide: STEPPER_GLOBAL_OPTIONS, useValue: { showError: true }
+    }]
 })
 export class RegisterComponent implements OnInit {
 
-  errorMsg?: string = undefined;
-  isLoading = false;
-  hide = true;
-  registrationForm = new FormGroup({
-    firstName: new FormControl('', [Validators.required]),
-    lastName: new FormControl('', [Validators.required]),
-    phone: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required]),
-    confirmPassword: new FormControl('', [Validators.required]),
-  }, (form: AbstractControl) => passwordMatchValidator(form));
+    errorMsg?: string = undefined;
+    isLoading = false;
+    hide = true;
+    hide2 = true;
+    states: string[] = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA",
+        "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
+        "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ",
+        "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC",
+        "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"];
+    registrationForm = new FormGroup({
+        firstName: new FormControl('', [Validators.required, trimStringLength(1)]),
+        lastName: new FormControl('', [Validators.required, trimStringLength(1)]),
+        phone: new FormControl('', [Validators.required, trimStringLength(1)]),
+        dob: new FormControl(''),
+        email: new FormControl('', [Validators.required, Validators.email, trimStringLength(1)]),
+        veteranaryStatus: new FormControl('', [Validators.required]),
+        password: new FormControl('', [Validators.required, trimStringLength(1)]),
+        confirmPassword: new FormControl('', [Validators.required, trimStringLength(1)]),
 
+    }, (form: AbstractControl) => passwordMatchValidator(form));
 
-  constructor(
-    private titleService: Title,
-    private notificationService: NotificationService,
-    private router: Router,
-    private customerService: CustomerService,
-    private log: NGXLogger,
-    private formBuilder: FormBuilder
-  ) { }
+    addressForm = new FormGroup({
+        line1: new FormControl('', [Validators.required, trimStringLength(1)]),
+        line2: new FormControl(''), //NOT required
+        city: new FormControl('', [Validators.required, trimStringLength(1)]),
+        state: new FormControl('', [Validators.required]),
+        zip: new FormControl('', [
+            Validators.required,
+            Validators.pattern(/^\d{5}(?:[-\s]\d{4})?$/),
+        ]),
+    })
 
-  ngOnInit(): void {
-    this.titleService.setTitle('Scrumptious - Register');
-  }
+    constructor(
+        private titleService: Title,
+        private notificationService: NotificationService,
+        private router: Router,
+        private customerService: CustomerService,
+        private log: NGXLogger,
+        private formBuilder: FormBuilder
+    ) { }
 
-  register() {
-    const theBiggestInt = 9007199254740991;
-    const address: Address = {
-      id: "23948",
-      line1: '234 Oakmont Str.',
-      line2: '',
-      city: 'Charlesville',
-      state: 'KY',
-      zip: '35489'
+    ngOnInit(): void {
+        this.titleService.setTitle('Scrumptious - Register');
     }
 
-    const registerDto: RegisterDto = {
-      firstName: this.registrationForm.get('firstName')?.value,
-      lastName: this.registrationForm.get('lastName')?.value,
-      email: this.registrationForm.get('email')?.value,
-      phone: this.registrationForm.get('phone')?.value,
-      password: this.registrationForm.get('password')?.value,
-      address: address
+    register() {
+        const address: Address = {
+            line1: this.addressForm.get('line1')?.value,
+            line2: this.addressForm.get('line2')?.value,
+            city: this.addressForm.get('city')?.value,
+            state: this.addressForm.get('state')?.value,
+            zip: this.addressForm.get('zip')?.value
+        }
 
+        const registerDto: RegisterDto = {
+            firstName: this.registrationForm.get('firstName')?.value,
+            lastName: this.registrationForm.get('lastName')?.value,
+            email: this.registrationForm.get('email')?.value,
+            dob: this.registrationForm.get('dob')?.value,
+            veteranaryStatus: this.registrationForm.get('veteranaryStatus')?.value,
+            phone: this.registrationForm.get('phone')?.value,
+            password: this.registrationForm.get('password')?.value,
+            address: address,
+
+        }
+
+        this.isLoading = true;
+
+        this.customerService.createCustomer(registerDto).subscribe(
+            () => {
+                this.handleRegisterSuccess().then(() => {
+                    this.registrationForm.reset();
+                    this.addressForm.reset()
+                });
+            },
+            (err: HttpErrorResponse) => {
+                this.handleRegisterFailure(err).then(() => {
+                    this.registrationForm.reset();
+                    this.addressForm.reset()
+                });
+            }
+        );
     }
 
-    this.isLoading = true;
+    async handleRegisterSuccess() {
 
-    this.customerService.createCustomer(registerDto).subscribe(
-      () => {
-        this.handleRegisterSuccess().then(() => this.registrationForm.reset());
-      },
-      (err: HttpErrorResponse) => {
-        this.handleRegisterFailure(err).then(() => this.registrationForm.reset());
-      }
-    );
-  }
-
-  async handleRegisterSuccess() {
-
-    this.errorMsg = undefined;
-    this.isLoading = false;
-    this.notificationService.openSnackBar("Register successful");
-    await this.router.navigate(['/auth/login']);
-  }
-
-  async handleRegisterFailure(err: HttpErrorResponse) {
-    this.log.debug('Failure', err);
-    this.isLoading = false;
-    if (err.status === 403 || err.status === 401 || err.status === 409) {
-      this.notificationService.openSnackBar('Email already registered to another user.');
-    } else {
-      this.notificationService.openSnackBar('An error occurred while registering. Please try again.');
-
+        this.errorMsg = undefined;
+        this.isLoading = false;
+        this.notificationService.openSnackBar("Register successful");
+        await this.router.navigate(['/auth/login']);
     }
-  }
 
-  /* Called on each input in either password field */
-  onPasswordInput() {
+    async handleRegisterFailure(err: HttpErrorResponse) {
+        this.log.debug('Failure', err);
+        this.isLoading = false;
+        if (err.status === 403 || err.status === 401 || err.status === 409) {
+            this.notificationService.openSnackBar('Email already registered to another user.');
+        } else {
+            this.notificationService.openSnackBar('An error occurred while registering. Please try again.');
 
-    if (this.registrationForm.hasError('passwordMismatch'))
-      this.registrationForm.get('confirmPassword')?.setErrors([{ 'passwordMismatch': true }]);
-    else
-      this.registrationForm.get('confirmPassword')?.setErrors(null);
-  }
+        }
+    }
+
+    /* Called on each input in either password field */
+    onPasswordInput() {
+
+        if (this.registrationForm.hasError('passwordMismatch'))
+            this.registrationForm.get('confirmPassword')?.setErrors([{ 'passwordMismatch': true }]);
+        else
+            this.registrationForm.get('confirmPassword')?.setErrors(null);
+    }
 
 }

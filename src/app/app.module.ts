@@ -31,6 +31,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { NgxMaskModule } from 'ngx-mask';
 import { RegisterComponent } from './auth/register/register.component';
+import { MatStepperModule } from '@angular/material/stepper';
 
 
 
@@ -45,6 +46,7 @@ import { RegisterComponent } from './auth/register/register.component';
     HomeComponent,
   ],
   imports: [
+    MatStepperModule,
     MatGridListModule,
     CommonModule,
     BrowserModule,
