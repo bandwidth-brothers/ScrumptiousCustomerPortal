@@ -12,13 +12,14 @@ pipeline{
 		stage('Analysis'){
       steps{
         sh 'npm install'
-        sh 'ng test'
+        sh 'npm run-script lint'
+        sh 'npm run-script test'
       }
     }		
     stage('Build'){
 			steps{
-				sh 'ng build'
-        sh 'ls ./dist'
+				sh 'npm run-script build'
+        sh 'ls .'
 			}
 		}
     /**
