@@ -27,9 +27,9 @@ export class AuthService {
   public username?: string;
   private tokenExpirationTimer?: any;
 
-  readonly LOGIN_URL = environment.baseAuthUrl + '/login';
-  readonly CONFIRM_REGISTRATION_URL = environment.baseAuthUrl + '/accounts/confirm';
-  readonly DELETE_ACCOUNT_URL = environment.baseAuthUrl + '/customers';
+  readonly LOGIN_URL = environment.BASE_AUTH_URL + '/login';
+  readonly CONFIRM_REGISTRATION_URL = environment.BASE_AUTH_URL + '/accounts/confirm';
+  readonly DELETE_ACCOUNT_URL = environment.BASE_AUTH_URL + '/customers';
 
   readonly STORAGE_KEY = 'AUTH_DATA';
 

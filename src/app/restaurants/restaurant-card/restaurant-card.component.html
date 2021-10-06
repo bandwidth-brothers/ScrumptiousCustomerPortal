@@ -1,0 +1,26 @@
+<div class="dataTable-container">
+    <mat-card class="example-card" *ngIf="restaurant">
+
+        <img mat-card-md-image src="{{restaurantPicture}}" alt="Photo of restaurant">
+
+        <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>{{restaurant.name}}</mat-card-title>
+            <!-- <mat-card-subtitle>sub</mat-card-subtitle> -->
+        </mat-card-header>
+        <mat-card-content>
+            <p>
+                {{restaurant.address.line1}}
+            </p>
+            <p *ngIf="restaurant.address.line2">
+                {{restaurant.address.line2}}
+            </p>
+            <p>
+                {{restaurant.address.city}}, {{restaurant.address.state}} {{restaurant.address.zip}}
+            </p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button (click)="goToRestaurant()">OPEN</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

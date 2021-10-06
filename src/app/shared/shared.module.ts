@@ -7,6 +7,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
 import { ContentPlaceholderAnimationComponent } from './content-placeholder-animation/content-placeholder-animation.component';
 import { LayoutComponent } from './layout/layout.component';
 import { LayoutModule } from '@angular/cdk/layout';
+import { SearchFieldComponent } from './search-field/search-field.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { LayoutModule } from '@angular/cdk/layout';
   declarations: [
     ConfirmDialogComponent,
     ContentPlaceholderAnimationComponent,
-    LayoutComponent
+    LayoutComponent,
+    SearchFieldComponent
   ],
   exports: [
     FormsModule,
@@ -27,6 +29,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     CustomMaterialModule,
     ConfirmDialogComponent,
     ContentPlaceholderAnimationComponent,
+    SearchFieldComponent
   ],
   entryComponents: [
     ConfirmDialogComponent

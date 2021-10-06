@@ -7,7 +7,9 @@ import { NgxLoggerLevel } from "ngx-logger";
 
 export const environment = {
   production: false,
-  baseAuthUrl: 'http://localhost:8080/auth',
+  BASE_AUTH_URL: 'http://localhost:8080/auth',
+  BASE_RESTAURANT_URL: 'http://localhost:8080/restaurant',
+  BASE_DRIVER_URL: 'http://localhost:8080/driver',
   USERS_GET_ALL_URL: '/accounts',
   USERS_GET_URL: '/accounts/',
   BASE_CUSTOMER_URL: 'http://localhost:8080/customer/customers',
