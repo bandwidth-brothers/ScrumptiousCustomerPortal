@@ -11,12 +11,13 @@ pipeline{
 		}
 		stage('Analysis'){
       steps{
-        sh 'npm install --legacy-peer-deps'
+        sh 'npm install --legacy-peer-deps -g @angular/cli'
+        sh 'ng test'
       }
     }		
     stage('Build'){
 			steps{
-				sh 'npm run-script build'
+				sh 'ng build'
         sh 'ls .'
 			}
 		}
