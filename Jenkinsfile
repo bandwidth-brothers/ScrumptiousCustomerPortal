@@ -12,7 +12,6 @@ pipeline{
 		stage('Analysis'){
       steps{
         sh 'npm install --legacy-peer-deps -g @angular/cli'
-        sh 'ng test'
       }
     }		
     stage('Build'){
