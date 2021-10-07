@@ -11,8 +11,7 @@ pipeline{
 		}
 		stage('Analysis'){
       steps{
-        sh 'npm install'
-        sh 'npm run-script test'
+        sh 'npm install --legacy-peer-deps'
       }
     }		
     stage('Build'){
