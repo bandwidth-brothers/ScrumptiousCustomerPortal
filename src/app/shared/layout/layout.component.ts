@@ -7,7 +7,7 @@ import { environment } from './../../../environments/environment';
 import { AuthService } from './../../core/services/auth.service';
 import { SpinnerService } from '../../core/services/spinner.service';
 import { Router } from '@angular/router';
-import { map, shareReplay } from 'rxjs/operators';
+import { map, shareReplay, delay } from 'rxjs/operators';
 
 @Component({
     selector: 'app-layout',
@@ -26,9 +26,11 @@ export class LayoutComponent {
 
     constructor(
         public spinnerService: SpinnerService,
-        private breakpointObserver: BreakpointObserver
-    ) {
+        private breakpointObserver: BreakpointObserver,
+        private ref: ChangeDetectorRef) { }
 
+    ngAfterContentChecked() {
+        this.ref.detectChanges();
     }
 
 

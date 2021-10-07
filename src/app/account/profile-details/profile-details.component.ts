@@ -43,7 +43,7 @@ export class ProfileDetailsComponent implements OnInit {
         lastName: new FormControl('', [Validators.required, trimStringLength(1)]),
         dob: new FormControl(''),
         email: new FormControl('', [Validators.required, Validators.email, trimStringLength(1)]),
-        veteranarianStatus: new FormControl(''),
+        veteranaryStatus: new FormControl(''),
         line1: new FormControl('', [Validators.required, trimStringLength(1)]),
         line2: new FormControl(''), //NOT required
         city: new FormControl('', [Validators.required, trimStringLength(1)]),
@@ -94,7 +94,7 @@ export class ProfileDetailsComponent implements OnInit {
             ?.value.trim();
 
         (this.customer as Customer).dob = this.customerProfileForm.get("dob")?.value;
-
+        (this.customer as Customer).veteranaryStatus = this.customerProfileForm.get("veteranaryStatus")?.value;
         (this.customer as Customer).address.line1 = this.customerProfileForm
             .get('line1')
             ?.value.trim();
@@ -104,7 +104,7 @@ export class ProfileDetailsComponent implements OnInit {
         ((this.customer as Customer).address as Address).city = this.customerProfileForm.get('city')?.value.trim();
         ((this.customer as Customer).address as Address).state = this.customerProfileForm.get('state')?.value.trim();
         ((this.customer as Customer).address as Address).zip = this.customerProfileForm.get('zip')?.value.trim();
-        (this.customer as Customer).phone = this.customerProfileForm.get('phone')?.value.trim();
+        (this.customer as Customer).phone = this.updatePhoneNumberFormat();
         //loyaltyPoints NOT updated
     }
 
@@ -136,5 +136,14 @@ export class ProfileDetailsComponent implements OnInit {
         this.customerProfileForm.enable();
     }
 
+    //save number as 555-555-5555 for the backend
+    updatePhoneNumberFormat(): string {
+        const control = this.customerProfileForm.get('phone');
+        if (control && control.valid) {
+            const val = control.value.replaceAll(/\D/g, '');
+            return val.slice(0, 3) + '-' + val.slice(3, 6) + '-' + val.slice(6, 11);
+        }
+        return '';
+    }
 
 }

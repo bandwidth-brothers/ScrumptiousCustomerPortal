@@ -2,6 +2,7 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { NGXLogger } from 'ngx-logger';
@@ -19,9 +20,9 @@ import { trimStringLength } from 'src/app/shared/validators/validators';
     selector: 'app-register',
     templateUrl: './register.component.html',
     styleUrls: ['./register.component.css'],
-    providers: [{
-        provide: STEPPER_GLOBAL_OPTIONS, useValue: { showError: true }
-    }]
+    providers: [
+        { provide: STEPPER_GLOBAL_OPTIONS, useValue: { showError: true } },
+    ]
 })
 export class RegisterComponent implements OnInit {
 
@@ -40,7 +41,7 @@ export class RegisterComponent implements OnInit {
         phone: new FormControl('', [Validators.required, trimStringLength(1)]),
         dob: new FormControl(''),
         email: new FormControl('', [Validators.required, Validators.email, trimStringLength(1)]),
-        veteranaryStatus: new FormControl('', [Validators.required]),
+        veteranaryStatus: new FormControl(''),
         password: new FormControl('', [Validators.required, trimStringLength(1)]),
         confirmPassword: new FormControl('', [Validators.required, trimStringLength(1)]),
 
@@ -85,7 +86,7 @@ export class RegisterComponent implements OnInit {
             email: this.registrationForm.get('email')?.value,
             dob: this.registrationForm.get('dob')?.value,
             veteranaryStatus: this.registrationForm.get('veteranaryStatus')?.value,
-            phone: this.registrationForm.get('phone')?.value,
+            phone: this.updatePhoneNumberFormat(),
             password: this.registrationForm.get('password')?.value,
             address: address,
 
@@ -135,6 +136,16 @@ export class RegisterComponent implements OnInit {
             this.registrationForm.get('confirmPassword')?.setErrors([{ 'passwordMismatch': true }]);
         else
             this.registrationForm.get('confirmPassword')?.setErrors(null);
+    }
+
+    //save number as 555-555-5555 for the backend
+    updatePhoneNumberFormat(): string {
+        const control = this.registrationForm.get('phone');
+        if (control && control.valid) {
+            const val = control.value.replaceAll(/\D/g, '');
+            return val.slice(0, 3) + '-' + val.slice(3, 6) + '-' + val.slice(6, 11);
+        }
+        return '';
     }
 
 }
