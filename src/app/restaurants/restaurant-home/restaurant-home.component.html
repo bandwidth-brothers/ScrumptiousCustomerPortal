@@ -13,7 +13,7 @@
         </mat-form-field>
     </form>
     <div class="card-body" *ngIf="isLoading==false">
-        <app-menu-item *ngFor="let menuItem of menuItems" [menuItem]="menuItem" [restaurant]="restaurant">
+        <app-menu-item *ngFor="let menuitem of menuitems" [menuitem]="menuitem" [restaurant]="restaurant">
         </app-menu-item>
     </div>
 </div>

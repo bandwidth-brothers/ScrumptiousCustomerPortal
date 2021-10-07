@@ -12,8 +12,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RestaurantsComponent } from './restaurants/restaurants/restaurants.component';
 import { RestaurantCardComponent } from './restaurants/restaurant-card/restaurant-card.component';
 import { RestaurantHomeComponent } from './restaurants/restaurant-home/restaurant-home.component';
-import { MenuItemsComponent } from './menu-items/menu-items/menu-items.component';
-import { MenuItemComponent } from './menu-items/menu-item/menu-item.component';
+import { MenuitemsComponent } from './menu-items/menu-items/menu-items.component';
+import { MenuitemComponent } from './menu-items/menu-item/menu-item.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { CustomMaterialModule } from './custom-material/custom-material.module';
@@ -31,7 +31,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { MenuItemService } from './core/services/menu-item.service';
+import { MenuitemService } from './core/services/menu-item.service';
 import { RestaurantService } from './core/services/restaurant.service';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -54,8 +54,8 @@ import { MatStepperModule } from '@angular/material/stepper';
     RestaurantsComponent,
     RestaurantCardComponent,
     RestaurantHomeComponent,
-    MenuItemsComponent,
-    MenuItemComponent
+    MenuitemsComponent,
+    MenuitemComponent
   ],
   imports: [
     MatStepperModule,

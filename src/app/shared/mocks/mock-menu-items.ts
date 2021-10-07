@@ -1,7 +1,7 @@
-import { MenuItem } from "src/app/entities/menu-item";
+import { Menuitem } from "src/app/entities/menuitem";
 import { RESTAURANTS } from 'src/app/shared/mocks/mock-restaurants'
 
-export const MENU_ITEMS: MenuItem[] = [
+export const MENU_ITEMS: Menuitem[] = [
     {
         "id": 1001,
         "name": "Fried Cheese Balls",

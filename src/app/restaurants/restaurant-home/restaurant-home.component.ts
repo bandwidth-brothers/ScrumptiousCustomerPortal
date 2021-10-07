@@ -4,9 +4,9 @@ import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Restaurant } from 'src/app/entities/restaurant';
-import { MenuItem } from 'src/app/entities/menu-item';
+import { Menuitem } from 'src/app/entities/menuitem';
 
-import { MenuItemService } from 'src/app/core/services/menu-item.service';
+import { MenuitemService } from 'src/app/core/services/menu-item.service';
 import { RestaurantService } from 'src/app/core/services/restaurant.service';
 
 @Component({
@@ -16,7 +16,7 @@ import { RestaurantService } from 'src/app/core/services/restaurant.service';
 })
 export class RestaurantHomeComponent implements OnInit {
   routeSub!: Subscription;
-  menuItems: MenuItem[] = [];
+  menuitems: Menuitem[] = [];
   restaurant!: Restaurant;
   restaurantId!: string;
   isLoading: boolean = true
@@ -24,7 +24,7 @@ export class RestaurantHomeComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private menuItemService: MenuItemService,
+    private menuitemService: MenuitemService,
     private router: Router,
     private fb: FormBuilder,
     private restaurantService: RestaurantService,
@@ -43,8 +43,8 @@ export class RestaurantHomeComponent implements OnInit {
       this.restaurant = restaurant
     })
 
-    this.menuItemService.getAllMenuItemsFromRestaurant(this.restaurantId).subscribe(menuItems => {
-      this.menuItems = menuItems
+    this.menuitemService.getAllMenuitemsFromRestaurant(this.restaurantId).subscribe(menuitems => {
+      this.menuitems = menuitems
       this.isLoading = false;
     })
   }
@@ -69,25 +69,25 @@ export class RestaurantHomeComponent implements OnInit {
       this.isLoading = true;
 
       if (searchValue.length === 0 && this.restaurantId === undefined) {
-        this.menuItemService.getAllMenuItems().subscribe(menuItems => {
-          this.menuItems = menuItems
+        this.menuitemService.getAllMenuitems().subscribe(menuitems => {
+          this.menuitems = menuitems
         })
       } else if (searchValue.search.length === 0) {
-        this.menuItemService.getAllMenuItemsFromRestaurant(this.restaurantId).subscribe(menuItems => {
-          this.menuItems = menuItems
+        this.menuitemService.getAllMenuitemsFromRestaurant(this.restaurantId).subscribe(menuitems => {
+          this.menuitems = menuitems
         })
       } else if (this.restaurantId === undefined) {
-        this.menuItemService.getAllMenuItemsFromSearch("?search=" + search).subscribe(menuItems => {
-          this.menuItems = menuItems
+        this.menuitemService.getAllMenuitemsFromSearch("?search=" + search).subscribe(menuitems => {
+          this.menuitems = menuitems
         })
       } else {
         if (search === undefined) {
         }
-        if (this.menuItemService === undefined) {
+        if (this.menuitemService === undefined) {
         }
-        this.menuItemService.getAllMenuItemsInRestaurantFromSearch(this.restaurantId, "?search=" + search).subscribe(menuItems => {
+        this.menuitemService.getAllMenuitemsInRestaurantFromSearch(this.restaurantId, "?search=" + search).subscribe(menuitems => {
 
-          this.menuItems = menuItems
+          this.menuitems = menuitems
           this.isLoading = false;
         })
       }

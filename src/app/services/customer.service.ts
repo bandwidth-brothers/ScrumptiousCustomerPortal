@@ -17,7 +17,7 @@ import { RegisterDto } from '../entities/registerDto';
 })
 export class CustomerService {
 
-	readonly CUSTOMERS_URL = environment.BASE_CUSTOMER_URL;
+	readonly CUSTOMERS_URL = environment.BASE_CUSTOMERS_URL;
 	httpOptions = {
 		headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 	};

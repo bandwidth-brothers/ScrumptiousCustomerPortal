@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { MenuItem } from 'src/app/entities/menu-item';
+import { Menuitem } from 'src/app/entities/menuitem';
 import { Restaurant } from 'src/app/entities/restaurant'
 import { Address } from 'src/app/entities/address'
 
@@ -9,8 +9,8 @@ import { Address } from 'src/app/entities/address'
   templateUrl: './menu-item.component.html',
   styleUrls: ['./menu-item.component.css']
 })
-export class MenuItemComponent implements OnInit {
-  @Input() menuItem!: MenuItem
+export class MenuitemComponent implements OnInit {
+  @Input() menuitem!: Menuitem
   @Input() restaurant!: Restaurant
   restaurantAddress!: Address
   foodPicture: string = "assets/images/food-img.jpg";

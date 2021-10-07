@@ -8,7 +8,7 @@ import { Location } from "@angular/common";
 
 import { RestaurantsComponent } from './restaurants.component';
 import { RestaurantService } from 'src/app/core/services/restaurant.service';
-import { MenuItemService } from 'src/app/core/services/menu-item.service';
+import { MenuitemService } from 'src/app/core/services/menu-item.service';
 
 import { Restaurant } from 'src/app/entities/restaurant';
 import { RESTAURANTS } from 'src/app/shared/mocks/mock-restaurants';
@@ -21,7 +21,7 @@ fdescribe('RestaurantsComponent', () => {
   let component: RestaurantsComponent;
   let fixture: ComponentFixture<RestaurantsComponent>;
   let restaurantServiceSpy: RestaurantService
-  let menuItemServiceSpy: MenuItemService
+  let menuitemServiceSpy: MenuitemService
 
   let route: ActivatedRoute;
   let router: Router;
@@ -35,7 +35,7 @@ fdescribe('RestaurantsComponent', () => {
         HttpClientTestingModule],
       declarations: [RestaurantsComponent],
       providers: [RestaurantService,
-        MenuItemService]
+        MenuitemService]
     })
       .compileComponents();
   });
@@ -47,7 +47,7 @@ fdescribe('RestaurantsComponent', () => {
 
     location = fixture.debugElement.injector.get(Location);
     restaurantServiceSpy = fixture.debugElement.injector.get(RestaurantService)
-    menuItemServiceSpy = fixture.debugElement.injector.get(MenuItemService)
+    menuitemServiceSpy = fixture.debugElement.injector.get(MenuitemService)
   });
 
   afterEach(() => {
@@ -75,7 +75,7 @@ fdescribe('RestaurantsComponent', () => {
 
     const search = component.searchForm.get('search')?.value;
 
-    const searchResult = spyOn(menuItemServiceSpy, 'getAllRestaurantsFromMenuItemSearch').and.callFake(function (searchW) {
+    const searchResult = spyOn(menuitemServiceSpy, 'getAllRestaurantsFromMenuitemSearch').and.callFake(function (searchW) {
       return of([mockRestaurants[0], mockRestaurants[1]])
     })
 

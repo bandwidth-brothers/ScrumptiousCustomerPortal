@@ -3,8 +3,7 @@ import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { MenuItem } from 'src/app/entities/menu-item';
-import { MenuItemService } from 'src/app/core/services/menu-item.service';
+import { MenuitemService } from 'src/app/core/services/menu-item.service';
 
 
 @Component({
@@ -16,14 +15,14 @@ export class SearchFieldComponent implements OnInit {
   @Input() callbackFunction!: (args: string) => void;
   routeSub!: Subscription;
   restaurantId: string = "";
-  //menuItems: MenuItem[] = [];
+  //menuitems: Menuitem[] = [];
   searchForm!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private menuItemService: MenuItemService,
+    private menuitemService: MenuitemService,
     private ref: ChangeDetectorRef
   ) { }
 
