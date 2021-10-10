@@ -91,7 +91,6 @@ export class RegisterComponent implements OnInit {
             address: address,
 
         }
-
         this.isLoading = true;
 
         this.customerService.createCustomer(registerDto).subscribe(

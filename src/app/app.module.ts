@@ -31,19 +31,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { MenuitemService } from './core/services/menu-item.service';
-import { RestaurantService } from './core/services/restaurant.service';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { NgxMaskModule } from 'ngx-mask';
 import { RegisterComponent } from './auth/register/register.component';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MenuitemModalComponent } from './menu-items/menuitem-modal/menuitem-modal.component';
+import { OrderHistoryComponent } from './order-history/order-history.component';
 
 
 
 @NgModule({
   declarations: [
+
     AppComponent,
     LoginComponent,
     RegisterComponent,
@@ -55,7 +56,9 @@ import { MatStepperModule } from '@angular/material/stepper';
     RestaurantCardComponent,
     RestaurantHomeComponent,
     MenuitemsComponent,
-    MenuitemComponent
+    MenuitemComponent,
+    MenuitemModalComponent,
+    OrderHistoryComponent,
   ],
   imports: [
     MatStepperModule,

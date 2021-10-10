@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>{{data.menuitem.name}}</h1>
+<div mat-dialog-content>
+    <p>{{data.menuitem.restaurant.name}}</p>
+    <mat-form-field appearance="outline">
+        <mat-label>Enter quantity</mat-label>
+        <input matInput placeholder="1" value="1" mask="099" [(ngModel)]="data.quantity">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="data.quantity"
+        [disabled]="!data.quantity || data.quantity === '0' || data.quantity === '00' || data.quantity === '000'">Ok</button>
+</div>

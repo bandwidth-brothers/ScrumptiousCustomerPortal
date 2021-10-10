@@ -48,17 +48,6 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { LayoutModule } from '@angular/cdk/layout';
 import { SelectCheckAllComponent } from './select-check-all/select-check-all.component';
 
-export const MY_FORMATS = {
-  parse: {
-    dateInput: 'DD MMM YYYY',
-  },
-  display: {
-    dateInput: 'DD MMM YYYY',
-    monthYearLabel: 'MMM YYYY',
-    dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'MMMM YYYY'
-  }
-};
 
 @NgModule({
   imports: [
@@ -83,11 +72,6 @@ export const MY_FORMATS = {
     MatExpansionModule, SelectCheckAllComponent, DragDropModule, MatSortModule
   ],
   providers: [
-    {
-      provide: MAT_DATE_FORMATS,
-      useValue: MY_FORMATS
-    },
-    { provide: LOCALE_ID, useValue: 'en-gb' }
   ],
   declarations: [SelectCheckAllComponent]
 })

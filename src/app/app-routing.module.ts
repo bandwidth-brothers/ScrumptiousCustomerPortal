@@ -11,6 +11,7 @@ import { LayoutComponent } from './shared/layout/layout.component';
 
 import { AuthenticationGuard } from './authentication.guard';
 import { MenuitemComponent } from './menu-items/menu-item/menu-item.component';
+import { OrderHistoryComponent } from './order-history/order-history.component';
 
 export const routes: Routes = [
   {
@@ -66,6 +67,10 @@ export const routes: Routes = [
       {
         path: 'account/profile',
         component: ProfileComponent
+      },
+      {
+        path: 'history',
+        component: OrderHistoryComponent
       }
     ],
     canActivate: [AuthenticationGuard]

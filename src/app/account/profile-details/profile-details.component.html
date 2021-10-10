@@ -42,7 +42,7 @@
         <mat-label>Phone number*</mat-label>
         <input matInput mask="000-000-0000" placeholder="555-555-5555" formControlName="phone">
         <mat-error *ngIf="customerProfileForm.controls['phone'].hasError('required')">
-          Please enter your last name
+          Phone number <strong>required</strong>
         </mat-error>
       </mat-form-field>
     </mat-grid-tile>
@@ -50,10 +50,13 @@
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <mat-form-field class="full-width" appearance="outline">
         <mat-label>Date of birth</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="dob">
+        <input matInput [matDatepicker]="picker" formControlName="dob" placeholder="02/25/1999">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker enabled="customerProfileForm.enabled">
         </mat-datepicker>
+        <mat-error *ngIf="customerProfileForm.controls['dob'].invalid">
+          Date must follow M(M)/d(d)/YYYY
+        </mat-error>
       </mat-form-field>
     </mat-grid-tile>
 

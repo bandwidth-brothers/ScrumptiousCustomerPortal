@@ -1,7 +1,7 @@
 <div class="dataTable-container">
-    <mat-card class="example-card" *ngIf="restaurant">
+    <mat-card class="example-card" *ngIf="restaurant" (click)="goToRestaurant()">
 
-        <img mat-card-md-image src="{{restaurantPicture}}" alt="Photo of restaurant">
+        <img mat-card-md-image src=" {{restaurantPicture}}" alt="Photo of restaurant">
 
         <mat-card-header>
             <div mat-card-avatar class="example-header-image"></div>

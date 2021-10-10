@@ -10,7 +10,7 @@ export interface Order {
     requestedDeliveryTime: Date;
     orderDiscount: number;
     submitedAt: Date;
-    preparationStatus: number;
-    menuitemOrder: MenuitemOrder[];
+    preparationStatus: string;
+    menuitemOrders: MenuitemOrder[];
     // delivery: Delivery;
 }

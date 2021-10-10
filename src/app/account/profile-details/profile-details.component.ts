@@ -35,7 +35,10 @@ export class ProfileDetailsComponent implements OnInit {
     ngOnInit(): void {
         this.getCustomer();
         this.customerProfileForm.disable();
+
     }
+
+
 
 
     customerProfileForm: FormGroup = new FormGroup({
@@ -75,6 +78,7 @@ export class ProfileDetailsComponent implements OnInit {
             this.customerProfileForm.patchValue(this.customer);
             // this will not fill in address information unless you explicitly feed it the address
             this.customerProfileForm.patchValue(this.customer.address);
+
         } else if (this.checkIsError(response)) {
             this.error = response;
         }

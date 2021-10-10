@@ -59,10 +59,13 @@
                                 <mat-form-field class="full-width" appearance="outline">
                                     <mat-label>Date of birth</mat-label>
                                     <input matInput [matDatepicker]="picker" formControlName="dob"
-                                        placeholder="12 Oct 2000">
+                                        placeholder="02/25/1999">
                                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                     <mat-datepicker #picker enabled="registrationForm.enabled">
                                     </mat-datepicker>
+                                    <mat-error *ngIf="registrationForm.controls['dob'].invalid">
+                                        Date must follow M(M)/d(d)/YYYY
+                                    </mat-error>
                                 </mat-form-field>
                             </mat-grid-tile>
                         </mat-grid-list>
@@ -168,6 +171,9 @@
                                     <input matInput placeholder="10001" formControlName="zip">
                                     <mat-error *ngIf="addressForm.controls['zip'].hasError('required')">
                                         Zip code is <strong>required</strong>
+                                    </mat-error>
+                                    <mat-error *ngIf="addressForm.controls['zip'].hasError('pattern')">
+                                        Must follow "55555"
                                     </mat-error>
                                 </mat-form-field>
                             </mat-grid-tile>
