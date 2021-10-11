@@ -1,5 +1,5 @@
 import { Component, NgZone, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, NgForm, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -30,6 +30,21 @@ export class RestaurantsComponent implements OnInit {
   ]
   selectedSortBy: string = "Featured";
 
+  filterByRating: string[] = [
+    "1 Stars & Up",
+    "2 Stars & Up",
+    "3 Stars & Up",
+    "4 Stars & Up"
+  ]
+  ratingThreshold: string = "0";
+
+  filterByPrice: string[] = [
+    "$",
+    "$$",
+    "$$$",
+  ]
+  priceCategories = new FormControl({ value: ['$', '$$', '$$$'], disabled: false });
+
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -56,6 +71,7 @@ export class RestaurantsComponent implements OnInit {
   }
 
   searchHandle() {
+    console.log(this.priceCategories)
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: {

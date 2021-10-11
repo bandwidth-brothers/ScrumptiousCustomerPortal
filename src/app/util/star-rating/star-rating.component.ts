@@ -7,6 +7,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class StarRatingComponent implements OnInit {
   @Input() rating: number = 0
+  @Input() textEnabled: boolean = true
+  @Input() suffix!: string
   iconList!: string[]
 
   constructor() { }

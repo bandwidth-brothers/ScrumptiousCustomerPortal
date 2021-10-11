@@ -20,33 +20,64 @@
         </mat-select>
     </mat-form-field>
 
+    <mat-form-field appearance="fill">
+        <mat-label>Filter By Rating: </mat-label>
+        <mat-select [(value)]="ratingThreshold">
+            <mat-select-trigger>{{ratingThreshold}}</mat-select-trigger>
+            <mat-option class="rating" [value]="option" *ngFor="let option of filterByRating">
+                <app-star-rating [textEnabled]=false [rating]="option | toNumber" [suffix]="'& Up'"></app-star-rating>
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Filter By Price Category: </mat-label>
+        <mat-select [formControl]="priceCategories" multiple>
+            <!-- <mat-select-trigger>{{ratingThreshold}}</mat-select-trigger> -->
+            <mat-option class="rating" [value]="option" *ngFor="let option of filterByPrice">{{option}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
     <div class="card-body" [ngSwitch]="selectedSortBy">
         <ng-container *ngSwitchCase="'Featured'">
-            <app-restaurant-card *ngFor="let restaurant of restaurants" [restaurant]="restaurant">
+            <app-restaurant-card
+                *ngFor="let restaurant of restaurants | filterByRating:ratingThreshold | filterByPriceCategory:priceCategories.value"
+                [restaurant]="restaurant">
             </app-restaurant-card>
         </ng-container>
         <ng-container *ngSwitchCase="'Price: Low to High'">
-            <app-restaurant-card *ngFor="let restaurant of restaurants | sortByPrice:true" [restaurant]="restaurant">
+            <app-restaurant-card
+                *ngFor="let restaurant of restaurants | sortByPrice:true | filterByRating:ratingThreshold | filterByPriceCategory:priceCategories.value"
+                [restaurant]="restaurant">
             </app-restaurant-card>
         </ng-container>
         <ng-container *ngSwitchCase="'Price: High to Low'">
-            <app-restaurant-card *ngFor="let restaurant of restaurants | sortByPrice:false" [restaurant]="restaurant">
+            <app-restaurant-card
+                *ngFor="let restaurant of restaurants | sortByPrice:false | filterByRating:ratingThreshold | filterByPriceCategory:priceCategories.value"
+                [restaurant]="restaurant">
             </app-restaurant-card>
         </ng-container>
         <ng-container *ngSwitchCase="'Rating: Low to High'">
-            <app-restaurant-card *ngFor="let restaurant of restaurants | sortByRating:true" [restaurant]="restaurant">
+            <app-restaurant-card
+                *ngFor="let restaurant of restaurants | sortByRating:true | filterByRating:ratingThreshold | filterByPriceCategory:priceCategories.value"
+                [restaurant]="restaurant">
             </app-restaurant-card>
         </ng-container>
         <ng-container *ngSwitchCase="'Rating: High to Low'">
-            <app-restaurant-card *ngFor="let restaurant of restaurants | sortByRating:false" [restaurant]="restaurant">
+            <app-restaurant-card
+                *ngFor="let restaurant of restaurants | sortByRating:false | filterByRating:ratingThreshold | filterByPriceCategory:priceCategories.value"
+                [restaurant]="restaurant">
             </app-restaurant-card>
         </ng-container>
         <ng-container *ngSwitchCase="'Distance: Nearest to Farthest'">
-            <app-restaurant-card *ngFor="let restaurant of restaurants | sortByDistance:true" [restaurant]="restaurant">
+            <app-restaurant-card
+                *ngFor="let restaurant of restaurants | sortByDistance:true | filterByRating:ratingThreshold | filterByPriceCategory:priceCategories.value"
+                [restaurant]="restaurant">
             </app-restaurant-card>
         </ng-container>
         <ng-container *ngSwitchCase="'Distance: Farthest to Nearest'">
-            <app-restaurant-card *ngFor="let restaurant of restaurants | sortByDistance:false"
+            <app-restaurant-card
+                *ngFor="let restaurant of restaurants | sortByDistance:false | filterByRating:ratingThreshold | filterByPriceCategory:priceCategories.value"
                 [restaurant]="restaurant">
             </app-restaurant-card>
         </ng-container>

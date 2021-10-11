@@ -41,6 +41,9 @@ import { SortByPricePipe } from './pipes/sort-by-price.pipe';
 import { SortByRatingPipe } from './pipes/sort-by-rating.pipe';
 import { SortByDistancePipe } from './pipes/sort-by-distance.pipe';
 import { StarRatingComponent } from './util/star-rating/star-rating.component';
+import { FilterByRatingPipe } from './pipes/filter-by-rating.pipe';
+import { ToNumberPipe } from './pipes/to-number.pipe';
+import { FilterByPriceCategoryPipe } from './pipes/filter-by-price-category.pipe';
 
 
 
@@ -60,7 +63,10 @@ import { StarRatingComponent } from './util/star-rating/star-rating.component';
     SortByPricePipe,
     SortByRatingPipe,
     SortByDistancePipe,
-    StarRatingComponent
+    StarRatingComponent,
+    FilterByRatingPipe,
+    ToNumberPipe,
+    FilterByPriceCategoryPipe
   ],
   imports: [
     MatGridListModule,
