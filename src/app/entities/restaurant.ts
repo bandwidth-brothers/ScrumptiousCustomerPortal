@@ -7,6 +7,7 @@ export interface Restaurant {
     cuisines: [],
     name: string,
     owner: object,
+    picture: string,
     priceCategory: string,
     rating: number
 }

@@ -12,7 +12,8 @@ export const environment = {
   BASE_DRIVER_URL: 'http://localhost:8080/driver',
   USERS_GET_ALL_URL: '/accounts',
   USERS_GET_URL: '/accounts/',
-  BASE_CUSTOMER_URL: 'http://localhost:8080/customer/customers',
+  BASE_CUSTOMERS_URL: 'http://localhost:8080/customer/customers',
+  BASE_ORDERS_URL: 'http://localhost:8080/order/orders',
   logLevel: NgxLoggerLevel.TRACE,
   serverLogLevel: NgxLoggerLevel.OFF
 };

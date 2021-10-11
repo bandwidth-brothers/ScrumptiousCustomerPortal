@@ -14,6 +14,6 @@ export interface Customer {
     loyaltyPoints: number;
     phone: string;
     dob: Date;
-    veteranarianStatus: boolean;
+    veteranaryStatus: boolean;
     address: Address;
 }

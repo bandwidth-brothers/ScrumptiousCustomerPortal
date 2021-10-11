@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { Restaurant } from 'src/app/entities/restaurant';
 import { RestaurantService } from 'src/app/core/services/restaurant.service';
-import { MenuItemService } from 'src/app/core/services/menu-item.service';
+import { MenuitemService } from 'src/app/core/services/menu-item.service';
 
 
 @Component({
@@ -50,7 +50,7 @@ export class RestaurantsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private restaurantService: RestaurantService,
-    private menuItemService: MenuItemService) { }
+    private menuitemService: MenuitemService) { }
 
   ngOnInit(): void {
     this.initializeForm()
@@ -86,7 +86,7 @@ export class RestaurantsComponent implements OnInit {
           this.restaurants = restaurants
         })
       } else {
-        this.menuItemService.getAllRestaurantsFromMenuItemSearch(search || "").subscribe(restaurants => {
+        this.menuitemService.getAllRestaurantsFromMenuitemSearch(search || "").subscribe(restaurants => {
           this.restaurants = restaurants
         })
       }

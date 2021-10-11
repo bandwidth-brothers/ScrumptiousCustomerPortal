@@ -2,7 +2,6 @@ import { Address } from "src/app/entities/address";
 
 export const ADDRESSES: Address[] = [
     {
-        "id": 1001,
         "line1": "11 Benson St",
         "line2": "",
         "city": "Bridgeport",
@@ -10,7 +9,6 @@ export const ADDRESSES: Address[] = [
         "zip": "06606"
     },
     {
-        "id": 1002,
         "line1": "123 Vreeland Ave",
         "line2": "",
         "city": "Paterson",
@@ -18,7 +16,6 @@ export const ADDRESSES: Address[] = [
         "zip": "07512"
     },
     {
-        "id": 1003,
         "line1": "22 Main St",
         "line2": "2nd Fl",
         "city": "Lodi",

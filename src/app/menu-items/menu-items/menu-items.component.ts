@@ -3,17 +3,17 @@ import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { MenuItem } from 'src/app/entities/menu-item';
-import { MenuItemService } from 'src/app/core/services/menu-item.service';
+import { Menuitem } from 'src/app/entities/menuitem';
+import { MenuitemService } from 'src/app/core/services/menu-item.service';
 
 @Component({
   selector: 'app-menu-items',
   templateUrl: './menu-items.component.html',
   styleUrls: ['./menu-items.component.css']
 })
-export class MenuItemsComponent implements OnInit {
+export class MenuitemsComponent implements OnInit {
   routeSub!: Subscription;
-  menuItems: MenuItem[] = [];
+  menuitems: Menuitem[] = [];
   restaurantId: string = "";
   searchForm!: FormGroup;
 
@@ -21,7 +21,7 @@ export class MenuItemsComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private menuItemService: MenuItemService) { }
+    private menuitemService: MenuitemService) { }
 
   ngOnInit(): void {
     this.initializeForm()
@@ -29,12 +29,12 @@ export class MenuItemsComponent implements OnInit {
       this.restaurantId = params.id
     })
     if (this.restaurantId === undefined) {
-      this.menuItemService.getAllMenuItems().subscribe(menuItems => {
-        this.menuItems = menuItems
+      this.menuitemService.getAllMenuitems().subscribe(menuitems => {
+        this.menuitems = menuitems
       })
     } else {
-      this.menuItemService.getAllMenuItemsFromRestaurant(this.restaurantId).subscribe(menuItems => {
-        this.menuItems = menuItems
+      this.menuitemService.getAllMenuitemsFromRestaurant(this.restaurantId).subscribe(menuitems => {
+        this.menuitems = menuitems
       })
     }
 
@@ -57,20 +57,20 @@ export class MenuItemsComponent implements OnInit {
     }).then(() => {
       const search = this.route.snapshot.queryParamMap.get('search')
       if (this.searchForm.value.search.length === 0 && this.restaurantId === undefined) {
-        this.menuItemService.getAllMenuItems().subscribe(menuItems => {
-          this.menuItems = menuItems
+        this.menuitemService.getAllMenuitems().subscribe(menuitems => {
+          this.menuitems = menuitems
         })
       } else if (this.searchForm.value.search.length === 0) {
-        this.menuItemService.getAllMenuItemsFromRestaurant(this.restaurantId).subscribe(menuItems => {
-          this.menuItems = menuItems
+        this.menuitemService.getAllMenuitemsFromRestaurant(this.restaurantId).subscribe(menuitems => {
+          this.menuitems = menuitems
         })
       } else if (this.restaurantId === undefined) {
-        this.menuItemService.getAllMenuItemsFromSearch("?search=" + search).subscribe(menuItems => {
-          this.menuItems = menuItems
+        this.menuitemService.getAllMenuitemsFromSearch("?search=" + search).subscribe(menuitems => {
+          this.menuitems = menuitems
         })
       } else {
-        this.menuItemService.getAllMenuItemsInRestaurantFromSearch(this.restaurantId, "?search=" + search).subscribe(menuItems => {
-          this.menuItems = menuItems
+        this.menuitemService.getAllMenuitemsInRestaurantFromSearch(this.restaurantId, "?search=" + search).subscribe(menuitems => {
+          this.menuitems = menuitems
         })
       }
     })
