@@ -6,6 +6,7 @@ import { tap, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Order } from '../entities/order';
 import { MenuitemOrder } from '../entities/menuitemOrder';
+import { UpdateOrderDto } from '../entities/updateOrderDto';
 
 @Injectable({
     providedIn: 'root'
@@ -52,9 +53,12 @@ export class OrderService {
     }
 
     //PUT update an order
-    updateOrder(updatedOrder: Order) {
-        const url = `${this.ORDERS_URL}/${updatedOrder.id}`;
-        return this.http.put<Order>(url, updatedOrder, this.httpOptions);
+    updateOrder(updateOrderDto: UpdateOrderDto) {
+        const url = `${this.ORDERS_URL}/${updateOrderDto.id}`;
+        return this.http.put<void>(url, updateOrderDto, this.httpOptions).pipe(
+            tap((_) => this.log.debug('updated order ' + updateOrderDto.id),
+                catchError(this.handleError<HttpErrorResponse>('updateOrder'))
+            ));
     }
 
     //PUT update an order with new restaurant
@@ -75,6 +79,20 @@ export class OrderService {
     addMenuitemToOrder(orderId: number, menuitemId: number, quantity: number) {
         const url = `${this.ORDERS_URL}/${orderId.toString()}`;
         return this.http.post<MenuitemOrder>(url, { menuitemId, quantity }, this.httpOptions);
+    }
+
+    // DELETE menuitemOrder
+    removeMenuitemFromOrder(orderId: number, menuitemId: number) {
+        const url = `${this.ORDERS_URL}/${orderId}/menuitems/${menuitemId}`;
+        // this.http.delete does not accept a body so we're doing it this way
+        return this.http.request<void>('delete', url, { body: { orderId, menuitemId } });
+    }
+
+    // DELETE all menuitemOrder
+    removeAllMenuitemsFromOrder(orderId: number) {
+        const url = `${this.ORDERS_URL}/${orderId}/menuitems`;
+        // this.http.delete does not accept a body so we're doing it this way
+        return this.http.request<void>('delete', url, { body: orderId });
     }
 
     //error handler passes back an HttpErrorResponse, handled in the component/view

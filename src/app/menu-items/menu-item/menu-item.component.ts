@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 
 export interface MenuitemData {
   menuitem: Menuitem;
-  quantity: string;
+  quantity: number;
 }
 @Component({
   selector: 'app-menu-item',
@@ -24,7 +24,6 @@ export class MenuitemComponent implements OnInit {
   @Input() restaurant!: Restaurant
   @Input() order: Order | any;
 
-  foodPicture: string = "assets/images/food-img.jpg";
   quantity!: number;
 
   constructor(public dialog: MatDialog,
@@ -40,7 +39,7 @@ export class MenuitemComponent implements OnInit {
 
   }
 
-  openModal(): void {
+  openModal() {
     const dialogRef = this.dialog.open(MenuitemModalComponent, {
       width: '250px',
       data: { menuitem: this.menuitem, quantity: this.quantity }

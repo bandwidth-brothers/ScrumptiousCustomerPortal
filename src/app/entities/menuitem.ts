@@ -4,9 +4,9 @@ export interface Menuitem {
     id: number,
     name: string,
     description: string,
+    picture: string,
     discount: number,
-    price: object,
+    price: number,
     isAvailable: boolean,
     restaurant: Restaurant,
-
 }
