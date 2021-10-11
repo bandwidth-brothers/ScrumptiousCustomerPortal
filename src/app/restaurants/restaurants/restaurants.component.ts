@@ -19,6 +19,16 @@ export class RestaurantsComponent implements OnInit {
   restaurants: Restaurant[] = [];
   restaurantId: string = "";
   searchForm!: FormGroup;
+  sortBy: string[] = [
+    "Featured",
+    "Price: Low to High",
+    "Price: High to Low",
+    "Rating: Low to High",
+    "Rating: High to Low",
+    "Distance: Nearest to Farthest",
+    "Distance: Farthest to Nearest",
+  ]
+  selectedSortBy: string = "Featured";
 
   constructor(
     private fb: FormBuilder,
@@ -35,6 +45,7 @@ export class RestaurantsComponent implements OnInit {
 
     this.restaurantService.getAllRestaurants().subscribe(restaurants => {
       this.restaurants = restaurants
+      console.log(restaurants)
     })
   }
 

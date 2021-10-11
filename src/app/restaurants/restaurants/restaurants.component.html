@@ -12,7 +12,49 @@
             </button>
         </mat-form-field>
     </form>
-    <div class="card-body">
-        <app-restaurant-card *ngFor="let restaurant of restaurants" [restaurant]="restaurant"></app-restaurant-card>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Sort By: </mat-label>
+        <mat-select [(value)]="selectedSortBy">
+            <mat-option [value]="option" *ngFor="let option of sortBy">{{ option }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <div class="card-body" [ngSwitch]="selectedSortBy">
+        <ng-container *ngSwitchCase="'Featured'">
+            <app-restaurant-card *ngFor="let restaurant of restaurants" [restaurant]="restaurant">
+            </app-restaurant-card>
+        </ng-container>
+        <ng-container *ngSwitchCase="'Price: Low to High'">
+            <app-restaurant-card *ngFor="let restaurant of restaurants | sortByPrice:true" [restaurant]="restaurant">
+            </app-restaurant-card>
+        </ng-container>
+        <ng-container *ngSwitchCase="'Price: High to Low'">
+            <app-restaurant-card *ngFor="let restaurant of restaurants | sortByPrice:false" [restaurant]="restaurant">
+            </app-restaurant-card>
+        </ng-container>
+        <ng-container *ngSwitchCase="'Rating: Low to High'">
+            <app-restaurant-card *ngFor="let restaurant of restaurants | sortByRating:true" [restaurant]="restaurant">
+            </app-restaurant-card>
+        </ng-container>
+        <ng-container *ngSwitchCase="'Rating: High to Low'">
+            <app-restaurant-card *ngFor="let restaurant of restaurants | sortByRating:false" [restaurant]="restaurant">
+            </app-restaurant-card>
+        </ng-container>
+        <ng-container *ngSwitchCase="'Distance: Nearest to Farthest'">
+            <app-restaurant-card *ngFor="let restaurant of restaurants | sortByDistance:true" [restaurant]="restaurant">
+            </app-restaurant-card>
+        </ng-container>
+        <ng-container *ngSwitchCase="'Distance: Farthest to Nearest'">
+            <app-restaurant-card *ngFor="let restaurant of restaurants | sortByDistance:false"
+                [restaurant]="restaurant">
+            </app-restaurant-card>
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+            <app-restaurant-card *ngFor="let restaurant of restaurants" [restaurant]="restaurant">
+            </app-restaurant-card>
+        </ng-container>
+
     </div>
+
 </div>

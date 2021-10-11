@@ -37,6 +37,10 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { NgxMaskModule } from 'ngx-mask';
+import { SortByPricePipe } from './pipes/sort-by-price.pipe';
+import { SortByRatingPipe } from './pipes/sort-by-rating.pipe';
+import { SortByDistancePipe } from './pipes/sort-by-distance.pipe';
+import { StarRatingComponent } from './util/star-rating/star-rating.component';
 
 
 
@@ -52,7 +56,11 @@ import { NgxMaskModule } from 'ngx-mask';
     RestaurantCardComponent,
     RestaurantHomeComponent,
     MenuItemsComponent,
-    MenuItemComponent
+    MenuItemComponent,
+    SortByPricePipe,
+    SortByRatingPipe,
+    SortByDistancePipe,
+    StarRatingComponent
   ],
   imports: [
     MatGridListModule,
