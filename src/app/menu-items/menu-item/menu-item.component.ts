@@ -40,6 +40,7 @@ export class MenuitemComponent implements OnInit {
   }
 
   openModal() {
+    this.quantity = 1;
     const dialogRef = this.dialog.open(MenuitemModalComponent, {
       width: '250px',
       data: { menuitem: this.menuitem, quantity: this.quantity }
