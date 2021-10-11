@@ -6,8 +6,8 @@
   <mat-grid-list cols="4" rowHeight="80px" gutterSize="10px">
     <mat-grid-tile [colspan]="2" [rowspan]="1">
       <mat-form-field class="mat-form-field-readonly" class="full-width" appearance="outline">
-        <mat-label>First Name*</mat-label>
-        <input matInput placeholder="First name" formControlName="firstName">
+        <mat-label>First Name</mat-label>
+        <input matInput placeholder="First name" formControlName="firstName" required>
         <mat-error *ngIf="customerProfileForm.controls['firstName'].hasError('required')">
           First name is required
         </mat-error>
@@ -16,8 +16,8 @@
 
     <mat-grid-tile [colspan]="2" [rowspan]="1">
       <mat-form-field class="full-width" appearance="outline">
-        <mat-label>Last Name*</mat-label>
-        <input matInput placeholder="Last name" formControlName="lastName">
+        <mat-label>Last Name</mat-label>
+        <input matInput placeholder="Last name" formControlName="lastName" required>
         <mat-error *ngIf="customerProfileForm.controls['lastName'].hasError('required')">
           Last name is required
         </mat-error>
@@ -26,8 +26,8 @@
 
     <mat-grid-tile [colspan]="4" [rowspan]="1">
       <mat-form-field class="full-width" appearance="outline">
-        <mat-label>Email*</mat-label>
-        <input matInput placeholder="pat@example.com" formControlName="email">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="pat@example.com" formControlName="email" required>
         <mat-error *ngIf="customerProfileForm.controls['email'].hasError('required')">
           Email is required
         </mat-error>
@@ -39,8 +39,8 @@
 
     <mat-grid-tile [colspan]="3" [rowspan]="1">
       <mat-form-field class="full-width" appearance="outline">
-        <mat-label>Phone number*</mat-label>
-        <input matInput mask="000-000-0000" placeholder="555-555-5555" formControlName="phone">
+        <mat-label>Phone number</mat-label>
+        <input matInput mask="000-000-0000" placeholder="555-555-5555" formControlName="phone" required>
         <mat-error *ngIf="customerProfileForm.controls['phone'].hasError('required')">
           Phone number <strong>required</strong>
         </mat-error>
@@ -70,8 +70,8 @@
 
     <mat-grid-tile [colspan]="4" [rowspan]="1">
       <mat-form-field class="full-width" appearance="outline">
-        <mat-label>Line one*</mat-label>
-        <input matInput placeholder="1234 Main St." formControlName="line1">
+        <mat-label>Line one</mat-label>
+        <input matInput placeholder="1234 Main St." formControlName="line1" required>
         <mat-error *ngIf="customerProfileForm.controls['line1'].hasError('required')">
           Please enter your street address
         </mat-error>
@@ -87,8 +87,8 @@
 
     <mat-grid-tile [colspan]="2" [rowspan]="1">
       <mat-form-field class="full-width" appearance="outline">
-        <mat-label>City*</mat-label>
-        <input matInput placeholder="New York City" formControlName="city">
+        <mat-label>City</mat-label>
+        <input matInput placeholder="New York City" formControlName="city" required>
         <mat-error *ngIf="customerProfileForm.controls['city'].hasError('required')">
           City required
         </mat-error>
@@ -97,9 +97,9 @@
 
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <mat-form-field class="full-width" appearance="outline">
-        <mat-label>State*</mat-label>
-        <input matInput *ngIf="customerProfileForm.disabled" placeholder="NY" formControlName="state">
-        <mat-select formControlName="state" *ngIf="customerProfileForm.enabled">
+        <mat-label>State</mat-label>
+        <input matInput *ngIf="customerProfileForm.disabled" placeholder="NY" formControlName="state" required>
+        <mat-select formControlName="state" *ngIf="customerProfileForm.enabled" required>
           <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
         </mat-select>
 
@@ -108,8 +108,8 @@
 
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <mat-form-field class="full-width" appearance="outline">
-        <mat-label>Zip code*</mat-label>
-        <input matInput placeholder="10001" formControlName="zip">
+        <mat-label>Zip code</mat-label>
+        <input matInput placeholder="10001" formControlName="zip" required>
         <mat-error *ngIf="customerProfileForm.controls['zip'].hasError('required')">
           Zip code required
         </mat-error>

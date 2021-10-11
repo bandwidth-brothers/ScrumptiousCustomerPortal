@@ -24,8 +24,8 @@
                         <mat-grid-list cols="2" rowHeight="80px" gutterSize="10px">
                             <mat-grid-tile [colspan]="1" [rowspan]="1">
                                 <mat-form-field class="mat-form-field-readonly" class="full-width" appearance="outline">
-                                    <mat-label>First Name*</mat-label>
-                                    <input matInput placeholder="First name" formControlName="firstName">
+                                    <mat-label>First Name</mat-label>
+                                    <input matInput placeholder="First name" formControlName="firstName" required>
                                     <mat-error *ngIf="registrationForm.controls['firstName'].hasError('required')">
                                         First name is <strong>required</strong>
                                     </mat-error>
@@ -34,8 +34,8 @@
 
                             <mat-grid-tile [colspan]="1" [rowspan]="1">
                                 <mat-form-field class="full-width" appearance="outline">
-                                    <mat-label>Last Name*</mat-label>
-                                    <input matInput placeholder="Last name" formControlName="lastName">
+                                    <mat-label>Last Name</mat-label>
+                                    <input matInput placeholder="Last name" formControlName="lastName" required>
                                     <mat-error *ngIf="registrationForm.controls['lastName'].hasError('required')">
                                         Last name is <strong>required</strong>
                                     </mat-error>
@@ -46,9 +46,9 @@
                         <mat-grid-list cols="4" rowHeight="80px" gutterSize="10px">
                             <mat-grid-tile [colspan]="2" [rowspan]="1">
                                 <mat-form-field class="full-width" appearance="outline">
-                                    <mat-label>Phone number*</mat-label>
+                                    <mat-label>Phone number</mat-label>
                                     <input matInput mask="000-000-0000" placeholder="555-555-5555"
-                                        formControlName="phone">
+                                        formControlName="phone" required>
                                     <mat-error *ngIf="registrationForm.controls['phone'].hasError('required')">
                                         Phone number is <strong>required</strong>
                                     </mat-error>
@@ -71,9 +71,9 @@
                         </mat-grid-list>
 
                         <mat-form-field class="full-width" appearance="outline">
-                            <mat-label>Email*</mat-label>
+                            <mat-label>Email</mat-label>
                             <input id="emailInput" matInput placeholder="example@a.com" formControlName="email"
-                                autocomplete="email" type="email">
+                                autocomplete="email" type="email" required>
 
                             <mat-error id="invalidEmailError"
                                 *ngIf="registrationForm.controls['email'].hasError('email')">
@@ -87,10 +87,10 @@
                         </mat-form-field>
 
                         <mat-form-field class="full-width" appearance="outline">
-                            <mat-label>Password*</mat-label>
+                            <mat-label>Password</mat-label>
                             <input matInput placeholder="Password" formControlName="password" type="password"
                                 autocomplete="current-password" (input)="onPasswordInput()"
-                                [type]="hide ? 'password' : 'text'">
+                                [type]="hide ? 'password' : 'text'" required>
                             <button mat-icon-button matSuffix type="button" (click)="hide = !hide"
                                 [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -101,10 +101,10 @@
                         </mat-form-field>
 
                         <mat-form-field class="full-width" appearance="outline">
-                            <mat-label>Confirm Password*</mat-label>
+                            <mat-label>Confirm Password</mat-label>
                             <input matInput placeholder="Comfirm Password" formControlName="confirmPassword"
                                 type="password2" autocomplete="current-password" (input)="onPasswordInput()"
-                                [type]="hide2 ? 'password' : 'text'">
+                                [type]="hide2 ? 'password' : 'text'" required>
                             <button mat-icon-button matSuffix type="button" (click)="hide2 = !hide2"
                                 [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide2">
                                 <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -128,8 +128,8 @@
                         <ng-template matStepLabel>Address</ng-template>
                         <p>Enter address information.</p>
                         <mat-form-field class="full-width" appearance="outline">
-                            <mat-label>Line one*</mat-label>
-                            <input matInput placeholder="1234 Main St." formControlName="line1">
+                            <mat-label>Line one</mat-label>
+                            <input matInput placeholder="1234 Main St." formControlName="line1" required>
                             <mat-error *ngIf="addressForm.controls['line1'].hasError('required')">
                                 Street address is <strong>required</strong>
                             </mat-error>
@@ -143,8 +143,8 @@
                         <mat-grid-list cols="4" rowHeight="80px" gutterSize="10px">
                             <mat-grid-tile [colspan]="2" [rowspan]="1">
                                 <mat-form-field class="full-width" appearance="outline">
-                                    <mat-label>City*</mat-label>
-                                    <input matInput placeholder="New York City" formControlName="city">
+                                    <mat-label>City</mat-label>
+                                    <input matInput placeholder="New York City" formControlName="city" required>
                                     <mat-error *ngIf="addressForm.controls['city'].hasError('required')">
                                         City is <strong>required</strong>
                                     </mat-error>
@@ -153,9 +153,9 @@
 
                             <mat-grid-tile [colspan]="1" [rowspan]="1">
                                 <mat-form-field class="full-width" appearance="outline">
-                                    <mat-label>State*</mat-label>
+                                    <mat-label>State</mat-label>
 
-                                    <mat-select formControlName="state">
+                                    <mat-select formControlName="state" required>
                                         <mat-option *ngFor="let state of states" [value]="state">{{state}}
                                         </mat-option>
                                     </mat-select>
@@ -167,8 +167,8 @@
 
                             <mat-grid-tile [colspan]="1" [rowspan]="1">
                                 <mat-form-field class="full-width" appearance="outline">
-                                    <mat-label>Zip code*</mat-label>
-                                    <input matInput placeholder="10001" formControlName="zip">
+                                    <mat-label>Zip code</mat-label>
+                                    <input matInput placeholder="10001" formControlName="zip" required>
                                     <mat-error *ngIf="addressForm.controls['zip'].hasError('required')">
                                         Zip code is <strong>required</strong>
                                     </mat-error>

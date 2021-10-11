@@ -4,7 +4,7 @@
     <p>{{data.menuitem.description}}</p>
     <mat-form-field appearance="outline">
         <mat-label>Enter quantity</mat-label>
-        <input matInput placeholder="1" value="1" mask="099" [(ngModel)]="data.quantity">
+        <input matInput placeholder="1" mask="099" [(ngModel)]="data.quantity" required>
     </mat-form-field>
 </div>
 <div mat-dialog-actions>
