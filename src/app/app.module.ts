@@ -39,6 +39,13 @@ import { RegisterComponent } from './auth/register/register.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MenuitemModalComponent } from './menu-items/menuitem-modal/menuitem-modal.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
+import { SortByPricePipe } from './pipes/sort-by-price.pipe';
+import { SortByRatingPipe } from './pipes/sort-by-rating.pipe';
+import { SortByDistancePipe } from './pipes/sort-by-distance.pipe';
+import { StarRatingComponent } from './util/star-rating/star-rating.component';
+import { FilterByRatingPipe } from './pipes/filter-by-rating.pipe';
+import { ToNumberPipe } from './pipes/to-number.pipe';
+import { FilterByPriceCategoryPipe } from './pipes/filter-by-price-category.pipe';
 
 
 
@@ -59,6 +66,15 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
     MenuitemComponent,
     MenuitemModalComponent,
     OrderHistoryComponent,
+    MenuItemsComponent,
+    MenuItemComponent,
+    SortByPricePipe,
+    SortByRatingPipe,
+    SortByDistancePipe,
+    StarRatingComponent,
+    FilterByRatingPipe,
+    ToNumberPipe,
+    FilterByPriceCategoryPipe
   ],
   imports: [
     MatStepperModule,
