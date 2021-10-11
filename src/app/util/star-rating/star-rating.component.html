@@ -1,0 +1,5 @@
+<div class="box">
+    <p id="rating" *ngIf="textEnabled">{{rating}}</p>
+    <mat-icon *ngFor="let icon of iconList" [ngStyle]="{'color': '#ff9529'}">{{icon}}</mat-icon>
+    <p *ngIf="suffix">{{suffix}}</p>
+</div>

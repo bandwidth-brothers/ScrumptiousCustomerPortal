@@ -1,0 +1,9 @@
+.box {
+    display: flex;
+    align-items: center;
+    --background-color: red;
+}
+
+#rating {
+    margin: 5px;
+}
