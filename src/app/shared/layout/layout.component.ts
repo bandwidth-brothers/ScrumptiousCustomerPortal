@@ -15,6 +15,7 @@ import { UpdateOrderDto } from 'src/app/entities/updateOrderDto';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { Menuitem } from 'src/app/entities/menuitem';
 import { MenuitemModalComponent } from 'src/app/menu-items/menuitem-modal/menuitem-modal.component';
+import { MenuitemOrder } from 'src/app/entities/menuitemOrder';
 
 @Component({
     selector: 'app-layout',
@@ -141,16 +142,17 @@ export class LayoutComponent implements AfterContentChecked {
         });
     }
 
-    editMenuitemOrder(menuitem: Menuitem) {
+    editMenuitemOrder(menuitemOrder: MenuitemOrder) {
+        this.quantity = menuitemOrder.quantity;
         const dialogRef = this.dialog.open(MenuitemModalComponent, {
             width: '250px',
-            data: { menuitem: menuitem, quantity: this.quantity }
+            data: { menuitem: menuitemOrder.menuitem, quantity: this.quantity }
         });
 
         dialogRef.afterClosed().subscribe(result => {
             if (result) {
                 this.quantity = result;
-                this.addMenuitem(menuitem);
+                this.addMenuitem(menuitemOrder.menuitem);
             }
 
 

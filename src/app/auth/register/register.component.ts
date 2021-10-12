@@ -26,6 +26,7 @@ import { trimStringLength } from 'src/app/shared/validators/validators';
 })
 export class RegisterComponent implements OnInit {
 
+    maxDate = new Date();
     errorMsg?: string = undefined;
     isLoading = false;
     hide = true;
