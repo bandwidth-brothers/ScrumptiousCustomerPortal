@@ -1,10 +1,13 @@
 
 pipeline{
-  agent any
+  agent {
+    docker {image "node:latest"}
+  }
 	stages{
 		stage('Checkout'){
 			steps{
 				checkout scm
+        sh 'apt-get update && apt-get install yarn -y'
 			}
 		}
 		stage('Analysis'){
