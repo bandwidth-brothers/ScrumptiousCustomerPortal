@@ -11,7 +11,7 @@ pipeline{
 		}
 		stage('Analysis'){
       steps{
-        sh 'npm install --save-dev @angular-devkit/build-angular'
+        sh 'npm install --save-dev @angular-devkit/build-angular --legacy-peer-deps'
         sh 'npm install --legacy-peer-deps -g @angular/cli'
       }
     }		
