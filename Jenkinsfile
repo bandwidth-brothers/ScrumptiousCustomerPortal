@@ -18,7 +18,7 @@ pipeline{
     }		
     stage('Build'){
 			steps{
-				sh 'ng build --production'
+				sh 'ng build --configuration production'
         sh 'ls .'
 			}
 		}
