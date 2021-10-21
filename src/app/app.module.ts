@@ -46,7 +46,7 @@ import { ToNumberPipe } from './pipes/to-number.pipe';
 import { FilterByPriceCategoryPipe } from './pipes/filter-by-price-category.pipe';
 import { MenuitemModalComponent } from './menu-items/menuitem-modal/menuitem-modal.component';
 import { RegisterComponent } from './auth/register/register.component';
-
+import { CartComponent } from './cart/cart.component';
 
 
 @NgModule({
@@ -66,13 +66,14 @@ import { RegisterComponent } from './auth/register/register.component';
     MenuitemComponent,
     MenuitemModalComponent,
     OrderHistoryComponent,
+    CartComponent,
     SortByPricePipe,
     SortByRatingPipe,
     SortByDistancePipe,
     StarRatingComponent,
     FilterByRatingPipe,
     ToNumberPipe,
-    FilterByPriceCategoryPipe
+    FilterByPriceCategoryPipe,
   ],
   imports: [
     MatStepperModule,

@@ -6,7 +6,7 @@
         <mat-card-header>
             <div mat-card-avatar class="example-header-image"></div>
             <mat-card-title>{{menuitem.name}}</mat-card-title>
-            <mat-card-subtitle>${{menuitem.price}}</mat-card-subtitle>
+            <mat-card-subtitle>${{menuitem.price | number: '1.2-2'}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
             <p>

@@ -17,7 +17,12 @@
         <!-- Status Column -->
         <ng-container matColumnDef="Status">
             <th mat-header-cell *matHeaderCellDef> Order status </th>
-            <td mat-cell *matCellDef="let order"> {{order.preparationStatus}} </td>
+            <td mat-cell *matCellDef="let order" [ngStyle]="{
+                'background-color': 
+            order.preparationStatus == 'Cancelled' ? '#ff5c5c' : 
+            order.preparationStatus == 'Order Placed' ? '#ffd300' : 
+            order.preparationStatus == 'Preparing' ? '#d8f000' : ''}">
+                {{order.preparationStatus}} </td>
         </ng-container>
 
         <!-- ConfirmationCode Column -->
@@ -48,13 +53,15 @@
                             <mat-list-item *ngFor="let menuitemOrder of order.menuitemOrders">
                                 <mat-icon mat-list-icon>restaurant_menu</mat-icon>
                                 <h3 mat-line>{{ menuitemOrder.menuitem.name }} - {{ menuitemOrder.quantity }}</h3>
-                                <p mat-line>${{ menuitemOrder.quantity * menuitemOrder.menuitem.price }}</p>
+                                <p mat-line>${{ (menuitemOrder.quantity * menuitemOrder.menuitem.price) | number:
+                                    '1.2-2'}}</p>
                             </mat-list-item>
 
                         </mat-list>
-
-                        <button mat-raised-button style="margin-bottom: 10px;" color="warn" *ngIf="isCancellable(order)"
-                            (click)="cancelOrder(order)">Cancel order</button>
+                        <button [disabled]="!isCancellable(order)" mat-raised-button style="margin-bottom: 10px;"
+                            color="primary" (click)="editOrder(order)">Edit order</button>
+                        <button [disabled]="!isCancellable(order)" mat-raised-button style="margin-bottom: 10px;"
+                            color="warn" (click)="cancelOrder(order)">Cancel order</button>
                     </div>
 
 

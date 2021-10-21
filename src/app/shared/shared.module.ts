@@ -8,6 +8,8 @@ import { ContentPlaceholderAnimationComponent } from './content-placeholder-anim
 import { LayoutComponent } from './layout/layout.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { SearchFieldComponent } from './search-field/search-field.component';
+import { CartPriceOverviewComponent } from 'src/app/util/cart-price-overview/cart-price-overview.component';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   imports: [
@@ -15,13 +17,15 @@ import { SearchFieldComponent } from './search-field/search-field.component';
     CustomMaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    LayoutModule
+    LayoutModule,
+    MatGridListModule
   ],
   declarations: [
     ConfirmDialogComponent,
     ContentPlaceholderAnimationComponent,
     LayoutComponent,
-    SearchFieldComponent
+    SearchFieldComponent,
+    CartPriceOverviewComponent
   ],
   exports: [
     FormsModule,
@@ -29,7 +33,8 @@ import { SearchFieldComponent } from './search-field/search-field.component';
     CustomMaterialModule,
     ConfirmDialogComponent,
     ContentPlaceholderAnimationComponent,
-    SearchFieldComponent
+    SearchFieldComponent,
+    CartPriceOverviewComponent
   ],
   entryComponents: [
     ConfirmDialogComponent

@@ -1,4 +1,5 @@
 import { MenuitemOrder } from "./menuitemOrder";
+import { UpdateMenuitemOrder } from '../entities/updateMenuitemOrder';
 
 export interface UpdateOrderDto {
     id: number;
@@ -9,5 +10,5 @@ export interface UpdateOrderDto {
     orderDiscount?: number;
     submittedAt?: any;
     preparationStatus?: string;
-    menuitemOrders?: MenuitemOrder[];
+    menuitems?: UpdateMenuitemOrder[];
 }

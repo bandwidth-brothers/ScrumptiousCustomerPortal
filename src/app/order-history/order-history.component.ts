@@ -1,8 +1,10 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Component, Input, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { CartComponent } from '../cart/cart.component';
 import { AuthService } from '../core/services/auth.service';
 import { NotificationService } from '../core/services/notification.service';
 import { Order } from '../entities/order';
@@ -30,7 +32,8 @@ export class OrderHistoryComponent {
 
 
   constructor(private authService: AuthService, private orderService: OrderService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private dialog: MatDialog
   ) {
     const customerId = this.authService.userId;
     if (customerId) {
@@ -72,8 +75,39 @@ export class OrderHistoryComponent {
           });
         }
       });
+    } else {
+      this.notificationService.openSnackBar("Order cannot be cancelled")
     }
-    this.notificationService.openSnackBar("Order cannot be cancelled")
+  }
+
+  editOrder(order: Order) {
+    if (this.isCancellable(order)) {
+      const dialogRef = this.dialog.open(CartComponent, {
+        id: 'dialog1',
+        panelClass: 'custom-side-dialog-container',
+        backdropClass: 'custom-side-backdrop',
+        height: "calc(100% - 64px)",
+        width: "15%",
+        position: {
+          right: "0%",
+          top: "0%"
+        },
+        data: {
+          order: order
+        }
+      })
+      console.log(order)
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.dataSource = this.dataSource?.map(order => {
+            return order.id === result.id ? result : order
+          })
+        }
+      });
+    } else {
+      this.notificationService.openSnackBar("Order cannot be edited")
+    }
+
   }
 
 }

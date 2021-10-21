@@ -45,3 +45,17 @@ table {
   .example-element-description-attribution {
     opacity: 0.5;
   }
+
+  .mat-column-Status {
+    width: 150px;
+    border-radius: 50% 20% / 20% 80%;
+    text-align : center;
+  }
+
+  .mat-column-ConfirmationCode {
+    padding: 0px 0px 0px 15px;
+  }
+  
+  button {
+    margin-right: 15px;
+  }

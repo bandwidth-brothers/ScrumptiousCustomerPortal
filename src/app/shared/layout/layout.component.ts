@@ -35,6 +35,8 @@ export class LayoutComponent implements AfterContentChecked {
     @Input() error: HttpErrorResponse | undefined;
     @Input() order: Order | undefined;
     @Input() quantity!: number;
+    selectedValue: string = "";
+    timeSlots: string[] = []
 
     constructor(
         public spinnerService: SpinnerService,
@@ -55,6 +57,19 @@ export class LayoutComponent implements AfterContentChecked {
 
         }
 
+    }
+
+    ngOnInit(): void {
+        const newUpdateReqTime: Date = new Date()
+        newUpdateReqTime.setHours(1 + newUpdateReqTime.getHours() + Math.floor(newUpdateReqTime.getMinutes() / 60))
+        this.selectedValue = newUpdateReqTime.toISOString()
+        this.timeSlots.push(newUpdateReqTime.toISOString())
+        console.log(newUpdateReqTime)
+        for (let i = 0; i < 10; i++) {
+            newUpdateReqTime.setHours(1 + newUpdateReqTime.getHours() + Math.floor(newUpdateReqTime.getMinutes() / 60))
+            newUpdateReqTime.setMinutes(0, 0, 0); // Resets also seconds and milliseconds
+            this.timeSlots.push(newUpdateReqTime.toISOString())
+        }
     }
 
     ngAfterContentChecked() {
@@ -110,18 +125,14 @@ export class LayoutComponent implements AfterContentChecked {
     placeOrder() {
         console.log("order placed");
         if (this.order) {
-            var currentDate = new Date();
-            var requestedDate = new Date();
-            requestedDate.setHours(currentDate.getHours() + 1);
-
             const updateOrderDto: UpdateOrderDto = {
                 id: this.order.id,
                 restaurantId: this.order.restaurant.id,
                 customerId: this.order.customer.id,
                 confirmationCode: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
-                preparationStatus: "Placed",
-                submittedAt: currentDate.toISOString(),
-                requestedDeliveryTime: requestedDate.toISOString(),
+                preparationStatus: "Order Placed",
+                submittedAt: new Date().toISOString(),
+                requestedDeliveryTime: new Date(Date.parse(this.selectedValue)).toISOString(),
                 // could set orderDiscount here depending on this.order.customer.dob
             }
             this.orderService.updateOrder(updateOrderDto).subscribe(() => {
@@ -134,7 +145,7 @@ export class LayoutComponent implements AfterContentChecked {
         }
     }
 
-    removeMenuitemOrder(orderId: number, menuitemId: number) {
+    async removeMenuitemOrder(orderId: number, menuitemId: number) {
         this.orderService.removeMenuitemFromOrder(orderId, menuitemId).subscribe(() => {
             if (this.orderService.currentOrder) {
                 this.orderService.currentOrder.menuitemOrders = this.orderService.currentOrder.menuitemOrders.filter(p => p.menuitem.id !== menuitemId);
@@ -157,6 +168,10 @@ export class LayoutComponent implements AfterContentChecked {
 
 
         });
+    }
+
+    editRequestTime(selectedValue: string) {
+        //this.tempOrder.requestedDeliveryTime = new Date(Date.parse(selectedValue));
     }
 
     async addMenuitem(menuitem: Menuitem) {
