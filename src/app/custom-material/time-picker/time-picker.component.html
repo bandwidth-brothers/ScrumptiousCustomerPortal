@@ -1,0 +1,13 @@
+<div class="time-picker">
+    <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Order time</mat-label>
+        <mat-select (selectionChange)="onRequestedDeliveryTimeChange($event.value)" [(value)]="selectedTime">
+            <mat-optgroup label="Today">
+                <mat-option *ngFor="let time of todayTimes" [value]="time">{{ time | date:'short' }}</mat-option>
+            </mat-optgroup>
+            <mat-optgroup label="Tomorrow">
+                <mat-option *ngFor="let time of tomorrowTimes" [value]="time">{{ time | date:'short' }}</mat-option>
+            </mat-optgroup>
+        </mat-select>
+    </mat-form-field>
+</div>

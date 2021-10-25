@@ -60,7 +60,6 @@ export class RestaurantsComponent implements OnInit {
 
     this.restaurantService.getAllRestaurants().subscribe(restaurants => {
       this.restaurants = restaurants
-      console.log(restaurants)
     })
   }
 
@@ -94,9 +93,8 @@ export class RestaurantsComponent implements OnInit {
 
   }
 
-
   ngOnDestroy() {
-    this.routeSub.unsubscribe()
+    this.routeSub.unsubscribe();
   }
 
 }

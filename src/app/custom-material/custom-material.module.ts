@@ -47,6 +47,7 @@ import { MatTreeModule } from '@angular/material/tree';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { LayoutModule } from '@angular/cdk/layout';
 import { SelectCheckAllComponent } from './select-check-all/select-check-all.component';
+import { TimePickerComponent } from './time-picker/time-picker.component';
 
 
 @NgModule({

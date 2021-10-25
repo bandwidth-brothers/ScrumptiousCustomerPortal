@@ -46,6 +46,8 @@ import { ToNumberPipe } from './pipes/to-number.pipe';
 import { FilterByPriceCategoryPipe } from './pipes/filter-by-price-category.pipe';
 import { MenuitemModalComponent } from './menu-items/menuitem-modal/menuitem-modal.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { LayoutComponent } from './shared/layout/layout.component';
+import { TimePickerComponent } from './custom-material/time-picker/time-picker.component';
 
 
 
@@ -56,11 +58,13 @@ import { RegisterComponent } from './auth/register/register.component';
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
+    TimePickerComponent,
     ChangePasswordComponent,
     ProfileDetailsComponent,
     HomeComponent,
     RestaurantsComponent,
     RestaurantCardComponent,
+    LayoutComponent,
     RestaurantHomeComponent,
     MenuitemsComponent,
     MenuitemComponent,

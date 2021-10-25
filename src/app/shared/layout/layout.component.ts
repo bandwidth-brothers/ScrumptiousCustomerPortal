@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef, Input, AfterContentChecked } from '@angular/core';
+import { Component, ChangeDetectorRef, Input, AfterContentChecked, OnChanges, SimpleChanges } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 
@@ -22,7 +22,7 @@ import { MenuitemOrder } from 'src/app/entities/menuitemOrder';
     templateUrl: './layout.component.html',
     styleUrls: ['./layout.component.css']
 })
-export class LayoutComponent implements AfterContentChecked {
+export class LayoutComponent implements AfterContentChecked, OnChanges {
 
 
     showSpinner!: boolean;
@@ -32,9 +32,9 @@ export class LayoutComponent implements AfterContentChecked {
             shareReplay()
         );
     @Input() customer: Customer | undefined;
-    @Input() error: HttpErrorResponse | undefined;
+    error: HttpErrorResponse | undefined;
     @Input() order: Order | undefined;
-    @Input() quantity!: number;
+    quantity!: number;
 
     constructor(
         public spinnerService: SpinnerService,
@@ -59,6 +59,11 @@ export class LayoutComponent implements AfterContentChecked {
 
     ngAfterContentChecked() {
         this.ref.detectChanges();
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        this.order = changes['order'].currentValue;
+        console.log(changes['order']);
     }
 
     async setCustomer(response: Customer | HttpErrorResponse) {
@@ -111,8 +116,6 @@ export class LayoutComponent implements AfterContentChecked {
         console.log("order placed");
         if (this.order) {
             var currentDate = new Date();
-            var requestedDate = new Date();
-            requestedDate.setHours(currentDate.getHours() + 1);
 
             const updateOrderDto: UpdateOrderDto = {
                 id: this.order.id,
@@ -121,7 +124,7 @@ export class LayoutComponent implements AfterContentChecked {
                 confirmationCode: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
                 preparationStatus: "Placed",
                 submittedAt: currentDate.toISOString(),
-                requestedDeliveryTime: requestedDate.toISOString(),
+                requestedDeliveryTime: this.order.requestedDeliveryTime,
                 // could set orderDiscount here depending on this.order.customer.dob
             }
             this.orderService.updateOrder(updateOrderDto).subscribe(() => {
@@ -175,6 +178,12 @@ export class LayoutComponent implements AfterContentChecked {
             }
             )
 
+        }
+    }
+
+    updateRequestedDeliveryTime(requestedDeliveryTime: Date) {
+        if (this.order) {
+            this.order.requestedDeliveryTime = requestedDeliveryTime;
         }
     }
 }

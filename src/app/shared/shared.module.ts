@@ -20,7 +20,6 @@ import { SearchFieldComponent } from './search-field/search-field.component';
   declarations: [
     ConfirmDialogComponent,
     ContentPlaceholderAnimationComponent,
-    LayoutComponent,
     SearchFieldComponent
   ],
   exports: [

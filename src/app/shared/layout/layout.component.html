@@ -97,9 +97,14 @@
             fixedInViewport style="width: 15%; min-width: 15%; max-width: 15%;"
             [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" fixedTopGap="56" position="end">
             <div *ngIf="order">
-                <h2 mat-subheader>My order from {{ order?.restaurant?.name }}</h2>
+                <h2 mat-subheader>My order from {{ order.restaurant?.name }}</h2>
+
+                <app-time-picker *ngIf="order.restaurant" [restaurant]="order.restaurant"
+                    (requestedDeliveryTime)="updateRequestedDeliveryTime($event)"></app-time-picker>
+
                 <button mat-raised-button style="margin: 10px;" color="accent" (click)="placeOrder()"
-                    [disabled]="order.menuitemOrders.length == 0">Checkout</button>
+                    [disabled]="order.menuitemOrders.length == 0 || !order.requestedDeliveryTime">Checkout</button>
+
                 <mat-card style="margin: 10px;" *ngFor="let menuitemOrder of order.menuitemOrders">
                     <mat-card-title>{{ menuitemOrder.menuitem.name }} - {{ menuitemOrder.quantity }}</mat-card-title>
                     <mat-card-subtitle>${{ menuitemOrder.quantity * menuitemOrder.menuitem.price }}</mat-card-subtitle>
