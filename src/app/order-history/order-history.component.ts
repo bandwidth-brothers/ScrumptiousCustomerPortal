@@ -35,7 +35,8 @@ export class OrderHistoryComponent {
     const customerId = this.authService.userId;
     if (customerId) {
       orderService.getOrdersByCustomerId(customerId).subscribe((orders) => {
-        this.dataSource = orders.slice(0, orders.length - 1);
+        console.log(orders);
+        this.dataSource = orders.filter(o => o.confirmationCode !== null);
 
       });
 

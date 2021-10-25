@@ -32,6 +32,7 @@ export class MenuitemService {
   }
 
   getAllMenuitemsFromRestaurant(restaurantId: string): Observable<Menuitem[]> {
+    console.log("menutime called");
     return this.http.get<Menuitem[]>(this.GET_ALL_MENU_ITEMS_FROM_RESTAURANT_URL.replace(":restaurantId", restaurantId), this.options)
   }
 

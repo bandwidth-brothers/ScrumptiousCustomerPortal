@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef, Input, AfterContentChecked } from '@angular/core';
+import { Component, ChangeDetectorRef, Input, AfterContentChecked, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 
@@ -16,15 +16,17 @@ import { NotificationService } from 'src/app/core/services/notification.service'
 import { Menuitem } from 'src/app/entities/menuitem';
 import { MenuitemModalComponent } from 'src/app/menu-items/menuitem-modal/menuitem-modal.component';
 import { MenuitemOrder } from 'src/app/entities/menuitemOrder';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-layout',
     templateUrl: './layout.component.html',
     styleUrls: ['./layout.component.css']
 })
-export class LayoutComponent implements AfterContentChecked {
+export class LayoutComponent implements OnInit, AfterContentChecked {
 
 
+    isRecoverSub: any;
     showSpinner!: boolean;
     isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
         .pipe(
@@ -37,6 +39,7 @@ export class LayoutComponent implements AfterContentChecked {
     @Input() quantity!: number;
 
     constructor(
+        private router: Router,
         public spinnerService: SpinnerService,
         public dialog: MatDialog,
         private notificationService: NotificationService,
@@ -51,11 +54,24 @@ export class LayoutComponent implements AfterContentChecked {
         if (!id) {
             //todo navigate to login
         } else {
-            this.customerService.getCustomer(id).subscribe((myCustomer) => this.setCustomer(myCustomer));
+            this.customerService.getCustomer(id).subscribe((myCustomer) => {
+                this.setCustomer(myCustomer);
+                console.log(myCustomer);
+                this.customerService.customerProfile = this.customer;
+            });
 
         }
 
     }
+
+    ngOnInit() {
+        this.isRecoverSub = this.orderService.isPaid$.subscribe((value:Boolean) => {
+            if (value) {
+                this.setCustomer(this.customer as Customer);
+            }
+        });
+    }
+
 
     ngAfterContentChecked() {
         this.ref.detectChanges();
@@ -107,6 +123,12 @@ export class LayoutComponent implements AfterContentChecked {
         return (returnedValue as Customer).firstName !== undefined;
     }
 
+    gotoCheckout() {
+        this.router.navigate(['order/checkout/']);
+    }
+
+
+
     placeOrder() {
         console.log("order placed");
         if (this.order) {
@@ -116,7 +138,7 @@ export class LayoutComponent implements AfterContentChecked {
 
             const updateOrderDto: UpdateOrderDto = {
                 id: this.order.id,
-                restaurantId: this.order.restaurant.id,
+                restaurantId: this.order.restaurant?.id,
                 customerId: this.order.customer.id,
                 confirmationCode: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
                 preparationStatus: "Placed",
@@ -177,6 +199,10 @@ export class LayoutComponent implements AfterContentChecked {
 
         }
     }
+
+
+
+
 }
 
 

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { NGXLogger } from 'ngx-logger';
 import { Observable, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { environment } from 'src/environments/environment';
 import { Order } from '../entities/order';
 import { MenuitemOrder } from '../entities/menuitemOrder';
@@ -20,7 +21,15 @@ export class OrderService {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     };
 
+    isPaid: Boolean = false;
+    isPaid$ = new BehaviorSubject<Boolean>(this.isPaid);
+
     constructor(private http: HttpClient, private log: NGXLogger) {
+    }
+
+    paidCheck(status: Boolean) {
+        this.isPaid = status;
+        this.isPaid$.next(this.isPaid);
     }
 
     // GET all orders
@@ -60,6 +69,14 @@ export class OrderService {
                 catchError(this.handleError<HttpErrorResponse>('updateOrder'))
             ));
     }
+
+    //PUT update an order
+    chargeOrder(paymentToken: String, orderId: number | undefined) {
+        const url = `${this.ORDERS_URL}/${orderId}/payment`;
+        return this.http.put(url, paymentToken, this.httpOptions);
+    }
+
+
 
     //PUT update an order with new restaurant
     updateOrderRestaurant(orderId: number, restaurantId: number): Observable<void | HttpErrorResponse> {

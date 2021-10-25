@@ -46,6 +46,8 @@ import { ToNumberPipe } from './pipes/to-number.pipe';
 import { FilterByPriceCategoryPipe } from './pipes/filter-by-price-category.pipe';
 import { MenuitemModalComponent } from './menu-items/menuitem-modal/menuitem-modal.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { CheckoutComponent } from './order/checkout/checkout.component';
+
 
 
 
@@ -72,7 +74,9 @@ import { RegisterComponent } from './auth/register/register.component';
     StarRatingComponent,
     FilterByRatingPipe,
     ToNumberPipe,
-    FilterByPriceCategoryPipe
+    FilterByPriceCategoryPipe,
+    CheckoutComponent,
+
   ],
   imports: [
     MatStepperModule,

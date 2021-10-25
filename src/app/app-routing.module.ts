@@ -12,6 +12,7 @@ import { LayoutComponent } from './shared/layout/layout.component';
 import { AuthenticationGuard } from './authentication.guard';
 import { MenuitemComponent } from './menu-items/menu-item/menu-item.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
+import { CheckoutComponent } from './order/checkout/checkout.component';
 
 export const routes: Routes = [
   {
@@ -71,6 +72,10 @@ export const routes: Routes = [
       {
         path: 'history',
         component: OrderHistoryComponent
+      },
+      {
+        path: 'order/checkout',
+        component: CheckoutComponent
       }
     ],
     canActivate: [AuthenticationGuard]
