@@ -1,4 +1,4 @@
-import { Restaurant } from "src/app/entities/restaurant";
+import { Restaurant } from "src/app/core/entities/restaurant";
 import { ADDRESSES } from 'src/app/shared/mocks/mock-addresses'
 
 export const RESTAURANTS: Restaurant[] = [

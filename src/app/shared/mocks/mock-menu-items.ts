@@ -1,4 +1,4 @@
-import { Menuitem } from "src/app/entities/menuitem";
+import { Menuitem } from "src/app/core/entities/menuitem";
 import { RESTAURANTS } from 'src/app/shared/mocks/mock-restaurants'
 
 export const MENU_ITEMS: Menuitem[] = [

@@ -1,149 +1,35 @@
 <div class="navbar-container">
 
     <!-- Top navbar -->
-    <mat-toolbar class="navbar" color="primary">
+    <app-header class="navbar" [order]="order" [drawer]="drawerSidenav" [drawer2]="drawer3"></app-header>
 
-        <button mat-icon-button (click)="drawer.toggle()">
-            <mat-icon>menu</mat-icon>
-        </button>
-
-        <a class="navbar-brand" [routerLink]="['/']" matTooltip="Home">
-            <h1>
-                Scrumptious
-            </h1>
-        </a>
-
-        <span class="navbar-spacer"></span>
-
-        <button mat-button [matMenuTriggerFor]="userMenu">
-            <mat-icon>person</mat-icon>
-        </button>
-        <mat-menu #userMenu="matMenu" xPosition="before" yPosition="above" [overlapTrigger]="false">
-
-            <a mat-menu-item [routerLink]="['/account/profile']">
-                <mat-icon>person</mat-icon>
-                <span>Account</span>
-            </a>
-
-            <a mat-menu-item [routerLink]="['/auth/login']">
-                <mat-icon>exit_to_app</mat-icon>
-                <span>Log out</span>
-            </a>
-
-        </mat-menu>
-
-        <button mat-icon-button *ngIf="order" (click)="drawer2.toggle()">
-            <mat-icon matBadge="{{ order.menuitemOrders?.length }}" matBadgeColor="accent">
-                shopping_basket
-            </mat-icon>
-        </button>
-
-
-
-    </mat-toolbar>
-
+    <!-- Content -->
     <mat-sidenav-container class="navbar-sidenav-container">
-        <!-- Side nav -->
-        <mat-sidenav #drawer [opened]="(isHandset$ | async) === false" [mode]="(isHandset$ | async) ? 'over' : 'side'"
-            fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" fixedTopGap="56"
-            class="sidenav" position="start">
 
-            <mat-nav-list>
-
-                <a mat-list-item [routerLink]="['/home']" routerLinkActive="active">
-                    <mat-icon mat-list-icon>
-                        dashboard
-                    </mat-icon>
-                    <span mat-line> Dashboard </span>
-                </a>
-
-                <a mat-list-item [routerLink]="['/restaurants']" routerLinkActive="active">
-                    <mat-icon mat-list-icon>
-                        business
-                    </mat-icon>
-                    <span mat-line> Restaurants </span>
-                </a>
-
-                <a mat-list-item [routerLink]="['/history']" routerLinkActive="active">
-                    <mat-icon mat-list-icon>
-                        history
-                    </mat-icon>
-                    <span mat-line> Order history </span>
-                </a>
-
-                <mat-divider></mat-divider>
-
-                <a mat-list-item [routerLink]="['/account/profile']">
-                    <mat-icon mat-list-icon>person</mat-icon>
-                    <span mat-line> Account </span>
-                </a>
-
-                <a mat-list-item [routerLink]="['/auth/login']">
-                    <mat-icon mat-list-icon>exit_to_app</mat-icon>
-                    <span mat-line> Log out </span>
-                </a>
-
-                <a id="push-bottom" mat-list-item [routerLink]="['/about']" routerLinkActive="active">
-                    <mat-icon mat-list-icon>
-                        info_outline
-                    </mat-icon>
-                    <span mat-line> About </span>
-                </a>
-            </mat-nav-list>
-
+        <!-- Drawer Side Nav -->
+        <mat-sidenav #drawerSidenav [opened]="(isHandset$ | async) === false"
+            [mode]="(isHandset$ | async) ? 'over' : 'side'" fixedInViewport
+            [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" fixedTopGap="56" class="sidenav"
+            position="start">
+            <app-left-drawer-sidenav>
+            </app-left-drawer-sidenav>
         </mat-sidenav>
 
-        <mat-sidenav #drawer2 [opened]="(isHandset$ | async) === false" [mode]="(isHandset$ | async) ? 'over' : 'side'"
+        <!-- Drawer Current Order -->
+        <mat-sidenav #drawer3 [opened]="(isHandset$ | async) === false" [mode]="(isHandset$ | async) ? 'over' : 'side'"
             fixedInViewport style="width: 15%; min-width: 15%; max-width: 15%;"
             [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" fixedTopGap="56" position="end">
-            <div *ngIf="order">
-                <h2 mat-subheader>My order from {{ order?.restaurant?.name }}</h2>
-                <button mat-raised-button style="margin: 10px;" color="accent" (click)="placeOrder()"
-                    [disabled]="order.menuitemOrders.length == 0">Checkout</button>
-                <mat-card style="margin: 10px;" *ngFor="let menuitemOrder of order.menuitemOrders">
-                    <mat-card-title>{{ menuitemOrder.menuitem.name }} - {{ menuitemOrder.quantity }}</mat-card-title>
-                    <mat-card-subtitle>${{ (menuitemOrder.quantity * menuitemOrder.menuitem.price) | number: '1.2-2' }}
-                    </mat-card-subtitle>
-                    <img mat-card-md-image src="{{menuitemOrder.menuitem.picture}}" alt="Photo of a Food">
-
-                    <mat-card-content>{{ menuitemOrder.menuitem.description }}</mat-card-content>
-                    <mat-card-actions>
-                        <button mat-button (click)="editMenuitemOrder(menuitemOrder)">Edit</button>
-                        <button mat-button
-                            (click)="removeMenuitemOrder(order.id, menuitemOrder.menuitem.id)">Remove</button>
-
-                    </mat-card-actions>
-                </mat-card>
-
-                <app-cart-price-overview [itemOrders]="order.menuitemOrders"></app-cart-price-overview>
-
-
-                <h4 mat-subheader>Requested Time</h4>
-                <mat-form-field class="select-time" appearance="fill">
-                    <mat-label>Time Slot: </mat-label>
-                    <mat-select [disabled]="order.menuitemOrders.length == 0"
-                        (selectionChange)="editRequestTime(selectedValue)" [(value)]="selectedValue" placeholder="Mode"
-                        name="slot">
-                        <mat-option *ngFor="let slot of timeSlots" [value]="slot">{{slot | date:'short'}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-
-
-            </div>
+            <app-right-drawer-current-order [order]="order" [customer]="customer"></app-right-drawer-current-order>
         </mat-sidenav>
 
         <!-- Main content -->
         <mat-sidenav-content class="sidenav-content">
-
             <div class="progress-bar-container">
-                <!-- <mat-progress-bar color="accent" mode="indeterminate" *ngIf="spinnerService.visibility | async">
-                </mat-progress-bar> -->
-                <!-- <mat-spinner class="spinner" [diameter]="50" *ngIf="showSpinner"></mat-spinner> -->
+                <mat-progress-bar color="accent" mode="indeterminate" *ngIf="spinnerService.visibility | async">
+                </mat-progress-bar>
+                <mat-spinner class="spinner" [diameter]="50" *ngIf="showSpinner"></mat-spinner>
             </div>
-
-
             <router-outlet></router-outlet>
-
         </mat-sidenav-content>
     </mat-sidenav-container>
 

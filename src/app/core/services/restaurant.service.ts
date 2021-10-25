@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { delay, concatMap } from 'rxjs/operators';
 
-import { Restaurant } from 'src/app/entities/restaurant';
+import { Restaurant } from 'src/app/core/entities/restaurant';
 import { environment } from '../../../environments/environment';
 import { AuthService } from './auth.service';
 
@@ -24,6 +25,7 @@ export class RestaurantService {
   }
 
   getAllRestaurants(): Observable<Restaurant[]> {
+
     return this.http.get<Restaurant[]>(this.GET_ALL_RESTAURANTS_URL, this.options)
   }
 
