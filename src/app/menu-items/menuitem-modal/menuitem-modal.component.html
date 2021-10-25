@@ -1,5 +1,5 @@
 <h1 mat-dialog-title>{{data.menuitem.name}}</h1>
-<p mat-dialog-subtitle>{{ data.menuitem.price *(1 - data.menuitem.discount) * data.quantity | currency }}</p>
+<p mat-dialog-subtitle>${{ data.menuitem.price * data.quantity }}</p>
 <div mat-dialog-content>
     <p>{{data.menuitem.description}}</p>
     <mat-form-field appearance="outline">

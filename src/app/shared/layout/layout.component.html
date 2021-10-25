@@ -98,15 +98,11 @@
             [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" fixedTopGap="56" position="end">
             <div *ngIf="order">
                 <h2 mat-subheader>My order from {{ order?.restaurant?.name }}</h2>
-
-                <button mat-raised-button style="margin: 10px;" color="accent" (click)="gotoCheckout()"
-                    [disabled]="order.menuitemOrders.length == 0">
-                    Checkout
-                </button>
-
+                <button mat-raised-button style="margin: 10px;" color="accent" (click)="placeOrder()"
+                    [disabled]="order.menuitemOrders.length == 0">Checkout</button>
                 <mat-card style="margin: 10px;" *ngFor="let menuitemOrder of order.menuitemOrders">
                     <mat-card-title>{{ menuitemOrder.menuitem.name }} - {{ menuitemOrder.quantity }}</mat-card-title>
-                    <mat-card-subtitle>{{ menuitemOrder.quantity * menuitemOrder.menuitem.price *(1 - menuitemOrder.menuitem.discount) |currency}}</mat-card-subtitle>
+                    <mat-card-subtitle>${{ menuitemOrder.quantity * menuitemOrder.menuitem.price }}</mat-card-subtitle>
                     <img mat-card-md-image src="{{menuitemOrder.menuitem.picture}}" alt="Photo of a Food">
 
                     <mat-card-content>{{ menuitemOrder.menuitem.description }}</mat-card-content>
@@ -128,7 +124,10 @@
                 </mat-progress-bar> -->
                 <!-- <mat-spinner class="spinner" [diameter]="50" *ngIf="showSpinner"></mat-spinner> -->
             </div>
+
+
             <router-outlet></router-outlet>
+
         </mat-sidenav-content>
     </mat-sidenav-container>
 

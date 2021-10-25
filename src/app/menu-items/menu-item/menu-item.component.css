@@ -14,7 +14,3 @@ mat-card-content{
 mat-card-actions {
     width: 100px;
 }
-
-.strikethrough {
-    text-decoration: line-through;
-  }

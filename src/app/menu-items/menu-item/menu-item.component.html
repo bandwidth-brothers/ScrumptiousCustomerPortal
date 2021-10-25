@@ -6,15 +6,7 @@
         <mat-card-header>
             <div mat-card-avatar class="example-header-image"></div>
             <mat-card-title>{{menuitem.name}}</mat-card-title>
-            <mat-card-subtitle>
-
-                <div *ngIf="menuitem.discount === 0">{{menuitem.price | currency}}</div>
-                <div *ngIf="menuitem.discount !== 0">
-                    <span style="text-decoration: line-through;">{{menuitem.price | currency}}</span>
-                    &nbsp; {{(menuitem.price * (1 - menuitem.discount)) | currency}}
-                </div>
-
-            </mat-card-subtitle>
+            <mat-card-subtitle>${{menuitem.price}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
             <p>
