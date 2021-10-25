@@ -65,11 +65,6 @@ export class CheckoutComponent implements OnInit {
     const paymentForm = document.getElementById('payment-form');
     paymentForm!.addEventListener('submit', event => {
       event.preventDefault();
-      console.log(this.checkoutForm.get("phone")?.value + " : " + this.checkoutForm.get("address")?.value);
-      console.log(this.orderService.currentOrder);
-      var x = this.getTotalCost();
-      console.log(x);
-
 
       stripe.createToken(card).then((result: any) => {
         if (result.error) {
@@ -90,7 +85,6 @@ export class CheckoutComponent implements OnInit {
   paymentCall(token: String) {
     console.log("payment called");
     this.orderService.chargeOrder(token, this.orderService.currentOrder?.id).subscribe((result) => {
-      console.log(result); 
       if(result !== ""){
         this.orderService.paidCheck(true);    
         this.router.navigate(['history']);
