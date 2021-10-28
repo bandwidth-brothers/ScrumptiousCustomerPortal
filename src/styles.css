@@ -146,3 +146,18 @@ p .mat-icon {
     opacity: 1;
   }
 }
+
+.custom-side-dialog-container .mat-dialog-container {
+  margin-top: 64px;
+  background: repeating-linear-gradient(
+    45deg,
+    #CCAA00,
+    #CCAA00 10px,
+    #ffd300 10px,
+    #ffd300 20px
+  );
+}
+
+.custom-side-backdrop {
+  opacity: 0;
+}

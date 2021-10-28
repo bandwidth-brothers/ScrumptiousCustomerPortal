@@ -1,42 +1,25 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProfileComponent } from './account/profile/profile.component';
-import { MenuitemsComponent } from './menu-items/menu-items/menu-items.component';
-import { RestaurantsComponent } from './restaurants/restaurants/restaurants.component'
-import { RestaurantHomeComponent } from './restaurants/restaurant-home/restaurant-home.component'
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './views/auth-view/login/login.component';
+import { RegisterComponent } from './views/auth-view/register/register.component';
+import { HomeComponent } from './views/dashboard-view/dashboard-components/home/home.component';
 import { LayoutComponent } from './shared/layout/layout.component';
 
-import { AuthenticationGuard } from './authentication.guard';
-import { MenuitemComponent } from './menu-items/menu-item/menu-item.component';
-import { OrderHistoryComponent } from './order-history/order-history.component';
+import { AuthenticationGuard } from './core/guards/authentication.guard';
+import { LoggedAuthGuard } from './core/guards/logged-auth.guard';
+
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'auth',
     pathMatch: "full"
   },
   {
     path: 'auth',
-    children: [
-      {
-        path: '',
-        redirectTo: 'home',
-        pathMatch: "full"
-      },
-
-      {
-        path: 'login',
-        component: LoginComponent,
-      },
-      {
-        path: 'register',
-        component: RegisterComponent,
-      },
-    ]
+    canLoad: [LoggedAuthGuard],
+    canActivate: [LoggedAuthGuard],
+    loadChildren: () => import('src/app/views/auth-view/auth-view.module').then(m => m.AuthViewModule)
   },
   {
     path: '',
@@ -49,28 +32,20 @@ export const routes: Routes = [
         pathMatch: "full"
       },
       {
-        path: 'restaurants/:id/menu-items',
-        component: RestaurantHomeComponent
-      },
-      {
         path: 'restaurants',
-        component: RestaurantsComponent
-      },
-      {
-        path: 'search/menu-items',
-        component: RestaurantsComponent
+        loadChildren: () => import('src/app/views/restaurants-view/restaurants-view.module').then(m => m.RestaurantsViewModule)
       },
       {
         path: 'home',
-        component: HomeComponent
+        loadChildren: () => import('src/app/views/dashboard-view/dashboard-view.module').then(m => m.DashboardViewModule)
       },
       {
-        path: 'account/profile',
-        component: ProfileComponent
+        path: 'account',
+        loadChildren: () => import('src/app/views/settings-view/settings-view.module').then(m => m.SettingsViewModule)
       },
       {
-        path: 'history',
-        component: OrderHistoryComponent
+        path: 'orders',
+        loadChildren: () => import('src/app/views/orders-view/orders-view.module').then(m => m.OrdersViewModule)
       }
     ],
     canActivate: [AuthenticationGuard]

@@ -3,8 +3,8 @@ import { Observable, of } from 'rxjs'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 
 
-import { Menuitem } from '../../entities/menuitem';
-import { Restaurant } from '../../entities/restaurant';
+import { Menuitem } from '../entities/menuitem';
+import { Restaurant } from '../entities/restaurant';
 import { environment } from '../../../environments/environment';
 import { AuthService } from './auth.service';
 

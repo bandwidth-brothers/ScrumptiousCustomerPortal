@@ -1,0 +1,29 @@
+<div *ngIf="order">
+    <h2 mat-subheader>My order from {{ order?.restaurant?.name }}</h2>
+    <button mat-raised-button style="margin: 10px;" color="accent" (click)="placeOrder()"
+        [disabled]="order.menuitemOrders.length == 0">Checkout</button>
+    <mat-card style="margin: 10px;" *ngFor="let menuitemOrder of order.menuitemOrders">
+        <mat-card-title>{{ menuitemOrder.menuitem.name }} - {{ menuitemOrder.quantity }}</mat-card-title>
+        <mat-card-subtitle>${{ (menuitemOrder.quantity * menuitemOrder.menuitem.price) | number: '1.2-2' }}
+        </mat-card-subtitle>
+        <img mat-card-md-image src="{{menuitemOrder.menuitem.picture}}" alt="Photo of a Food">
+
+        <mat-card-content>{{ menuitemOrder.menuitem.description }}</mat-card-content>
+        <mat-card-actions>
+            <button mat-button (click)="editMenuitemOrder(menuitemOrder)">Edit</button>
+            <button mat-button (click)="removeMenuitemOrder(order.id, menuitemOrder.menuitem.id)">Remove</button>
+
+        </mat-card-actions>
+    </mat-card>
+
+    <app-current-order-price-overview [itemOrders]="order.menuitemOrders"></app-current-order-price-overview>
+
+    <h4 mat-subheader>Requested Time</h4>
+    <mat-form-field class="select-time" appearance="fill">
+        <mat-label>Time Slot: </mat-label>
+        <mat-select [disabled]="order.menuitemOrders.length == 0" (selectionChange)="editRequestTime(selectedValue)"
+            [(value)]="selectedValue" placeholder="Mode" name="slot">
+            <mat-option *ngFor="let slot of timeSlots" [value]="slot">{{slot | date:'short'}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>

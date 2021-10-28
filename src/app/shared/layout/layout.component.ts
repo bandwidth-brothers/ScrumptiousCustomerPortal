@@ -1,21 +1,21 @@
-import { Component, ChangeDetectorRef, Input, AfterContentChecked } from '@angular/core';
+import { Component, ChangeDetectorRef, Input, AfterContentChecked, ViewChild, TemplateRef, ElementRef, SimpleChange, SimpleChanges } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 
-import { AuthService } from './../../core/services/auth.service';
+import { AuthService } from '../../core/services/auth.service';
 import { SpinnerService } from '../../core/services/spinner.service';
 import { map, shareReplay } from 'rxjs/operators';
-import { OrderService } from 'src/app/services/order.service';
-import { CustomerService } from 'src/app/services/customer.service';
-import { Customer } from 'src/app/entities/customer';
+import { OrderService } from 'src/app/core/services/order.service'
+import { CustomerService } from 'src/app/core/services/customer.service';
+import { Customer } from 'src/app/core/entities/customer';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Order } from 'src/app/entities/order';
+import { Order } from 'src/app/core/entities/order';
 import { MatDialog } from '@angular/material/dialog';
-import { UpdateOrderDto } from 'src/app/entities/updateOrderDto';
+import { UpdateOrderDto } from 'src/app/core/entities/updateOrderDto';
 import { NotificationService } from 'src/app/core/services/notification.service';
-import { Menuitem } from 'src/app/entities/menuitem';
-import { MenuitemModalComponent } from 'src/app/menu-items/menuitem-modal/menuitem-modal.component';
-import { MenuitemOrder } from 'src/app/entities/menuitemOrder';
+import { Menuitem } from 'src/app/core/entities/menuitem';
+import { MenuitemModalComponent } from 'src/app/views/menu-items-view/menu-items/menu-item-modal/menu-item-modal.component';
+import { MenuitemOrder } from 'src/app/core/entities/menuitemOrder';
 
 @Component({
     selector: 'app-layout',
@@ -39,7 +39,6 @@ export class LayoutComponent implements AfterContentChecked {
     constructor(
         public spinnerService: SpinnerService,
         public dialog: MatDialog,
-        private notificationService: NotificationService,
         private breakpointObserver: BreakpointObserver,
         private ref: ChangeDetectorRef,
         private orderService: OrderService,
@@ -57,23 +56,17 @@ export class LayoutComponent implements AfterContentChecked {
 
     }
 
+
+
+    ngOnInit(): void {
+
+    }
+
     ngAfterContentChecked() {
         this.ref.detectChanges();
     }
 
-    async setCustomer(response: Customer | HttpErrorResponse) {
-        if (this.checkIsValidCustomer(response)) {
-            this.customer = response;
-            // this is to ensure that this.orderService.currentOrder has a value
-            this.orderService.getOrdersByCustomerId(this.customer.id).subscribe((o) => {
-                this.getOrder(o);
-            });
 
-
-        } else if (this.checkIsError(response)) {
-            this.error = response;
-        }
-    }
 
     async getOrder(orders: Order[]) {
         if (this.customer) {
@@ -99,6 +92,20 @@ export class LayoutComponent implements AfterContentChecked {
         }
     }
 
+    async setCustomer(response: Customer | HttpErrorResponse) {
+        if (this.checkIsValidCustomer(response)) {
+            this.customer = response;
+            // this is to ensure that this.orderService.currentOrder has a value
+            this.orderService.getOrdersByCustomerId(this.customer.id).subscribe((o) => {
+                this.getOrder(o);
+            });
+
+
+        } else if (this.checkIsError(response)) {
+            this.error = response;
+        }
+    }
+
     checkIsError(returnedValue: any): returnedValue is HttpErrorResponse {
         return (returnedValue as HttpErrorResponse).status !== undefined;
     }
@@ -107,75 +114,10 @@ export class LayoutComponent implements AfterContentChecked {
         return (returnedValue as Customer).firstName !== undefined;
     }
 
-    placeOrder() {
-        console.log("order placed");
-        if (this.order) {
-            var currentDate = new Date();
-            var requestedDate = new Date();
-            requestedDate.setHours(currentDate.getHours() + 1);
 
-            const updateOrderDto: UpdateOrderDto = {
-                id: this.order.id,
-                restaurantId: this.order.restaurant.id,
-                customerId: this.order.customer.id,
-                confirmationCode: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
-                preparationStatus: "Placed",
-                submittedAt: currentDate.toISOString(),
-                requestedDeliveryTime: requestedDate.toISOString(),
-                // could set orderDiscount here depending on this.order.customer.dob
-            }
-            this.orderService.updateOrder(updateOrderDto).subscribe(() => {
-
-                if (this.orderService.customerOrders) {
-                    this.setCustomer(this.customer as Customer);
-                    this.notificationService.openSnackBar("Order successfully placed");
-                }
-            });
-        }
-    }
-
-    removeMenuitemOrder(orderId: number, menuitemId: number) {
-        this.orderService.removeMenuitemFromOrder(orderId, menuitemId).subscribe(() => {
-            if (this.orderService.currentOrder) {
-                this.orderService.currentOrder.menuitemOrders = this.orderService.currentOrder.menuitemOrders.filter(p => p.menuitem.id !== menuitemId);
-            }
-        });
-    }
-
-    editMenuitemOrder(menuitemOrder: MenuitemOrder) {
-        this.quantity = menuitemOrder.quantity;
-        const dialogRef = this.dialog.open(MenuitemModalComponent, {
-            width: '250px',
-            data: { menuitem: menuitemOrder.menuitem, quantity: this.quantity }
-        });
-
-        dialogRef.afterClosed().subscribe(result => {
-            if (result) {
-                this.quantity = result;
-                this.addMenuitem(menuitemOrder.menuitem);
-            }
-
-
-        });
-    }
-
-    async addMenuitem(menuitem: Menuitem) {
-        // ugly code to add a menu item to the current order, will also update layout component with new values
-        if (this.orderService.currentOrder) {
-            this.orderService.addMenuitemToOrder(this.orderService.currentOrder.id, menuitem.id, this.quantity).subscribe(() => {
-                this.notificationService.openSnackBar(menuitem.name + " (" + this.quantity + ") added to order");
-                if (this.orderService.currentOrder) {
-
-                    this.orderService.getOrderById(this.orderService.currentOrder.id).subscribe((o) => {
-                        if (this.orderService.currentOrder)
-                            this.orderService.currentOrder.menuitemOrders = (o as Order).menuitemOrders;
-                    }
-                    )
-                }
-            }
-            )
-
-        }
+    logout() {
+        console.log("LOGOUT")
+        this.authService.logout();
     }
 }
 
