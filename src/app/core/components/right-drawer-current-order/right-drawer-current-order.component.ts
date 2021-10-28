@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MenuitemModalComponent } from 'src/app/views/menu-items-view/menu-item-modal/menu-item-modal.component';
+import { MenuitemModalComponent } from 'src/app/views/menu-items-view/menu-items/menu-item-modal/menu-item-modal.component';
 import { Customer } from '../../entities/customer';
 import { Menuitem } from '../../entities/menuitem';
 import { MenuitemOrder } from '../../entities/menuitemOrder';

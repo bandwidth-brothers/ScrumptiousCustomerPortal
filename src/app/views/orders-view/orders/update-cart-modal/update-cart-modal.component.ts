@@ -5,12 +5,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { Order } from '../../../../core/entities/order';
 import { Menuitem } from 'src/app/core/entities/menuitem';
 import { MenuitemOrder } from '../../../../core/entities/menuitemOrder';
-import { MenuitemModalComponent } from '../../../menu-items-view/menu-item-modal/menu-item-modal.component';
+import { MenuitemModalComponent } from '../../../menu-items-view/menu-items/menu-item-modal/menu-item-modal.component';
 import { OrderService } from 'src/app/core/services/order.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { UpdateOrderDto } from 'src/app/core/entities/updateOrderDto';
 import { UpdateMenuitemOrder, MenuitemToUpdateMenuitemOrder } from '../../../../core/entities/updateMenuitemOrder';
-import { ConfirmDialogComponent } from '../../../../shared/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { Observable } from 'rxjs';
 
 @Component({

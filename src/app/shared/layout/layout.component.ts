@@ -14,7 +14,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { UpdateOrderDto } from 'src/app/core/entities/updateOrderDto';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { Menuitem } from 'src/app/core/entities/menuitem';
-import { MenuitemModalComponent } from 'src/app/views/menu-items-view/menu-item-modal/menu-item-modal.component';
+import { MenuitemModalComponent } from 'src/app/views/menu-items-view/menu-items/menu-item-modal/menu-item-modal.component';
 import { MenuitemOrder } from 'src/app/core/entities/menuitemOrder';
 
 @Component({

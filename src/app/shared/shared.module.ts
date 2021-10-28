@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common'
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
-import { ContentPlaceholderAnimationComponent } from './content-placeholder-animation/content-placeholder-animation.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { ContentPlaceholderAnimationComponent } from './components/content-placeholder-animation/content-placeholder-animation.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { SearchFieldComponent } from './search-field/search-field.component';
+import { SearchFieldComponent } from './components/search-field/search-field.component';
 import { CartPriceOverviewComponent } from 'src/app/shared/utils/cart-price-overview/cart-price-overview.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { CoreModule } from '../core/core.module';
