@@ -36,6 +36,7 @@ import { ToNumberPipe } from './pipes/to-number.pipe';
 import { FilterByPriceCategoryPipe } from './pipes/filter-by-price-category.pipe';
 import { StarRatingComponent } from './utils/star-rating/star-rating.component';
 import { LayoutComponent } from './layout/layout.component';
+import { TimePickerComponent } from './components/time-picker/time-picker.component';
 
 @NgModule({
   imports: [
@@ -76,6 +77,7 @@ import { LayoutComponent } from './layout/layout.component';
     SearchFieldComponent,
     CartPriceOverviewComponent,
     StarRatingComponent,
+    TimePickerComponent,
     LayoutComponent
   ],
   exports: [
@@ -91,6 +93,7 @@ import { LayoutComponent } from './layout/layout.component';
     ConfirmDialogComponent,
     ContentPlaceholderAnimationComponent,
     SearchFieldComponent,
+    TimePickerComponent,
     CartPriceOverviewComponent,
     StarRatingComponent,
     LayoutComponent,

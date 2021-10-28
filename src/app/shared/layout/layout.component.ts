@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef, Input, AfterContentChecked, ViewChild, TemplateRef, ElementRef, SimpleChange, SimpleChanges } from '@angular/core';
+import { Component, ChangeDetectorRef, Input, AfterContentChecked, ViewChild, OnChanges, TemplateRef, ElementRef, SimpleChange, SimpleChanges } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 
@@ -22,7 +22,7 @@ import { MenuitemOrder } from 'src/app/core/entities/menuitemOrder';
     templateUrl: './layout.component.html',
     styleUrls: ['./layout.component.css']
 })
-export class LayoutComponent implements AfterContentChecked {
+export class LayoutComponent implements AfterContentChecked, OnChanges {
 
 
     showSpinner!: boolean;
@@ -32,9 +32,9 @@ export class LayoutComponent implements AfterContentChecked {
             shareReplay()
         );
     @Input() customer: Customer | undefined;
-    @Input() error: HttpErrorResponse | undefined;
+    error: HttpErrorResponse | undefined;
     @Input() order: Order | undefined;
-    @Input() quantity!: number;
+    quantity!: number;
 
     constructor(
         public spinnerService: SpinnerService,
@@ -66,6 +66,21 @@ export class LayoutComponent implements AfterContentChecked {
         this.ref.detectChanges();
     }
 
+    ngOnChanges(changes: SimpleChanges) {
+        this.order = changes['order'].currentValue;
+        console.log(changes['order']);
+    }
+
+    async setCustomer(response: Customer | HttpErrorResponse) {
+        if (this.checkIsValidCustomer(response)) {
+            this.customer = response;
+            // this is to ensure that this.orderService.currentOrder has a value
+            this.orderService.getOrdersByCustomerId(this.customer.id).subscribe((o) => {
+                this.getOrder(o);
+            });
+        }
+    }
+
 
 
     async getOrder(orders: Order[]) {
@@ -92,23 +107,29 @@ export class LayoutComponent implements AfterContentChecked {
         }
     }
 
-    async setCustomer(response: Customer | HttpErrorResponse) {
-        if (this.checkIsValidCustomer(response)) {
-            this.customer = response;
-            // this is to ensure that this.orderService.currentOrder has a value
-            this.orderService.getOrdersByCustomerId(this.customer.id).subscribe((o) => {
-                this.getOrder(o);
-            });
+    placeOrder() {
+        console.log("order placed");
+        if (this.order) {
+            var currentDate = new Date();
 
-
-        } else if (this.checkIsError(response)) {
-            this.error = response;
+            const updateOrderDto: UpdateOrderDto = {
+                id: this.order.id,
+                restaurantId: this.order.restaurant.id,
+                customerId: this.order.customer.id,
+                confirmationCode: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
+                preparationStatus: "Placed",
+                submittedAt: currentDate.toISOString(),
+                requestedDeliveryTime: this.order.requestedDeliveryTime,
+                // could set orderDiscount here depending on this.order.customer.dob
+            }
+            this.orderService.updateOrder(updateOrderDto).subscribe();
         }
     }
 
     checkIsError(returnedValue: any): returnedValue is HttpErrorResponse {
         return (returnedValue as HttpErrorResponse).status !== undefined;
     }
+
     checkIsValidCustomer(returnedValue: Customer | HttpErrorResponse | undefined): returnedValue is Customer {
         //try to cast it to a Customer and check its firstName to see if it's actually a customer
         return (returnedValue as Customer).firstName !== undefined;
@@ -119,6 +140,13 @@ export class LayoutComponent implements AfterContentChecked {
         console.log("LOGOUT")
         this.authService.logout();
     }
+
+    updateRequestedDeliveryTime(requestedDeliveryTime: Date) {
+        if (this.order) {
+            this.order.requestedDeliveryTime = requestedDeliveryTime;
+        }
+    }
 }
+
 
 

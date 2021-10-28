@@ -27,9 +27,8 @@ import { NgxMaskModule } from 'ngx-mask';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatBadgeModule } from '@angular/material/badge';
-
-
 import { MenuItemsViewModule } from './views/menu-items-view/menu-items-view.module';
+
 
 
 @NgModule({

@@ -1,3 +1,4 @@
+import { Time } from '@angular/common';
 import { Address } from './address'
 
 export interface Restaurant {
@@ -9,5 +10,9 @@ export interface Restaurant {
     owner: object,
     picture: string,
     priceCategory: string,
-    rating: number
+    rating: number,
+
+    // either string or any, wont work otherwise
+    openingTime: string,
+    closingTime: string
 }

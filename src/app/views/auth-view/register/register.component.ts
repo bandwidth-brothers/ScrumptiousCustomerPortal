@@ -76,7 +76,6 @@ export class RegisterComponent implements OnInit {
         const address: Address = {
             line1: this.addressForm.get('line1')?.value,
             line2: this.addressForm.get('line2')?.value,
-            lineOne: this.addressForm.get('line1')?.value,
             city: this.addressForm.get('city')?.value,
             state: this.addressForm.get('state')?.value,
             zip: this.addressForm.get('zip')?.value
