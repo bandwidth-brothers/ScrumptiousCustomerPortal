@@ -4,12 +4,17 @@ import { OrderHistoryComponent } from './orders/order-history/order-history.comp
 import { SharedModule } from 'src/app/shared/shared.module';
 import { UpdateCartModalComponent } from 'src/app/views/orders-view/orders/update-cart-modal/update-cart-modal.component';
 import { OrdersRoutingModule } from './orders-routing.module';
+import { CheckoutComponent } from './orders/checkout/checkout.component';
+
+
 
 
 @NgModule({
   declarations: [
     OrderHistoryComponent,
-    UpdateCartModalComponent
+    UpdateCartModalComponent,
+    CheckoutComponent
+
   ],
   imports: [
     CommonModule,
@@ -19,7 +24,9 @@ import { OrdersRoutingModule } from './orders-routing.module';
   ],
   exports: [
     OrderHistoryComponent,
-    UpdateCartModalComponent
+    UpdateCartModalComponent,
+    CheckoutComponent
+
   ]
 })
 export class OrdersViewModule { }
