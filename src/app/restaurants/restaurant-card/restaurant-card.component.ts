@@ -24,6 +24,7 @@ export class RestaurantCardComponent {
   }
 
   goToRestaurant() {
+    console.log("goToRestaurant called");
     if (this.orderService.currentOrder && this.restaurant.id) {
       // if you are changing to a new restaurant then all menuitemOrders must go away
       if (this.orderService.currentOrder.restaurant?.id !== this.restaurant.id) {
