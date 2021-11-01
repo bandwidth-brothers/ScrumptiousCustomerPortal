@@ -25,6 +25,7 @@ import { MenuitemOrder } from 'src/app/core/entities/menuitemOrder';
 export class LayoutComponent implements AfterContentChecked, OnChanges {
 
 
+    isRecoverSub: any;
     showSpinner!: boolean;
     isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
         .pipe(
@@ -50,7 +51,12 @@ export class LayoutComponent implements AfterContentChecked, OnChanges {
         if (!id) {
             //todo navigate to login
         } else {
-            this.customerService.getCustomer(id).subscribe((myCustomer) => this.setCustomer(myCustomer));
+            this.customerService.getCustomer(id).subscribe((myCustomer) =>{
+                this.setCustomer(myCustomer);
+            
+            this.customerService.customerProfile = this.customer;
+
+            });
 
         }
 
@@ -59,7 +65,11 @@ export class LayoutComponent implements AfterContentChecked, OnChanges {
 
 
     ngOnInit(): void {
-
+        this.isRecoverSub = this.orderService.isPaid$.subscribe((value:Boolean) => {
+            if (value) {
+                this.setCustomer(this.customer as Customer);
+            }
+        });
     }
 
     ngAfterContentChecked() {
@@ -74,6 +84,7 @@ export class LayoutComponent implements AfterContentChecked, OnChanges {
     async setCustomer(response: Customer | HttpErrorResponse) {
         if (this.checkIsValidCustomer(response)) {
             this.customer = response;
+            console.log(this.customer);
             // this is to ensure that this.orderService.currentOrder has a value
             this.orderService.getOrdersByCustomerId(this.customer.id).subscribe((o) => {
                 this.getOrder(o);
