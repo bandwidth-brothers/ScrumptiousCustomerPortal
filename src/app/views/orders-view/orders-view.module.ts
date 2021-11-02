@@ -9,6 +9,7 @@ import { CheckoutComponent } from './orders/checkout/checkout.component';
 
 
 
+
 @NgModule({
   declarations: [
     OrderHistoryComponent,
@@ -19,6 +20,7 @@ import { CheckoutComponent } from './orders/checkout/checkout.component';
   imports: [
     CommonModule,
     SharedModule,
+
 
     OrdersRoutingModule
   ],
