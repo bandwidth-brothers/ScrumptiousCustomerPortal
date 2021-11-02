@@ -87,7 +87,7 @@ export class CheckoutComponent implements OnInit {
     this.orderService.chargeOrder(token, this.orderService.currentOrder?.id).subscribe((result) => {
       if(result !== ""){
         this.orderService.paidCheck(true);    
-        this.router.navigate(['history']);
+        this.router.navigate(['orders/history']);
       }else{
         console.log("payment failed");
         this.notificationService.openSnackBar("payment failed");
