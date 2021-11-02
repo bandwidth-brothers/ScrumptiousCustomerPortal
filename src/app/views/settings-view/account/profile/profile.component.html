@@ -7,13 +7,25 @@
         <h2>My Profile</h2>
 
 
+        <input #imageInput hidden="true" type="file" onclick="this.value=null" (change)="uploadImage($event)"
+          accept="image/*" />
+        <div *ngIf="!editing">
+          <img src={{url}}>
+          <button mat-raised-button type="button" color="accent" class="full-width" (click)="enableEdit()">Edit</button>
+        </div>
+        <div *ngIf="editing">
+          <h3>Preview:</h3>
+          <img src={{tmpUrl}}>
+          <button mat-flat-button color="primary" (click)="imageInput.click()">Upload Image</button>
+          <button mat-flat-button color="primary" [disabled]="fileData === undefined"
+            (click)="saveImage()">Save</button>
+          <button mat-flat-button color="primary" (click)="disableEdit()">Cancel</button>
+        </div>
 
 
-
-
-        <mat-tab-group>
+        <mat-tab-group *ngIf='customer'>
           <mat-tab label="Details">
-            <app-profile-details></app-profile-details>
+            <app-profile-details [customer]='customer' [error]='error'></app-profile-details>
           </mat-tab>
           <!-- <mat-tab label="Change Password">
             <app-change-password></app-change-password>
