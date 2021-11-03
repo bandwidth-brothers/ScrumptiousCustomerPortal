@@ -26,7 +26,7 @@ pipeline{
 			steps{
         nodejs(nodeJSInstallationName: 'node'){
 				  sh 'npm run build-production'
-          sh 'll .'
+          sh 'ls -l dist'
         }
 			}
 		}
