@@ -1,24 +1,29 @@
 
 pipeline{
-  agent {
-    docker {image "node:latest"}
+  agent any
+  environment{
+    scannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
   }
-	stages{
+  stages{
 		stage('Checkout'){
 			steps{
 				checkout scm
-        sh 'apt-get update && apt-get install yarn -y'
 			}
 		}
 		stage('Analysis'){
       steps{
-        sh 'npm install --save-dev @angular-devkit/build-angular --legacy-peer-deps'
-        sh 'npm install --legacy-peer-deps -g @angular/cli'
+        nodejs(nodeJSInstallationName: 'node'){
+          sh 'npm install --legacy-peer-deps -g @angular/cli'
+          sh 'ng test'
+          withSonarQubeEnv(installationName:'Sonar Home'){
+            sh "${scannerHome}/bin/sonarscanner"
+          }
+        }
       }
     }		
     stage('Build'){
 			steps{
-				sh 'npm run ng build -prod'
+				sh 'ng build-production'
         sh 'ls .'
 			}
 		}
