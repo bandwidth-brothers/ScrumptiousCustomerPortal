@@ -24,8 +24,10 @@ pipeline{
     }		*/
     stage('Build'){
 			steps{
-				sh 'ng build-production'
-        sh 'ls .'
+        nodejs(nodeJSInstallationName: 'node'){
+				  sh 'ng build-production'
+          sh 'ls .'
+        }
 			}
 		}
     /**
