@@ -14,8 +14,7 @@ pipeline{
 		stage('Analysis'){
       steps{
         nodejs(nodeJSInstallationName: 'node'){
-          sh 'npm install --legacy-peer-deps -g @angular/cli'
-          sh 'ng test'
+          sh 'npm run test'
           withSonarQubeEnv(installationName:'Sonar Home'){
             sh "${scannerHome}/bin/sonarscanner"
           }
@@ -26,7 +25,6 @@ pipeline{
 			steps{
         nodejs(nodeJSInstallationName: 'node'){
 				  sh 'npm run build-production'
-          sh 'ls -l dist/CustomerPortal'
         }
 			}
 		}
