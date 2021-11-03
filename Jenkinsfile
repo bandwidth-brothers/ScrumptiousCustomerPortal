@@ -25,7 +25,7 @@ pipeline{
     stage('Build'){
 			steps{
         nodejs(nodeJSInstallationName: 'node'){
-				  sh 'npm run build'
+				  sh 'npm run build-production'
           sh 'ls .'
         }
 			}
