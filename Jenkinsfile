@@ -10,6 +10,7 @@ pipeline{
 				checkout scm
 			}
 		}
+    /**
 		stage('Analysis'){
       steps{
         nodejs(nodeJSInstallationName: 'node'){
@@ -20,7 +21,7 @@ pipeline{
           }
         }
       }
-    }		
+    }		*/
     stage('Build'){
 			steps{
 				sh 'ng build-production'
