@@ -28,7 +28,6 @@ pipeline{
         }
 			}
 		}
-    /**
 		stage('Publish'){
 			steps{
 				withAWS(region: 'us-east-2', credentials: 'aws-creds'){
@@ -36,6 +35,5 @@ pipeline{
 				}
 			}
 		}
-		*/
 	}
 }
