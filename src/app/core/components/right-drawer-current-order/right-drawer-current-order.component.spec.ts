@@ -1,4 +1,8 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { LoggerTestingModule } from 'ngx-logger/testing';
 
 import { RightDrawerCurrentOrderComponent } from './right-drawer-current-order.component';
 
@@ -8,9 +12,15 @@ describe('RightDrawerCurrentOrderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RightDrawerCurrentOrderComponent ]
+      imports: [
+        MatDialogModule,
+        MatSnackBarModule,
+        HttpClientTestingModule,
+        LoggerTestingModule
+      ],
+      declarations: [RightDrawerCurrentOrderComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

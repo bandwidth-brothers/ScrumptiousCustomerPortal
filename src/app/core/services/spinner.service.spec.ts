@@ -1,7 +1,7 @@
 import { SpinnerConsumer } from '../../shared/mocks/spinner-consumer';
 import { SpinnerService } from './spinner.service';
 
-describe('BusyIndicatorService', () => {
+describe('SpinnerService', () => {
     let component: SpinnerService;
     let consumer1: SpinnerConsumer;
     let consumer2: SpinnerConsumer;

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { PasswordResetRequestComponent } from './password-reset-request/password-reset-request.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { AuthRoutingModule } from './auth-routing.module';
@@ -22,7 +21,6 @@ import { FlexLayoutModule } from "@angular/flex-layout";
   declarations: [
     LoginComponent,
     RegisterComponent,
-    PasswordResetRequestComponent
   ],
   imports: [
     CommonModule,
@@ -41,7 +39,6 @@ import { FlexLayoutModule } from "@angular/flex-layout";
   exports: [
     LoginComponent,
     RegisterComponent,
-    PasswordResetRequestComponent
   ]
 })
 export class AuthViewModule { }

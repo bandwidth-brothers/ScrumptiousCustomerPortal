@@ -48,7 +48,7 @@ export class ProfileDetailsComponent implements OnInit {
         lastName: new FormControl('', [Validators.required, trimStringLength(1)]),
         dob: new FormControl(''),
         email: new FormControl('', [Validators.required, Validators.email, trimStringLength(1)]),
-        veteranaryStatus: new FormControl(''),
+        veteranStatus: new FormControl(''),
         line1: new FormControl('', [Validators.required, trimStringLength(1)]),
         line2: new FormControl(''), //NOT required
         city: new FormControl('', [Validators.required, trimStringLength(1)]),
@@ -100,7 +100,7 @@ export class ProfileDetailsComponent implements OnInit {
             ?.value.trim();
 
         (this.customer as Customer).dob = this.customerProfileForm.get("dob")?.value;
-        (this.customer as Customer).veteranaryStatus = this.customerProfileForm.get("veteranaryStatus")?.value;
+        (this.customer as Customer).veteranStatus = this.customerProfileForm.get("veteranStatus")?.value;
         (this.customer as Customer).address.line1 = this.customerProfileForm
             .get('line1')
             ?.value.trim();
