@@ -73,54 +73,54 @@ describe('RestaurantListComponent', () => {
   });
 
   afterEach(() => {
-    //component.searchForm.reset();
+    component.searchForm.reset();
   })
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  // it('should populate restaurants on init', () => {
+  it('should populate restaurants on init', () => {
 
-  //   const fn = spyOn(restaurantServiceSpy, 'getAllRestaurants').and.returnValue(of(mockRestaurants))
+    const fn = spyOn(restaurantServiceSpy, 'getAllRestaurants').and.returnValue(of(mockRestaurants))
 
-  //   component.ngOnInit();
+    component.ngOnInit();
 
-  //   expect(fn).toHaveBeenCalled();
-  //   expect(component.restaurants).toBe(mockRestaurants)
-  // });
+    expect(fn).toHaveBeenCalled();
+    expect(component.restaurants).toBe(mockRestaurants)
+  });
 
-  // it('should attempt to search menu item word', fakeAsync(() => {
+  it('should attempt to search menu item word', fakeAsync(() => {
 
-  //   component.searchForm.setValue({ 'search': 'fries' });
+    component.searchForm.setValue({ 'search': 'fries' });
 
-  //   const search = component.searchForm.get('search')?.value;
+    const search = component.searchForm.get('search')?.value;
 
-  //   const searchResult = spyOn(menuitemServiceSpy, 'getAllRestaurantsFromMenuitemSearch').and.callFake(function (searchW) {
-  //     return of([mockRestaurants[0], mockRestaurants[1]])
-  //   })
+    const searchResult = spyOn(menuitemServiceSpy, 'getAllRestaurantsFromMenuitemSearch').and.callFake(function (searchW) {
+      return of([mockRestaurants[0], mockRestaurants[1]])
+    })
 
-  //   component.searchHandle();
-  //   tick()
-  //   expect(searchResult).toHaveBeenCalled();
-  //   expect(searchResult).toHaveBeenCalledWith('name:' + search);
+    component.searchHandle();
+    tick()
+    expect(searchResult).toHaveBeenCalled();
+    expect(searchResult).toHaveBeenCalledWith('name:' + search);
 
-  //   expect(location.path()).toBe('/?search=name:' + search);
-  // }));
+    expect(location.path()).toBe('/?search=name:' + search);
+  }));
 
-  // it('should attempt to search empty menu item ', fakeAsync(() => {
+  it('should attempt to search empty menu item ', fakeAsync(() => {
 
-  //   component.searchForm.setValue({ 'search': '' });
+    component.searchForm.setValue({ 'search': '' });
 
-  //   const search = component.searchForm.get('search')?.value;
+    const search = component.searchForm.get('search')?.value;
 
-  //   const searchResult = spyOn(restaurantServiceSpy, 'getAllRestaurants').and.returnValue(of(mockRestaurants))
+    const searchResult = spyOn(restaurantServiceSpy, 'getAllRestaurants').and.returnValue(of(mockRestaurants))
 
-  //   component.searchHandle();
-  //   tick()
-  //   expect(searchResult).toHaveBeenCalled();
-  //   expect(location.path()).toBe('/?search=name:');
+    component.searchHandle();
+    tick()
+    expect(searchResult).toHaveBeenCalled();
+    expect(location.path()).toBe('/?search=name:');
 
-  // }));
+  }));
 
 });
