@@ -7,6 +7,7 @@ import { LayoutComponent } from './shared/layout/layout.component';
 
 import { AuthenticationGuard } from './core/guards/authentication.guard';
 import { LoggedAuthGuard } from './core/guards/logged-auth.guard';
+import { CheckoutComponent } from './views/orders-view/orders/checkout/checkout.component';
 
 
 export const routes: Routes = [
@@ -46,7 +47,12 @@ export const routes: Routes = [
       {
         path: 'orders',
         loadChildren: () => import('src/app/views/orders-view/orders-view.module').then(m => m.OrdersViewModule)
+      },
+      {
+        path: 'order/checkout',
+        component: CheckoutComponent
       }
+
     ],
     canActivate: [AuthenticationGuard]
   }

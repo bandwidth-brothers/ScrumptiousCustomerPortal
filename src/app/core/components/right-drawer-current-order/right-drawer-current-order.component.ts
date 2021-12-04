@@ -9,6 +9,7 @@ import { Order } from '../../entities/order';
 import { UpdateOrderDto } from '../../entities/updateOrderDto';
 import { NotificationService } from '../../services/notification.service';
 import { OrderService } from '../../services/order.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-right-drawer-current-order',
@@ -28,6 +29,7 @@ export class RightDrawerCurrentOrderComponent implements OnInit {
   timeSlots: string[] = []
 
   constructor(
+    private router: Router,
     public dialog: MatDialog,
     private orderService: OrderService,
     private notificationService: NotificationService,) { }
@@ -112,6 +114,10 @@ export class RightDrawerCurrentOrderComponent implements OnInit {
   checkIsValidCustomer(returnedValue: Customer | HttpErrorResponse | undefined): returnedValue is Customer {
     //try to cast it to a Customer and check its firstName to see if it's actually a customer
     return (returnedValue as Customer).firstName !== undefined;
+  }
+
+  gotoCheckout() {
+    this.router.navigate(['order/checkout']);
   }
 
   placeOrder() {
