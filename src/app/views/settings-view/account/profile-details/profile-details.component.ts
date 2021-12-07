@@ -16,7 +16,7 @@ import { Address } from 'src/app/core/entities/address';
 export class ProfileDetailsComponent implements OnInit {
 
 
-    @Input() customer: Customer | undefined;
+    @Input() customer!: Customer;
     @Input() error: HttpErrorResponse | undefined;
     isLoading = false;
     startDate = new Date(1990, 0, 1);
@@ -35,9 +35,11 @@ export class ProfileDetailsComponent implements OnInit {
 
 
     ngOnInit(): void {
-        this.getCustomer();
         this.customerProfileForm.disable();
 
+        this.customerProfileForm.patchValue(this.customer);
+        // this will not fill in address information unless you explicitly feed it the address
+        this.customerProfileForm.patchValue(this.customer.address);
     }
 
 
@@ -63,32 +65,9 @@ export class ProfileDetailsComponent implements OnInit {
         loyaltyPoints: new FormControl({ disabled: true }),
     });
 
-    getCustomer(): void {
-        const id = this.authService.userId;
 
-        if (!id) {
-            //todo navigate to login
-        } else {
-            this.customerService.getCustomer(id).subscribe((myCustomer) => this.setCustomer(myCustomer));
-        }
-    }
 
-    setCustomer(response: Customer | HttpErrorResponse): void {
-        if (this.checkIsValidCustomer(response)) {
-            this.customer = response;
 
-            this.customerProfileForm.patchValue(this.customer);
-            // this will not fill in address information unless you explicitly feed it the address
-            this.customerProfileForm.patchValue(this.customer.address);
-
-        } else if (this.checkIsError(response)) {
-            this.error = response;
-        }
-    }
-
-    checkIsError(returnedValue: any): returnedValue is HttpErrorResponse {
-        return (returnedValue as HttpErrorResponse).status !== undefined;
-    }
 
     //get values from the form to update our customer in preparation for sending to the backend
     pullInCustomerFormValues(): void {

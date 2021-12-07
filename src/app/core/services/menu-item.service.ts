@@ -20,11 +20,7 @@ export class MenuitemService {
   options: object = {}
 
   constructor(private http: HttpClient, private authService: AuthService) {
-    this.options = {
-      headers: {
-        'Authorization': <string>this.authService.token
-      }
-    }
+
   }
 
   getAllMenuitems(): Observable<Menuitem[]> {
