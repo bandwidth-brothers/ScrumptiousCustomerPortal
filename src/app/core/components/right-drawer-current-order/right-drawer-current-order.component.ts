@@ -6,6 +6,7 @@ import { Customer } from '../../entities/customer';
 import { Menuitem } from '../../entities/menuitem';
 import { MenuitemOrder } from '../../entities/menuitemOrder';
 import { Order } from '../../entities/order';
+import { OrderMessageDto } from '../../entities/OrderMessageDto';
 import { UpdateOrderDto } from '../../entities/updateOrderDto';
 import { NotificationService } from '../../services/notification.service';
 import { OrderService } from '../../services/order.service';
@@ -140,6 +141,19 @@ export class RightDrawerCurrentOrderComponent implements OnInit {
           if (this.orderService.customerOrders) {
             this.setCustomer(this.customer as Customer);
             this.notificationService.openSnackBar("Order successfully placed");
+            const orderMessageDto: OrderMessageDto = {
+              customerName: this.order?.customer.firstName,
+              customerPhoneNumber: this.order?.customer.phone,
+              restaurantName: this.order?.restaurant.name,
+              restaurantAddress: this.order?.restaurant.address.line1,
+              confirmationCode: updateOrderDto.confirmationCode,
+              preparationStatus: updateOrderDto.preparationStatus,
+              requestedDeliveryTime: new Date(Date.parse(this.selectedValue)).toISOString()
+
+            }
+            this.notificationService.sendTextMessageOrderConfirmation(orderMessageDto).subscribe(() => {
+
+            })
           }
         });
       } else {
