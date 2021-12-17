@@ -1,0 +1,20 @@
+mat-card {
+    display: flex;
+    justify-content: flex-start;
+}
+
+mat-card-header{
+    width: 175px;
+}
+
+mat-card-content{
+    width: 100%;
+}
+
+mat-card-actions {
+    width: 100px;
+}
+
+#distance {
+    width: 100px;
+}

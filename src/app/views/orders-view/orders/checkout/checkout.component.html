@@ -1,0 +1,60 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+    <div fxFlex.md="75%" fxFlex.sm="95%">
+        <mat-card>
+            <mat-card-content>
+                <h2>Checkout</h2>
+                <!-- <mat-grid-list cols="4" rowHeight="80px" gutterSize="10px" co="2" [rowspan]="1"> -->
+                <div style="min-width: 450px; max-width: 750px; align-content: center;">
+                    <form action="/charge" method="post" id="payment-form" [formGroup]="checkoutForm">
+
+                        <div class="form-row">
+                            <mat-form-field class="full-width" appearance="standard">
+                                <mat-label>Name for contact</mat-label>
+                                <input matInput id="name" [disabled]="true" value={{getFullName()}} placeholder="name"
+                                    name="name" width="full">
+                            </mat-form-field>
+                        </div>
+
+
+                        <div class="form-row">
+                            <mat-form-field class="full-width" appearance="standard">
+                                <mat-label>Phone for contact</mat-label>
+                                <input matInput id="phone" [disabled]="true"
+                                    value={{orderService.currentOrder?.customer?.phone}} placeholder="phone"
+                                    name="phone" width="full">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="form-row">
+                            <mat-form-field class="full-width" appearance="standard">
+                                <mat-label>Time for delivery</mat-label>
+                                <input matInput id="time" [disabled]="true" value={{getDeliveryTime()}}
+                                    placeholder="time for delivery" name="time" width="full">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="form-row">
+                            <mat-form-field class="full-width" appearance="standard">
+                                <mat-label>Address for delivery</mat-label>
+                                <input matInput id="card-address" value={{getFullAddress()}} placeholder="address" name="address">
+                            </mat-form-field>
+                            <!-- <label for="card-address">address for shipping</label>
+                            <input id="card-address" placeholder="address" name="address" />
+                            <div id="card-errors" role="alert"></div> -->
+                        </div>
+                        <div class="form-row" style="margin-top: 10px;">
+                            <!-- <label for="card-element" style="margin-bottom: 5px;">Credit or debit card</label> -->
+                            <div id="card-element" style="margin-top: 10px; margin-bottom: 30px;"></div>
+                            <div id="card-errors" role="alert"></div>
+                        </div>
+                        <div fxLayoutAlign="center none">
+                            <button mat-flat-button color="accent" class="full-width">PAY {{getTotalCost() |
+                                currency}}</button>
+                        </div>
+
+                    </form>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

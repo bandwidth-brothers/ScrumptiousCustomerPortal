@@ -1,9 +1,12 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "b415eb08-f240-4abf-a753-9f5dc160586d"
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "UserPortal": {
+    "CustomerPortal": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -17,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/UserPortal",
+            "outputPath": "dist/CustomerPortal",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -27,7 +30,6 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -69,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "UserPortal:build:production"
+              "browserTarget": "CustomerPortal:build:production"
             },
             "development": {
-              "browserTarget": "UserPortal:build:development"
+              "browserTarget": "CustomerPortal:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -80,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "UserPortal:build"
+            "browserTarget": "CustomerPortal:build"
           }
         },
         "test": {
@@ -103,5 +105,5 @@
       }
     }
   },
-  "defaultProject": "UserPortal"
+  "defaultProject": "CustomerPortal"
 }

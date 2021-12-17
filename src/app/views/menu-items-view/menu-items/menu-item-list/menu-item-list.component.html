@@ -1,0 +1,19 @@
+<div class="card mb-4">
+    <h2 class="card-header">
+        Menu Items
+
+    </h2>
+    <form class="search-form" [formGroup]="searchForm" (ngSubmit)="searchHandle()">
+        <mat-form-field class="example-form-field" appearance="fill">
+            <mat-label>Search</mat-label>
+            <input matInput type="search" formControlName="search">
+            <button matSuffix mat-icon-button aria-label="Search" type="submit">
+                <mat-icon>search</mat-icon>
+            </button>
+        </mat-form-field>
+    </form>
+    <div class="card-body">
+        <app-menu-item-card *ngFor="let menuitem of menuitems" [menuitem]="menuitem"></app-menu-item-card>
+
+    </div>
+</div>

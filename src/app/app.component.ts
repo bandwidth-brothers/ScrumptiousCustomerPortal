@@ -1,10 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { AuthService } from './core/services/auth.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
-  title = 'UserPortal';
+export class AppComponent implements OnInit {
+  public constructor(
+    private titleService: Title,
+    private authService: AuthService
+  ) { }
+
+  ngOnInit(): void {
+    this.setTitle('Scrumptious');
+    this.authService.autoLogin();
+  }
+
+  public setTitle(newTitle: string) {
+    this.titleService.setTitle(newTitle);
+  }
 }
