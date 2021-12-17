@@ -1,5 +1,5 @@
 import { NgxLoggerLevel } from "ngx-logger";
-const base_url = 'http://ss-scrumptious-api.com';
+const base_url = 'https://ss-scrumptious-api.com';
 
 export const environment = {
   production: true,
