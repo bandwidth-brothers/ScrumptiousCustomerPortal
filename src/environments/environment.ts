@@ -5,35 +5,16 @@
 import { NgxLoggerLevel } from "ngx-logger";
 
 
-
-
-// export const environment = {
-//   production: false,
-//   BASE_AUTH_URL: 'http://localhost:8000',
-//   BASE_RESTAURANT_URL: 'http://localhost:8010',
-//   BASE_DRIVER_URL: 'http://localhost:8080/driver',
-//   USERS_GET_ALL_URL: '/accounts',
-//   USERS_GET_URL: '/accounts/',
-//   BASE_CUSTOMERS_URL: 'http://localhost:8020/customers',
-//   BASE_ORDERS_URL: 'http://localhost:8030/orders',
-//   BASE_NOTIFICATION_URL: 'http://localhost:8080/notification',
-//   logLevel: NgxLoggerLevel.TRACE,
-//   serverLogLevel: NgxLoggerLevel.OFF
-// };
-
-  const base_url = 'http://ss-scrumptious-api.com';
-
 export const environment = {
   production: false,
-  BASE_URL: base_url,
-  BASE_AUTH_URL: base_url + '/auth',
-  BASE_RESTAURANT_URL: base_url,
-  BASE_DRIVER_URL: base_url + '/driver',
+  BASE_AUTH_URL: 'http://localhost:8080/auth',
+  BASE_RESTAURANT_URL: 'http://localhost:8080/restaurant',
+  BASE_DRIVER_URL: 'http://localhost:8080/driver',
   USERS_GET_ALL_URL: '/accounts',
   USERS_GET_URL: '/accounts/',
-  BASE_CUSTOMERS_URL: base_url + '/customers',
-  BASE_ORDERS_URL: base_url + '/orders',
-  BASE_NOTIFICATION_URL: base_url + '/notification',
+  BASE_CUSTOMERS_URL: 'http://localhost:8080/customer/customers',
+  BASE_ORDERS_URL: 'http://localhost:8080/order/orders',
+  BASE_NOTIFICATION_URL: 'http://localhost:8080/notification',
   logLevel: NgxLoggerLevel.TRACE,
   serverLogLevel: NgxLoggerLevel.OFF
 };
