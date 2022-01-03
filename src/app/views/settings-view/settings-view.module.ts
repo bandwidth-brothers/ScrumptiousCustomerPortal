@@ -10,6 +10,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 @NgModule({
@@ -25,8 +26,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatInputModule,
     MatNativeDateModule,
     MatSlideToggleModule,
+    NgxMaskModule.forRoot(),
 
-    SettingsRoutingModule
+    SettingsRoutingModule,
   ],
   exports: [
     ProfileComponent,

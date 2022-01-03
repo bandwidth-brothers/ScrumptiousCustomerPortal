@@ -15,6 +15,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { NgxMaskModule } from 'ngx-mask';
 
 
 
@@ -35,6 +36,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     MatDatepickerModule,
     MatNativeDateModule,
     FlexLayoutModule,
+    NgxMaskModule.forRoot(),
 
     AuthRoutingModule
   ],
