@@ -23,7 +23,6 @@ import { MatListModule } from '@angular/material/list';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
-import { NgxMaskModule } from 'ngx-mask';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatBadgeModule } from '@angular/material/badge';
@@ -63,7 +62,6 @@ import { MenuItemsViewModule } from './views/menu-items-view/menu-items-view.mod
     MatIconModule,
     MatListModule,
     MatCardModule,
-    NgxMaskModule.forRoot(),
     MenuItemsViewModule,
     MatSnackBarModule,
     MatBadgeModule
