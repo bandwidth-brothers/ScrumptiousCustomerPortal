@@ -1,4 +1,4 @@
-import { Address } from "src/app/entities/address";
+import { Address } from "src/app/core/entities/address";
 
 export const ADDRESSES: Address[] = [
     {

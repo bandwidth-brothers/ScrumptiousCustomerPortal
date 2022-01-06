@@ -3,8 +3,8 @@ import { Observable, of } from 'rxjs'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 
 
-import { Menuitem } from '../../entities/menuitem';
-import { Restaurant } from '../../entities/restaurant';
+import { Menuitem } from '../entities/menuitem';
+import { Restaurant } from '../entities/restaurant';
 import { environment } from '../../../environments/environment';
 import { AuthService } from './auth.service';
 
@@ -20,11 +20,7 @@ export class MenuitemService {
   options: object = {}
 
   constructor(private http: HttpClient, private authService: AuthService) {
-    this.options = {
-      headers: {
-        'Authorization': <string>this.authService.token
-      }
-    }
+
   }
 
   getAllMenuitems(): Observable<Menuitem[]> {
@@ -32,7 +28,6 @@ export class MenuitemService {
   }
 
   getAllMenuitemsFromRestaurant(restaurantId: string): Observable<Menuitem[]> {
-    console.log("menutime called");
     return this.http.get<Menuitem[]>(this.GET_ALL_MENU_ITEMS_FROM_RESTAURANT_URL.replace(":restaurantId", restaurantId), this.options)
   }
 

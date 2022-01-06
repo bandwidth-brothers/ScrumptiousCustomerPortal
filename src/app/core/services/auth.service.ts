@@ -2,6 +2,7 @@ import { ComponentFactoryResolver, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs'
 
 interface AuthResponse {
   userId: string;
@@ -134,4 +135,6 @@ export class AuthService {
       })
     );
   }
+
+
 }

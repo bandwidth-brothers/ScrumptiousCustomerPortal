@@ -1,0 +1,173 @@
+<!-- <div *ngIf="customer"> -->
+
+
+
+<mat-accordion multi>
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        General Information
+      </mat-panel-title>
+      <mat-panel-description>
+        {{ customer.firstName }} {{ customer.lastName }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <form [formGroup]="generalForm" (ngSubmit)="updateCustomerGeneral()">
+      <mat-grid-list cols="4" rowHeight="80px" gutterSize="10px">
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+          <mat-form-field class="mat-form-field-readonly" class="full-width" appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input matInput placeholder="First name" formControlName="firstName" required>
+            <mat-error *ngIf="generalForm.controls['firstName'].hasError('required')">
+              First name is required
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input matInput placeholder="Last name" formControlName="lastName" required>
+            <mat-error *ngIf="generalForm.controls['lastName'].hasError('required')">
+              Last name is required
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="4" [rowspan]="1">
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="pat@example.com" formControlName="email" required>
+            <mat-error *ngIf="generalForm.controls['email'].hasError('required')">
+              Email is required
+            </mat-error>
+            <mat-error *ngIf="generalForm.controls['email'].hasError('email')">
+              Email must follow standard formatting [pat@example.com]
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Phone number</mat-label>
+            <input matInput mask="000-000-0000" placeholder="555-555-5555" formControlName="phone" required>
+            <mat-error *ngIf="generalForm.controls['phone'].hasError('required')">
+              Phone number <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Date of birth</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="dob" [max]="maxDate" placeholder="02/25/1999">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker enabled="generalForm.enabled">
+            </mat-datepicker>
+            <mat-error *ngIf="generalForm.controls['dob'].invalid">
+              Date must follow M(M)/d(d)/YYYY
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+
+      </mat-grid-list>
+      <mat-slide-toggle style="padding-left: 10px; padding-bottom: 10px;" formControlName="veteranaryStatus">Are you a
+        veteran?</mat-slide-toggle>
+      <mat-action-row>
+        <div *ngIf="generalForm.disabled">
+          <button mat-raised-button type="button" color="accent" (click)="enableGeneralEdit()">Edit</button>
+        </div>
+
+        <div *ngIf="generalForm.enabled">
+          <button mat-raised-button type="submit" color="primary" [disabled]="generalForm.invalid">Save</button>
+        </div>
+      </mat-action-row>
+    </form>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Address Information
+      </mat-panel-title>
+      <mat-panel-description>
+        <div *ngIf="customer.address.line2">
+          {{ customer.address.line1 }} {{ customer.address.line2 }}, {{customer.address.city}},
+          {{customer.address.state}} {{customer.address.zip}}
+        </div>
+        <div *ngIf="!customer.address.line2">
+          {{ customer.address.line1 }}, {{customer.address.city}},
+          {{customer.address.state}} {{customer.address.zip}}
+        </div>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <form [formGroup]="addressForm" (ngSubmit)="updateCustomerAddress()">
+
+      <mat-grid-list cols="4" rowHeight="75px" gutterSize="10px">
+
+        <mat-grid-tile [colspan]="4" [rowspan]="1">
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Line one</mat-label>
+            <input matInput placeholder="1234 Main St." formControlName="line1" required>
+            <mat-error *ngIf="addressForm.controls['line1'].hasError('required')">
+              Please enter your street address
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="4" [rowspan]="1">
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Line two</mat-label>
+            <input matInput placeholder="Apt. 34" formControlName="line2">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>City</mat-label>
+            <input matInput placeholder="New York City" formControlName="city" required>
+            <mat-error *ngIf="addressForm.controls['city'].hasError('required')">
+              City required
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>State</mat-label>
+            <input matInput *ngIf="addressForm.disabled" placeholder="NY" formControlName="state" required>
+            <mat-select formControlName="state" *ngIf="addressForm.enabled" required>
+              <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
+            </mat-select>
+
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Zip code</mat-label>
+            <input matInput placeholder="10001" formControlName="zip" required>
+            <mat-error *ngIf="addressForm.controls['zip'].hasError('required')">
+              Zip code required
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+
+      </mat-grid-list>
+
+      <mat-action-row>
+        <div *ngIf="addressForm.disabled">
+          <button mat-raised-button type="button" color="accent" (click)="enableAddressEdit()">Edit</button>
+        </div>
+
+        <div *ngIf="addressForm.enabled">
+          <button mat-raised-button type="submit" color="primary" [disabled]="addressForm.invalid">Save</button>
+        </div>
+      </mat-action-row>
+    </form>
+
+  </mat-expansion-panel>
+
+</mat-accordion>

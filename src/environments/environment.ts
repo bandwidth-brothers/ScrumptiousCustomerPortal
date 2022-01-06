@@ -14,6 +14,7 @@ export const environment = {
   USERS_GET_URL: '/accounts/',
   BASE_CUSTOMERS_URL: 'http://localhost:8080/customer/customers',
   BASE_ORDERS_URL: 'http://localhost:8080/order/orders',
+  BASE_NOTIFICATION_URL: 'http://localhost:8080/notification',
   logLevel: NgxLoggerLevel.TRACE,
   serverLogLevel: NgxLoggerLevel.OFF
 };
