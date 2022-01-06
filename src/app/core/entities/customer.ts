@@ -13,8 +13,8 @@ export interface Customer {
     lastName: string;
     loyaltyPoints: number;
     phone: string;
-    dob: Date;
-    veteranStatus: boolean;
+    dob: string;
+    veteranaryStatus: boolean;
     address: Address;
     picture: string;
 }

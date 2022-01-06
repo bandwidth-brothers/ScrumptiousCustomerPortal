@@ -102,10 +102,7 @@ export class RegisterComponent implements OnInit {
                 });
             },
             (err: HttpErrorResponse) => {
-                this.handleRegisterFailure(err).then(() => {
-                    this.registrationForm.reset();
-                    this.addressForm.reset()
-                });
+                this.handleRegisterFailure(err);
             }
         );
     }
@@ -123,6 +120,7 @@ export class RegisterComponent implements OnInit {
         this.isLoading = false;
         if (err.status === 403 || err.status === 401 || err.status === 409) {
             this.notificationService.openSnackBar('Email already registered to another user.');
+            this.registrationForm.controls['email'].reset();
         } else {
             this.notificationService.openSnackBar('An error occurred while registering. Please try again.');
 
