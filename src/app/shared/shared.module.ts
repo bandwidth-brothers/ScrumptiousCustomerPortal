@@ -26,6 +26,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatInputModule } from '@angular/material/input';
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 
 import { SortByPricePipe } from './pipes/sort-by-price.pipe';
@@ -63,6 +65,8 @@ import { TimePickerComponent } from './components/time-picker/time-picker.compon
     MatButtonModule,
     MatBadgeModule,
     MatProgressSpinnerModule,
+    MatInputModule,
+    FlexLayoutModule,
   ],
   declarations: [
     SortByPricePipe,
@@ -113,7 +117,9 @@ import { TimePickerComponent } from './components/time-picker/time-picker.compon
     MatSidenavModule,
     MatMenuModule,
     MatButtonModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatInputModule,
+    FlexLayoutModule
 
   ],
   entryComponents: [

@@ -1,6 +1,6 @@
 <div *ngIf="order">
     <h2 mat-subheader>My order from {{ order?.restaurant?.name }}</h2>
-    <button mat-raised-button style="margin: 10px;" color="accent" (click)="placeOrder()"
+    <button mat-raised-button style="margin: 10px;" color="accent" (click)="gotoCheckout()"
         [disabled]="order.menuitemOrders.length == 0">Checkout</button>
     <mat-card style="margin: 10px;" *ngFor="let menuitemOrder of order.menuitemOrders">
         <mat-card-title>{{ menuitemOrder.menuitem.name }} - {{ menuitemOrder.quantity }}</mat-card-title>

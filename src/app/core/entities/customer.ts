@@ -16,4 +16,5 @@ export interface Customer {
     dob: Date;
     veteranStatus: boolean;
     address: Address;
+    picture: string;
 }
