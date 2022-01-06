@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class SpinnerService {
 
-  public visibility: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  public visibility: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor() { }
 

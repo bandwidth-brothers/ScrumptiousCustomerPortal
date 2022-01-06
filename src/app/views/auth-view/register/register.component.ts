@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
         phone: new FormControl('', [Validators.required, trimStringLength(1)]),
         dob: new FormControl(''),
         email: new FormControl('', [Validators.required, Validators.email, trimStringLength(1)]),
-        veteranaryStatus: new FormControl(''),
+        veteranStatus: new FormControl(''),
         password: new FormControl('', [Validators.required, trimStringLength(1)]),
         confirmPassword: new FormControl('', [Validators.required, trimStringLength(1)]),
 
@@ -86,7 +86,7 @@ export class RegisterComponent implements OnInit {
             lastName: this.registrationForm.get('lastName')?.value,
             email: this.registrationForm.get('email')?.value,
             dob: this.registrationForm.get('dob')?.value,
-            veteranaryStatus: this.registrationForm.get('veteranaryStatus')?.value,
+            veteranStatus: this.registrationForm.get('veteranStatus')?.value,
             phone: this.updatePhoneNumberFormat(),
             password: this.registrationForm.get('password')?.value,
             address: address,

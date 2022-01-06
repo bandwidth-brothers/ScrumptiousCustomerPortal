@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -16,8 +16,17 @@ import { RESTAURANTS } from 'src/app/shared/mocks/mock-restaurants';
 import {
   routes
 } from 'src/app/app-routing.module'
+import { ToNumberPipe } from 'src/app/shared/pipes/to-number.pipe';
+import { FilterByPriceCategoryPipe } from 'src/app/shared/pipes/filter-by-price-category.pipe';
+import { FilterByRatingPipe } from 'src/app/shared/pipes/filter-by-rating.pipe';
+import { MatOptionModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-fdescribe('RestaurantsComponent', () => {
+describe('RestaurantListComponent', () => {
   let component: RestaurantListComponent;
   let fixture: ComponentFixture<RestaurantListComponent>;
   let restaurantServiceSpy: RestaurantService
@@ -30,12 +39,25 @@ fdescribe('RestaurantsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule,
+
+      declarations: [
+        RestaurantListComponent,
+        ToNumberPipe,
+        FilterByPriceCategoryPipe,
+        FilterByRatingPipe
+      ],
+      imports: [
+        MatOptionModule,
+        MatIconModule,
+        MatSelectModule,
+        MatInputModule,
+        MatFormFieldModule,
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+        FormsModule,
         RouterTestingModule,
-        HttpClientTestingModule],
-      declarations: [RestaurantListComponent],
-      providers: [RestaurantService,
-        MenuitemService]
+        HttpClientTestingModule
+      ],
     })
       .compileComponents();
   });
@@ -56,7 +78,6 @@ fdescribe('RestaurantsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-    fixture.detectChanges();
   });
 
   it('should populate restaurants on init', () => {

@@ -9,6 +9,7 @@ import {
     NGXMapperService,
 } from 'ngx-logger';
 import {
+    LoggerTestingModule,
     NGXLoggerHttpServiceMock,
     NGXMapperServiceMock,
 } from 'ngx-logger/testing';
@@ -55,13 +56,18 @@ describe('LoginComponent', () => {
         await TestBed.configureTestingModule({
             declarations: [LoginComponent],
             providers: [
-                NGXLogger,
-                { provide: NGXLoggerHttpService, useClass: NGXLoggerHttpServiceMock },
-                { provide: NGXMapperService, useClass: NGXMapperServiceMock },
-                { provide: LoggerConfig, useValue: { level: NgxLoggerLevel.ERROR } },
                 DatePipe
             ],
-            imports: [RouterTestingModule, HttpClientTestingModule, FormsModule, ReactiveFormsModule, MatSnackBarModule, MatSlideToggleModule, BrowserAnimationsModule],
+            imports: [
+                RouterTestingModule,
+                HttpClientTestingModule,
+                LoggerTestingModule,
+                FormsModule,
+                ReactiveFormsModule,
+                MatSnackBarModule,
+                MatSlideToggleModule,
+                BrowserAnimationsModule
+            ],
         }).compileComponents();
     });
 
@@ -137,7 +143,7 @@ describe('LoginComponent', () => {
     it('should navigate to homepage on successful login', () => {
         const navigate = spyOn(router, 'navigate');
         component.handleLoginSuccess();
-        expect(navigate).toHaveBeenCalledWith(['/']);
+        expect(navigate).toHaveBeenCalledWith(['/home']);
         expect(component.isLoading).toBeFalse();
         expect(component.errorMsg).toBeUndefined();
     });

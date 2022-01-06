@@ -1,4 +1,7 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { LoggerTestingModule } from 'ngx-logger/testing';
 
 import { ChangePasswordComponent } from './change-password.component';
 
@@ -8,9 +11,14 @@ describe('ChangePasswordComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ChangePasswordComponent ]
+      declarations: [ChangePasswordComponent],
+      imports: [
+        HttpClientTestingModule,
+        LoggerTestingModule,
+        MatSnackBarModule
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

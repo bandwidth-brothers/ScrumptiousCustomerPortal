@@ -1,12 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/core/services/auth.service';
 import { Customer } from 'src/app/core/entities/customer';
 import { CustomerService } from 'src/app/core/services/customer.service';
 import { trimStringLength } from 'src/app/shared/validators/validators';
 import { NotificationService } from 'src/app/core/services/notification.service';
-import { Address } from 'src/app/core/entities/address';
 
 @Component({
     selector: 'app-profile-details',
@@ -28,7 +26,6 @@ export class ProfileDetailsComponent implements OnInit {
 
     constructor(
         private customerService: CustomerService,
-        private authService: AuthService,
         private notificationService: NotificationService,
     ) { }
 
