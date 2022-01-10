@@ -1,6 +1,8 @@
 mat-card {
     display: flex;
     justify-content: flex-start;
+    cursor: pointer;
+    margin-bottom: 5px;
 }
 
 mat-card-header{
