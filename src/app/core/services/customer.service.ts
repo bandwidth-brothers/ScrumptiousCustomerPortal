@@ -11,6 +11,7 @@ import { NGXLogger } from 'ngx-logger';
 import { Customer } from 'src/app/core/entities/customer';
 import { environment } from 'src/environments/environment';
 import { RegisterDto } from '../entities/registerDto';
+import { CustomerDashBoardTto } from '../entities/CustomerDashBoardDto';
 
 @Injectable({
 	providedIn: 'root',
@@ -18,6 +19,7 @@ import { RegisterDto } from '../entities/registerDto';
 export class CustomerService {
 
 	customerProfile: Customer | undefined;
+	dashBoardDto: CustomerDashBoardTto | undefined;
 
 	readonly CUSTOMERS_URL = environment.BASE_CUSTOMERS_URL;
 	httpOptions = {
@@ -53,6 +55,11 @@ export class CustomerService {
 	// POST new customer
 	createCustomer(registerDto: RegisterDto) {
 		return this.http.post<Customer>(this.CUSTOMERS_URL, registerDto);
+	}
+
+	// get dashboard dto
+	getCustomerDashBoardDto(id: string) {
+		return this.http.get<CustomerDashBoardTto>(`${this.CUSTOMERS_URL}/${id}/dashboard`);
 	}
 
 

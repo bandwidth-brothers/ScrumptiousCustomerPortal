@@ -1,28 +1,27 @@
-// import { FormGroup, FormControl, Validators } from '@angular/forms';
-// import { ActivatedRoute, Router, ParamMap } from '@angular/router';
-// import { Component, OnInit } from '@angular/core';
-// import { Title } from '@angular/platform-browser';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { NotificationService } from 'src/app/core/services/notification.service';
 
-// import { NotificationService } from '../../core/services/notification.service';
-// import { AuthenticationService } from '../../core/services/auth.service';
+@Component({
+  selector: 'app-password-reset',
+  templateUrl: './password-reset.component.html',
+  styleUrls: ['./password-reset.component.css']
+})
+export class PasswordResetComponent {
 
-// @Component({
-//   selector: 'app-password-reset',
-//   templateUrl: './password-reset.component.html',
-//   styleUrls: ['./password-reset.component.css']
-// })
-// export class PasswordResetComponent implements OnInit {
-
-//   private token: string;
-//   email: string;
-//   form: FormGroup;
-//   loading: boolean;
+//   private token?:string;
+//   email?: string;
+//   form?: FormGroup;
+//   loading?: boolean;
 //   hideNewPassword: boolean;
 //   hideNewPasswordConfirm: boolean;
 
 //   constructor(private activeRoute: ActivatedRoute,
 //     private router: Router,
-//     private authService: AuthenticationService,
+//     private authService: AuthService,
 //     private notificationService: NotificationService,
 //     private titleService: Title) {
 
@@ -33,8 +32,8 @@
 
 //   ngOnInit() {
 //     this.activeRoute.queryParamMap.subscribe((params: ParamMap) => {
-//       this.token = params.get('token');
-//       this.email = params.get('email');
+//       this.token = params.get('token')!;
+//       this.email = params.get('email')!;
 
 //       if (!this.token || !this.email) {
 //         this.router.navigate(['/']);
@@ -75,4 +74,4 @@
 //   cancel() {
 //     this.router.navigate(['/']);
 //   }
-// }
+}

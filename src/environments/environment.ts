@@ -5,19 +5,35 @@
 import { NgxLoggerLevel } from "ngx-logger";
 
 
+
 export const environment = {
   production: false,
-  BASE_AUTH_URL: 'http://localhost:8080/auth',
-  BASE_RESTAURANT_URL: 'http://localhost:8080/restaurant',
+  BASE_AUTH_URL: 'http://localhost:8000',
+  BASE_RESTAURANT_URL: 'http://localhost:8010',
   BASE_DRIVER_URL: 'http://localhost:8080/driver',
   USERS_GET_ALL_URL: '/accounts',
   USERS_GET_URL: '/accounts/',
-  BASE_CUSTOMERS_URL: 'http://localhost:8080/customer/customers',
-  BASE_ORDERS_URL: 'http://localhost:8080/order/orders',
+  BASE_CUSTOMERS_URL: 'http://localhost:8020/customers',
+  BASE_ORDERS_URL: 'http://localhost:8030/orders',
   BASE_NOTIFICATION_URL: 'http://localhost:8080/notification',
   logLevel: NgxLoggerLevel.TRACE,
   serverLogLevel: NgxLoggerLevel.OFF
 };
+
+
+// export const environment = {
+//   production: false,
+//   BASE_AUTH_URL: 'http://localhost:8080/auth',
+//   BASE_RESTAURANT_URL: 'http://localhost:8080/restaurant',
+//   BASE_DRIVER_URL: 'http://localhost:8080/driver',
+//   USERS_GET_ALL_URL: '/accounts',
+//   USERS_GET_URL: '/accounts/',
+//   BASE_CUSTOMERS_URL: 'http://localhost:8080/customer/customers',
+//   BASE_ORDERS_URL: 'http://localhost:8080/order/orders',
+//   BASE_NOTIFICATION_URL: 'http://localhost:8080/notification',
+//   logLevel: NgxLoggerLevel.TRACE,
+//   serverLogLevel: NgxLoggerLevel.OFF
+// };
 
 /*
  * For easier debugging in development mode, you can import the following file

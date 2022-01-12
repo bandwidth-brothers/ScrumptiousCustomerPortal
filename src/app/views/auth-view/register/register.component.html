@@ -2,7 +2,7 @@
 
     <!-- fxFlex % is how much of the container (horizontally) the component takes up -->
     <!-- fxFlex.sm is for small or zoomed in screen and fxFlex.xs is for tiny screens -->
-    <mat-card fxFlex="60%" fxFlex.sm="80%" fxFlex.xs="90%">
+    <mat-card fxFlex="40%" fxFlex.sm="80%" fxFlex.xs="90%" fxFlex.md="50%">
         <mat-card-title>
             Scrumptious
         </mat-card-title>
@@ -119,7 +119,10 @@
                         </mat-form-field>
                         <mat-slide-toggle formControlName="veteranaryStatus">Are you a veteran?</mat-slide-toggle>
                         <br><br>
-                        <button mat-button matStepperNext>Next</button>
+                        <div style="text-align: right;">
+                            <button mat-button matStepperNext>Next</button>
+                        </div>
+                        
                     </form>
                 </mat-step>
                 <mat-step [stepControl]="addressForm" errorMessage="Errors exist">
@@ -179,16 +182,22 @@
                             </mat-grid-tile>
 
                         </mat-grid-list>
-                        <button mat-button matStepperPrevious>Back</button>
-                        <button mat-button matStepperNext>Next</button>
+                        <div style="text-align: right;">
+                            <button mat-button matStepperPrevious>Back</button>
+                            <button mat-button matStepperNext>Next</button>
+                        </div>
+
                     </form>
                 </mat-step>
                 <mat-step>
                     <ng-template matStepLabel>Done</ng-template>
                     <p>All done! Click Register to complete registration.</p>
-                    <button mat-button matStepperPrevious type="button">Back</button>
-                    <button mat-raised-button id="register" color="accent" type="submit" (click)="register()"
-                        [disabled]="registrationForm.invalid || addressForm.invalid || isLoading">Register</button>
+                    <div style="text-align: right;">
+                        <button mat-button matStepperPrevious type="button">Back</button>
+                        <button mat-raised-button id="register" color="accent" type="submit" (click)="register()"
+                            [disabled]="registrationForm.invalid || addressForm.invalid || isLoading">Register</button>
+                    </div>
+
                 </mat-step>
 
             </mat-stepper>

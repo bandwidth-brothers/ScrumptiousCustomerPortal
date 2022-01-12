@@ -51,17 +51,16 @@
             </mat-card-content>
 
             <mat-card-actions class="login-actions">
-                <button mat-raised-button id="login" color="primary" type="submit"
+                <div style="text-align: right;">
+                    <button mat-raised-button id="login" color="primary" type="submit"
                     [disabled]="loginForm.invalid || isLoading">Login</button>
-                <button mat-button id="reset" type="reset">Reset</button>
-
+                    <button mat-button id="reset" type="reset">Reset</button>
+                </div>
             </mat-card-actions>
 
             <mat-card-footer>
                 <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
             </mat-card-footer>
         </mat-card>
-
-
     </form>
 </div>
