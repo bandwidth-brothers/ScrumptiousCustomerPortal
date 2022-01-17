@@ -151,10 +151,10 @@ p .mat-icon {
   margin-top: 64px;
   background: repeating-linear-gradient(
     45deg,
-    #CCAA00,
-    #CCAA00 10px,
-    #ffd300 10px,
-    #ffd300 20px
+    #fff,
+    #fff 10px,
+    #3F51B5 10px,
+    #3F51B5 20px
   );
 }
 

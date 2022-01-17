@@ -13,3 +13,14 @@
 .select-time {
     margin: 0 10px;
   }
+
+  .ng-star-inserted {
+    margin: 10px;
+    padding: 10px;
+  }
+
+  .cont {
+    margin: 30px 0px 0px 0px;
+    border: solid #000;
+    border-radius: 5px;
+  }

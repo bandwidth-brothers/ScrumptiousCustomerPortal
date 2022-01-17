@@ -5,3 +5,17 @@
 .rating {
     padding: 10px;
 }
+
+.search-filter-div {
+
+}
+
+.search-form .example-form-field {
+    width: 100%;
+}
+
+.filter-div {
+    width: 45%;
+    display: flex;
+    justify-content: space-between;
+}
