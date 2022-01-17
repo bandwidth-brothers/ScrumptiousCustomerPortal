@@ -9,6 +9,7 @@ import { MenuItemsViewModule } from '../menu-items-view/menu-items-view.module';
 import { RestaurantsRoutingModule } from './restaurants-routing.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 
@@ -25,6 +26,7 @@ import { MatInputModule } from '@angular/material/input';
 
     MatFormFieldModule,
     MatInputModule,
+    MatPaginatorModule,
 
     RestaurantsRoutingModule
   ],

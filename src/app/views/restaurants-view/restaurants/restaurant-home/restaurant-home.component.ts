@@ -1,4 +1,5 @@
-import { Component, Input, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, } from '@angular/core';
+//import { MatPaginator } from '@angular/material'
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,6 +9,7 @@ import { Menuitem } from 'src/app/core/entities/menuitem';
 
 import { MenuitemService } from 'src/app/core/services/menu-item.service';
 import { RestaurantService } from 'src/app/core/services/restaurant.service';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-restaurant-home',
@@ -21,6 +23,9 @@ export class RestaurantHomeComponent implements OnInit {
   restaurantId!: string;
   isLoading: boolean = true
   searchForm!: FormGroup;
+  pageSlice: Menuitem[] = [];
+
+  //@ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
     private route: ActivatedRoute,
@@ -46,7 +51,10 @@ export class RestaurantHomeComponent implements OnInit {
     this.menuitemService.getAllMenuitemsFromRestaurant(this.restaurantId).subscribe(menuitems => {
       this.menuitems = menuitems
       this.isLoading = false;
+      this.pageSlice = this.menuitems.slice(0, 5)
+
     })
+
   }
 
   initializeForm(): void {
@@ -92,6 +100,15 @@ export class RestaurantHomeComponent implements OnInit {
         })
       }
     })
+  }
+
+  OnPageChange(event: PageEvent) {
+    let currentInd = event.pageSize * event.pageIndex
+    let endInd = event.pageSize + currentInd
+    if (endInd > event.length) {
+      endInd = event.length
+    }
+    this.pageSlice = this.menuitems.slice(currentInd, endInd)
   }
 
   ngOnDestroy() {
