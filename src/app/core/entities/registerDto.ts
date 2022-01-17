@@ -6,7 +6,7 @@ export interface RegisterDto {
     lastName: string;
     email: string;
     dob: Date;
-    veteranaryStatus: boolean;
+    veteranStatus: boolean;
     phone: string;
     password: string;
     address: Address;

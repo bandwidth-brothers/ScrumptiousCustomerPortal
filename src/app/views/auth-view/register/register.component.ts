@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
         phone: new FormControl('', [Validators.required, trimStringLength(1)]),
         dob: new FormControl(''),
         email: new FormControl('', [Validators.required, Validators.email, trimStringLength(1)]),
-        veteranaryStatus: new FormControl(''),
+        veteranStatus: new FormControl(''),
         password: new FormControl('', [Validators.required, trimStringLength(1)]),
         confirmPassword: new FormControl('', [Validators.required, trimStringLength(1)]),
 
@@ -86,7 +86,7 @@ export class RegisterComponent implements OnInit {
             lastName: this.registrationForm.get('lastName')?.value,
             email: this.registrationForm.get('email')?.value,
             dob: this.registrationForm.get('dob')?.value,
-            veteranaryStatus: this.registrationForm.get('veteranaryStatus')?.value,
+            veteranStatus: this.registrationForm.get('veteranStatus')?.value,
             phone: this.updatePhoneNumberFormat(),
             password: this.registrationForm.get('password')?.value,
             address: address,
@@ -102,10 +102,7 @@ export class RegisterComponent implements OnInit {
                 });
             },
             (err: HttpErrorResponse) => {
-                this.handleRegisterFailure(err).then(() => {
-                    this.registrationForm.reset();
-                    this.addressForm.reset()
-                });
+                this.handleRegisterFailure(err);
             }
         );
     }
@@ -123,6 +120,7 @@ export class RegisterComponent implements OnInit {
         this.isLoading = false;
         if (err.status === 403 || err.status === 401 || err.status === 409) {
             this.notificationService.openSnackBar('Email already registered to another user.');
+            this.registrationForm.controls['email'].reset();
         } else {
             this.notificationService.openSnackBar('An error occurred while registering. Please try again.');
 

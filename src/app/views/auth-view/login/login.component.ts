@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
                 }
             },
             (err: HttpErrorResponse) => {
-                this.handleLoginFailure(err).then(() => this.loginForm.reset());
+                this.handleLoginFailure(err).then(() => this.loginForm.controls['password'].reset());
             }
         );
     }

@@ -38,7 +38,7 @@ export class OrderHistoryComponent {
     const customerId = this.authService.userId;
     if (customerId) {
       orderService.getOrdersByCustomerId(customerId).subscribe((orders) => {
-        this.dataSource = orders.slice(0, orders.length - 1);
+        this.dataSource = orders.slice(0, orders.length - 1).reverse();
 
       });
 
@@ -70,13 +70,13 @@ export class OrderHistoryComponent {
       this.orderService.updateOrder(updateOrderDto).subscribe(() => {
         if (this.authService.userId) {
           this.orderService.getOrdersByCustomerId(this.authService.userId).subscribe((orders) => {
-            this.dataSource = orders.slice(0, orders.length - 1);
-            this.notificationService.openSnackBar("Order cancelled")
+            this.dataSource = orders.slice(0, orders.length - 1).reverse();
+            this.notificationService.openSnackBar("Order cancelled");
           });
         }
       });
     } else {
-      this.notificationService.openSnackBar("Order cannot be cancelled")
+      this.notificationService.openSnackBar("Order cannot be cancelled");
     }
   }
 

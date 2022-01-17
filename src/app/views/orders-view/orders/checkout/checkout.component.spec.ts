@@ -1,4 +1,8 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { RouterTestingModule } from '@angular/router/testing';
+import { LoggerTestingModule } from 'ngx-logger/testing';
 
 import { CheckoutComponent } from './checkout.component';
 
@@ -8,9 +12,10 @@ describe('Checkout2Component', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CheckoutComponent ]
+      declarations: [CheckoutComponent],
+      imports: [HttpClientTestingModule, LoggerTestingModule, RouterTestingModule, MatSnackBarModule]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -19,7 +24,4 @@ describe('Checkout2Component', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
 });

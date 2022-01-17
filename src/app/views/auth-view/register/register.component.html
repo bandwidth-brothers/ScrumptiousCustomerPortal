@@ -10,7 +10,7 @@
             Register new account
             <div style="float: right;">
                 Already a member?
-                <a id="register" [routerLink]="['/auth/login']">Login</a>
+                <a id="login" [routerLink]="['/auth/login']">Login</a>
             </div>
         </mat-card-subtitle>
         <mat-card-content>
@@ -117,9 +117,9 @@
                                 Passwords don't match
                             </mat-error>
                         </mat-form-field>
-                        <mat-slide-toggle formControlName="veteranaryStatus">Are you a veteran?</mat-slide-toggle>
+                        <mat-slide-toggle formControlName="veteranStatus">Are you a veteran?</mat-slide-toggle>
                         <br><br>
-                        <button mat-button matStepperNext>Next</button>
+                        <button mat-button matStepperNext type="button">Next</button>
                     </form>
                 </mat-step>
                 <mat-step [stepControl]="addressForm" errorMessage="Errors exist">

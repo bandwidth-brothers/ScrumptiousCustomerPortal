@@ -1,16 +1,22 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { LoggerTestingModule } from 'ngx-logger/testing';
 
 import { RestaurantCardComponent } from './restaurant-card.component';
 
-describe('RestaurantComponent', () => {
+describe('RestaurantCardComponent', () => {
   let component: RestaurantCardComponent;
   let fixture: ComponentFixture<RestaurantCardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
-      declarations: [RestaurantCardComponent]
+      declarations: [RestaurantCardComponent],
+      imports: [
+        RouterTestingModule,
+        HttpClientTestingModule,
+        LoggerTestingModule,
+      ]
     })
       .compileComponents();
   });

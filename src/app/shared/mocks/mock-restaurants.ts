@@ -9,8 +9,11 @@ export const RESTAURANTS: Restaurant[] = [
         "cuisines": [],
         "name": "Burger King",
         "owner": {},
+        "picture": "",
         "priceCategory": '$',
-        "rating": 3
+        "rating": 3,
+        "openingTime": "5:00",
+        "closingTime": "12:00"
     },
     {
         "id": 1002,
@@ -19,8 +22,11 @@ export const RESTAURANTS: Restaurant[] = [
         "cuisines": [],
         "name": "Smoothie Palace",
         "owner": {},
+        "picture": "",
         "priceCategory": '$',
-        "rating": 3.5
+        "rating": 3.5,
+        "openingTime": "5:00",
+        "closingTime": "12:00"
     },
     {
         "id": 1001,
@@ -29,7 +35,10 @@ export const RESTAURANTS: Restaurant[] = [
         "cuisines": [],
         "name": "Red Lobster",
         "owner": {},
+        "picture": "",
         "priceCategory": '$$$',
-        "rating": 4.1
+        "rating": 4.1,
+        "openingTime": "5:00",
+        "closingTime": "12:00"
     },
 ]

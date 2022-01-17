@@ -13,7 +13,7 @@ export interface Customer {
     lastName: string;
     loyaltyPoints: number;
     phone: string;
-    dob: Date;
+    dob: string;
     veteranaryStatus: boolean;
     address: Address;
     picture: string;
