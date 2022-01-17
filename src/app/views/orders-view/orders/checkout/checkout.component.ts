@@ -5,6 +5,9 @@ import { NotificationService } from 'src/app/core/services/notification.service'
 import { CustomerService } from 'src/app/core/services/customer.service';
 import { OrderService } from 'src/app/core/services/order.service'
 
+import { UpdateOrderDto } from 'src/app/core/entities/updateOrderDto'
+import { OrderMessageDto } from 'src/app/core/entities/OrderMessageDto'
+
 declare var Stripe: any;
 
 @Component({
@@ -22,12 +25,26 @@ export class CheckoutComponent implements OnInit {
     address: new FormControl(''),
   });
 
-  constructor(private customerService: CustomerService, 
+  selectedValue: string = "";
+  timeSlots: string[] = []
+
+  constructor(private customerService: CustomerService,
     private notificationService: NotificationService,
     private route: ActivatedRoute, public orderService: OrderService, private router: Router) { }
 
   ngOnInit() {
-    
+
+    const newUpdateReqTime: Date = new Date()
+    newUpdateReqTime.setHours(1 + newUpdateReqTime.getHours() + Math.floor(newUpdateReqTime.getMinutes() / 60))
+    this.selectedValue = newUpdateReqTime.toISOString()
+    this.timeSlots.push(newUpdateReqTime.toISOString())
+    console.log(newUpdateReqTime)
+    for (let i = 0; i < 10; i++) {
+      newUpdateReqTime.setHours(1 + newUpdateReqTime.getHours() + Math.floor(newUpdateReqTime.getMinutes() / 60))
+      newUpdateReqTime.setMinutes(0, 0, 0); // Resets also seconds and milliseconds
+      this.timeSlots.push(newUpdateReqTime.toISOString())
+    }
+
     console.log(this.orderService.currentOrder);
     // Your Stripe public key
     const stripe = Stripe('pk_test_51JjnQuJMHW5DMjis6yBh6Z0cEmyjv0PTQIAxc671ggRJ1c6llrSekoQbBzvLZxTMFvbcxh88cQpEQGuQcGTLtJz300xqC4wzMc');
@@ -60,6 +77,7 @@ export class CheckoutComponent implements OnInit {
       }
     });
 
+
     // Listen for form submission, process the form with Stripe,
     // and get the 
     const paymentForm = document.getElementById('payment-form');
@@ -82,21 +100,65 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
+  editRequestTime(selectedValue: string) {
+    //this.tempOrder.requestedDeliveryTime = new Date(Date.parse(selectedValue));
+  }
+
   paymentCall(token: String) {
     console.log("payment called");
     this.orderService.chargeOrder(token, this.orderService.currentOrder?.id).subscribe((result) => {
-      if(result !== ""){
-        this.orderService.paidCheck(true);    
+      if (result !== "") {
+        this.placeOrder()
+        this.orderService.paidCheck(true);
         this.router.navigate(['orders/history']);
-      }else{
+      } else {
         console.log("payment failed");
         this.notificationService.openSnackBar("payment failed");
       }
 
-      
+
     });;
   }
 
+  placeOrder() {
+    console.log("order placed");
+    console.log(this.orderService.currentOrder)
+    if (this.orderService.currentOrder) {
+      if (this.orderService.currentOrder.restaurant) {
+        const updateOrderDto: UpdateOrderDto = {
+          id: this.orderService.currentOrder.id,
+          restaurantId: this.orderService.currentOrder.restaurant.id,
+          customerId: this.orderService.currentOrder.customer.id,
+          confirmationCode: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
+          preparationStatus: "Order Placed",
+          submittedAt: new Date().toISOString(),
+          requestedDeliveryTime: this.orderService.currentOrder.requestedDeliveryTime.toISOString(),
+          // could set orderDiscount here depending on this.order.customer.dob
+        }
+        this.orderService.updateOrder(updateOrderDto).subscribe(() => {
+
+          if (this.orderService.customerOrders) {
+            this.notificationService.openSnackBar("Order successfully placed");
+            const orderMessageDto: OrderMessageDto = {
+              customerName: this.orderService.currentOrder?.customer.firstName,
+              customerPhoneNumber: this.orderService.currentOrder?.customer.phone,
+              restaurantName: this.orderService.currentOrder?.restaurant.name,
+              restaurantAddress: this.orderService.currentOrder?.restaurant.address.line1,
+              confirmationCode: updateOrderDto.confirmationCode,
+              preparationStatus: updateOrderDto.preparationStatus,
+              requestedDeliveryTime: this.orderService.currentOrder?.requestedDeliveryTime.toISOString()
+
+            }
+            this.notificationService.sendTextMessageOrderConfirmation(orderMessageDto).subscribe(() => {
+
+            })
+          }
+        });
+      } else {
+
+      }
+    }
+  }
   getTotalCost() {
     var x = this.orderService.currentOrder?.menuitemOrders.reduce((total, o) => o.menuitem.price * (1 - o.menuitem.discount) * o.quantity + total, 0);
     let discount = this.orderService.currentOrder?.orderDiscount;
@@ -111,13 +173,14 @@ export class CheckoutComponent implements OnInit {
     var currentDate = new Date();
     var requestedDate = new Date();
     requestedDate.setHours(currentDate.getHours() + 1)
-    return requestedDate.toLocaleString();
+
+    return this.orderService.currentOrder?.requestedDeliveryTime.toLocaleString();
 
   }
 
   getFullAddress() {
     var address = this.customerService.customerProfile?.address;
-    return address?.line1 + ", " + (address?.line2? address?.line2+", " : "") + " " + address?.city + " " + address?.state + ", " + address?.zip;
+    return address?.line1 + ", " + (address?.line2 ? address?.line2 + ", " : "") + " " + address?.city + " " + address?.state + ", " + address?.zip;
   }
 
 }

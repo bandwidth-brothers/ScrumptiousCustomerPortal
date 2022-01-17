@@ -13,10 +13,18 @@ import { Order } from 'src/app/core/entities/order';
 export class RestaurantCardComponent {
   @Input() restaurant!: Restaurant;
   @Input() order: Order | undefined;
-
+  tags!: String[];
   constructor(private router: Router,
     private route: ActivatedRoute,
     private orderService: OrderService) {
+
+    this.tags = [
+      "Fast Food",
+      "Chicken",
+      "Drinks",
+      "Sandwiches",
+      "Burgers"
+    ]
   }
 
   goToRestaurant() {

@@ -1,4 +1,5 @@
 mat-card {
+    cursor: pointer;
     display: flex;
     justify-content: flex-start;
 }
@@ -15,6 +16,18 @@ mat-card-actions {
     width: 100px;
 }
 
+#tags{
+    width: 500px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
 #distance {
-    width: 100px;
+    width: 150px;
+}
+
+.tag {
+    border: solid 1px #000;
+    border-radius: 10px;
+    padding: 5px;
+    width: max-content;
 }

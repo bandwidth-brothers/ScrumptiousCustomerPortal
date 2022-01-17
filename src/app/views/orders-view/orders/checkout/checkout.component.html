@@ -7,6 +7,16 @@
                 <div style="min-width: 450px; max-width: 750px; align-content: center;">
                     <form action="/charge" method="post" id="payment-form" [formGroup]="checkoutForm">
 
+                        <h4 mat-subheader>Requested Time</h4>
+                        <mat-form-field class="select-time" appearance="fill">
+                            <mat-label>Time Slot: </mat-label>
+                            <mat-select (selectionChange)="editRequestTime(selectedValue)" [(value)]="selectedValue"
+                                placeholder="Mode" name="slot">
+                                <mat-option *ngFor="let slot of timeSlots" [value]="slot">{{slot | date:'short'}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
                         <div class="form-row">
                             <mat-form-field class="full-width" appearance="standard">
                                 <mat-label>Name for contact</mat-label>
@@ -25,18 +35,21 @@
                             </mat-form-field>
                         </div>
 
-                        <div class="form-row">
+
+
+                        <!-- <div class="form-row">
                             <mat-form-field class="full-width" appearance="standard">
                                 <mat-label>Time for delivery</mat-label>
                                 <input matInput id="time" [disabled]="true" value={{getDeliveryTime()}}
                                     placeholder="time for delivery" name="time" width="full">
                             </mat-form-field>
-                        </div>
+                        </div> -->
 
                         <div class="form-row">
                             <mat-form-field class="full-width" appearance="standard">
                                 <mat-label>Address for delivery</mat-label>
-                                <input matInput id="card-address" value={{getFullAddress()}} placeholder="address" name="address">
+                                <input matInput id="card-address" value={{getFullAddress()}} placeholder="address"
+                                    name="address">
                             </mat-form-field>
                             <!-- <label for="card-address">address for shipping</label>
                             <input id="card-address" placeholder="address" name="address" />

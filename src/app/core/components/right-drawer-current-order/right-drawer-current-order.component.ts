@@ -118,49 +118,15 @@ export class RightDrawerCurrentOrderComponent implements OnInit {
   }
 
   gotoCheckout() {
+    if (this.orderService.currentOrder) {
+      this.orderService.currentOrder.requestedDeliveryTime = new Date(Date.parse(this.selectedValue))
+      console.log(new Date(Date.parse(this.selectedValue)))
+      console.log(this.orderService.currentOrder.requestedDeliveryTime)
+    }
     this.router.navigate(['order/checkout']);
   }
 
-  placeOrder() {
-    console.log("order placed");
-    console.log(this.order)
-    if (this.order) {
-      if (this.order.restaurant) {
-        const updateOrderDto: UpdateOrderDto = {
-          id: this.order.id,
-          restaurantId: this.order.restaurant.id,
-          customerId: this.order.customer.id,
-          confirmationCode: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
-          preparationStatus: "Order Placed",
-          submittedAt: new Date().toISOString(),
-          requestedDeliveryTime: new Date(Date.parse(this.selectedValue)).toISOString(),
-          // could set orderDiscount here depending on this.order.customer.dob
-        }
-        this.orderService.updateOrder(updateOrderDto).subscribe(() => {
 
-          if (this.orderService.customerOrders) {
-            this.setCustomer(this.customer as Customer);
-            this.notificationService.openSnackBar("Order successfully placed");
-            const orderMessageDto: OrderMessageDto = {
-              customerName: this.order?.customer.firstName,
-              customerPhoneNumber: this.order?.customer.phone,
-              restaurantName: this.order?.restaurant.name,
-              restaurantAddress: this.order?.restaurant.address.line1,
-              confirmationCode: updateOrderDto.confirmationCode,
-              preparationStatus: updateOrderDto.preparationStatus,
-              requestedDeliveryTime: new Date(Date.parse(this.selectedValue)).toISOString()
-
-            }
-            this.notificationService.sendTextMessageOrderConfirmation(orderMessageDto).subscribe(() => {
-
-            })
-          }
-        });
-      } else {
-
-      }
-    }
-  }
 
   async removeMenuitemOrder(orderId: number, menuitemId: number) {
     this.orderService.removeMenuitemFromOrder(orderId, menuitemId).subscribe(() => {
