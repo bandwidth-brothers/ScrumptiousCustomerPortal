@@ -28,7 +28,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
 import { FlexLayoutModule } from "@angular/flex-layout";
-
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { SortByPricePipe } from './pipes/sort-by-price.pipe';
 import { SortByRatingPipe } from './pipes/sort-by-rating.pipe';
@@ -39,6 +39,7 @@ import { FilterByPriceCategoryPipe } from './pipes/filter-by-price-category.pipe
 import { StarRatingComponent } from './utils/star-rating/star-rating.component';
 import { LayoutComponent } from './layout/layout.component';
 import { TimePickerComponent } from './components/time-picker/time-picker.component';
+import { FilterByStatusPipe } from './pipes/filter-by-status.pipe';
 
 @NgModule({
   imports: [
@@ -67,6 +68,7 @@ import { TimePickerComponent } from './components/time-picker/time-picker.compon
     MatProgressSpinnerModule,
     MatInputModule,
     FlexLayoutModule,
+    MatPaginatorModule,
   ],
   declarations: [
     SortByPricePipe,
@@ -82,7 +84,8 @@ import { TimePickerComponent } from './components/time-picker/time-picker.compon
     CartPriceOverviewComponent,
     StarRatingComponent,
     TimePickerComponent,
-    LayoutComponent
+    LayoutComponent,
+    FilterByStatusPipe
   ],
   exports: [
     SortByPricePipe,
@@ -91,6 +94,7 @@ import { TimePickerComponent } from './components/time-picker/time-picker.compon
     FilterByRatingPipe,
     ToNumberPipe,
     FilterByPriceCategoryPipe,
+    FilterByStatusPipe,
 
     FormsModule,
     ReactiveFormsModule,
@@ -119,7 +123,8 @@ import { TimePickerComponent } from './components/time-picker/time-picker.compon
     MatButtonModule,
     MatBadgeModule,
     MatInputModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatPaginatorModule,
 
   ],
   entryComponents: [

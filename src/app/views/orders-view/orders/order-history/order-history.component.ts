@@ -1,5 +1,5 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, SystemJsNgModuleLoader, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -26,6 +26,8 @@ import { OrderService } from 'src/app/core/services/order.service';
 export class OrderHistoryComponent {
 
   @Input() dataSource: Order[] | undefined;
+  displayStatus: string[] = ['Order Placed', 'Accepted', 'Preparing', 'Ready For Pickup', 'Delivery'];
+  viewToggle: Boolean = true;
   displayedColumns: string[] = ['Id', 'Restaurant', "Status", "ConfirmationCode", "SubmittedAt", "RequestedTime"];
   expandedOrder!: Order | null;
   foodPicture: string = "assets/images/food-img.jpg";
@@ -43,6 +45,16 @@ export class OrderHistoryComponent {
       });
 
     }
+  }
+
+  toggle() {
+    this.viewToggle = !this.viewToggle
+    if (!this.viewToggle) {
+      this.displayStatus = ['Cancelled', 'Completed'];
+    } else {
+      this.displayStatus = ['Order Placed', 'Accepted', 'Preparing', 'Ready For Pickup', 'Delivery'];
+    }
+    console.log(this.viewToggle)
   }
 
   // determine if the order is more than 30 minutes out or has certain preparationStatuses

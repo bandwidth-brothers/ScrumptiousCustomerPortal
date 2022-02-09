@@ -13,7 +13,10 @@
         </mat-form-field>
     </form>
     <div class="card-body" *ngIf="isLoading==false">
-        <app-menu-item-card *ngFor="let menuitem of menuitems" [menuitem]="menuitem" [restaurant]="restaurant">
+        <app-menu-item-card *ngFor="let menuitem of pageSlice" [menuitem]="menuitem" [restaurant]="restaurant">
         </app-menu-item-card>
+        <mat-paginator [length]="menuitems.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"
+            (page)="OnPageChange($event)" showFirstLastButtons>
+        </mat-paginator>
     </div>
 </div>

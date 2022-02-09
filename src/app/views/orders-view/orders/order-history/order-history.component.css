@@ -59,3 +59,8 @@ table {
   button {
     margin-right: 15px;
   }
+
+  .btn {
+    margin: 10px;
+    width: 20%;
+  }
