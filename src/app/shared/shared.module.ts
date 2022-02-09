@@ -39,6 +39,7 @@ import { FilterByPriceCategoryPipe } from './pipes/filter-by-price-category.pipe
 import { StarRatingComponent } from './utils/star-rating/star-rating.component';
 import { LayoutComponent } from './layout/layout.component';
 import { TimePickerComponent } from './components/time-picker/time-picker.component';
+import { FilterByStatusPipe } from './pipes/filter-by-status.pipe';
 
 @NgModule({
   imports: [
@@ -83,7 +84,8 @@ import { TimePickerComponent } from './components/time-picker/time-picker.compon
     CartPriceOverviewComponent,
     StarRatingComponent,
     TimePickerComponent,
-    LayoutComponent
+    LayoutComponent,
+    FilterByStatusPipe
   ],
   exports: [
     SortByPricePipe,
@@ -92,6 +94,7 @@ import { TimePickerComponent } from './components/time-picker/time-picker.compon
     FilterByRatingPipe,
     ToNumberPipe,
     FilterByPriceCategoryPipe,
+    FilterByStatusPipe,
 
     FormsModule,
     ReactiveFormsModule,
